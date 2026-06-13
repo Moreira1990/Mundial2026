@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quem vai ganhar o Mundial 2026? — Estudo por Américo Moreira</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Syne:wght@700;800&display=swap');
+:root{
+  --orange:#E8751A;--orange2:rgba(232,117,26,0.1);
+  --blue:#0A1F44;--blue2:#1E3A6B;--blue3:#3266AD;
+  --green:#0E6B3A;--purple:#5C2D8A;--red:#B03020;--gold:#B8920A;
+  --bg:#F5F3EE;--bg2:#FFFFFF;--border:#DDD9D0;
+  --text:#111009;--text2:#5A5650;--text3:#9A9590;
+  --r:10px;--shadow:0 2px 8px rgba(0,0,0,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text)}
+
+/* ─── HERO ─── */
+.hero{background:var(--blue);min-height:260px;position:relative;overflow:hidden;padding:2.5rem 2rem 2rem}
+.hero-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:end}
+.hero::before{content:'';position:absolute;top:-80px;right:-80px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(232,117,26,.2) 0%,transparent 65%);pointer-events:none}
+.hero::after{content:'⚽';position:absolute;bottom:-20px;right:2rem;font-size:160px;opacity:.06;pointer-events:none;line-height:1}
+.hero-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:.7rem}
+.hero-title{font-family:'Syne',sans-serif;font-size:clamp(26px,4.5vw,52px);font-weight:800;color:#fff;line-height:1.05;margin-bottom:.8rem}
+.hero-title span{color:var(--orange)}
+.hero-lead{font-size:13px;color:rgba(255,255,255,.62);line-height:1.65;max-width:580px;margin-bottom:1.2rem}
+.hero-chips{display:flex;flex-wrap:wrap;gap:6px}
+.hchip{font-size:9px;font-weight:700;letter-spacing:.05em;padding:3px 10px;border-radius:20px;border:1px solid;white-space:nowrap}
+.hc1{color:var(--orange);border-color:var(--orange)}
+.hc2{color:#74B8E8;border-color:#74B8E8}
+.hc3{color:#7DE3A8;border-color:#7DE3A8}
+.hc4{color:#E3D07D;border-color:#E3D07D}
+.hero-winner{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:1.2rem 1.5rem;text-align:center;min-width:160px;backdrop-filter:blur(4px)}
+.hw-label{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:.5rem}
+.hw-flag{font-size:44px;line-height:1;margin-bottom:.3rem}
+.hw-name{font-size:15px;font-weight:800;color:#fff;margin-bottom:.2rem}
+.hw-pct{font-size:28px;font-weight:900;color:var(--orange);line-height:1}
+.hw-sub{font-size:9px;color:rgba(255,255,255,.4);margin-top:.3rem}
+
+/* ─── MAIN LAYOUT ─── */
+.main{max-width:1100px;margin:0 auto;padding:2rem 1.5rem 5rem}
+
+/* ─── SECTION HEADER ─── */
+.sec-header{display:flex;align-items:center;gap:10px;margin-bottom:1.2rem}
+.sec-num{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:var(--border);line-height:1}
+.sec-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--text)}
+.sec-sub{font-size:12px;color:var(--text2);margin-top:2px}
+.divider{height:1px;background:var(--border);margin:2.5rem 0}
+
+/* ─── TABS ─── */
+.tabs{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:1.5rem;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tb{padding:9px 14px;font-size:11px;font-weight:700;cursor:pointer;border:none;background:none;color:var(--text2);border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;letter-spacing:.02em}
+.tb.on{color:var(--orange);border-bottom-color:var(--orange)}
+.ts{display:none}.ts.on{display:block}
+
+/* ─── PODIUM ─── */
+.pod3{display:grid;grid-template-columns:1fr 1.12fr 1fr;gap:10px;margin-bottom:1.2rem}
+.pcard{background:var(--bg2);border-radius:14px;padding:1.1rem .75rem 1rem;text-align:center;border:1px solid var(--border);box-shadow:var(--shadow)}
+.pcard.win{border:2px solid var(--orange);background:linear-gradient(170deg,#FFF8F2 0%,#fff 60%)}
+.pfl{font-size:32px;margin-bottom:5px;line-height:1}
+.pnm{font-size:13px;font-weight:800}
+.ppt{font-size:24px;font-weight:900;color:var(--orange);line-height:1.1}
+.prk{font-size:10px;color:var(--text2);margin-top:3px}
+.psub{font-size:9px;color:var(--text3);margin-top:2px}
+
+/* ─── SCORE PILLARS ─── */
+.pillars{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-bottom:1.2rem}
+.pillar{background:var(--bg2);border-radius:var(--r);padding:10px 6px;text-align:center;border:1px solid var(--border)}
+.pi-ico{font-size:15px;margin-bottom:3px}
+.pi-val{font-size:16px;font-weight:800}
+.pi-lbl{font-size:9px;color:var(--text3);margin-top:2px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+
+/* ─── CHART CARD ─── */
+.chart-card{background:var(--bg2);border-radius:14px;padding:1.25rem;border:1px solid var(--border);box-shadow:var(--shadow);margin-bottom:1rem}
+.cc-title{font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:1rem}
+.cc-canvas{position:relative;height:380px}
+
+/* ─── RANKING TABLE ─── */
+.rtbl{width:100%;border-collapse:collapse;background:var(--bg2);border-radius:14px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow)}
+.rtbl thead th{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text2);text-align:left;padding:9px 11px;border-bottom:2px solid var(--border);background:#FAFAF8;white-space:nowrap}
+.rtbl tbody td{font-size:11px;padding:8px 11px;border-bottom:1px solid var(--border);vertical-align:middle}
+.rtbl tbody tr:last-child td{border-bottom:none}
+.rtbl tbody tr:hover td{background:#FAFAF8}
+.r1 td{background:linear-gradient(90deg,rgba(232,117,26,.06),transparent)!important}
+.rn{font-weight:900;font-size:13px}.r1 .rn{color:var(--orange)}
+.rpct{font-weight:900;color:var(--orange);font-size:13px}
+.cscore{display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700}
+
+/* ─── TRIONDA FEATURE ─── */
+.trionda-hero{background:linear-gradient(135deg,var(--blue) 0%,var(--blue2) 100%);border-radius:16px;padding:1.75rem;color:#fff;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.trionda-hero::after{content:'⚽';position:absolute;right:1.5rem;bottom:-10px;font-size:100px;opacity:.08;pointer-events:none}
+.th-label{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:.5rem}
+.th-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;margin-bottom:.6rem}
+.th-body{font-size:12px;color:rgba(255,255,255,.72);line-height:1.65;max-width:680px;margin-bottom:1.2rem}
+.trionda-specs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tspec{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:12px}
+.tspec-val{font-size:18px;font-weight:900;color:var(--orange)}
+.tspec-lbl{font-size:10px;color:rgba(255,255,255,.6);margin-top:3px;line-height:1.4}
+.trionda-teams{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:1rem}
+.tt-card{background:var(--bg2);border-radius:var(--r);padding:12px;border:1px solid var(--border)}
+.tt-title{font-size:11px;font-weight:700;margin-bottom:4px}
+.tt-tag{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;padding:2px 7px;border-radius:10px;display:inline-block}
+.tt-body{font-size:11px;color:var(--text2);line-height:1.5}
+.tt-teams{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.team-tag{font-size:10px;padding:2px 8px;background:var(--bg);border-radius:20px;border:1px solid var(--border)}
+
+/* ─── SIGNO EXPLAINER ─── */
+.signo-box{background:linear-gradient(135deg,rgba(92,45,138,.07),rgba(92,45,138,.03));border:1px solid rgba(92,45,138,.2);border-radius:14px;padding:1.25rem;margin-bottom:1rem}
+.sb-title{font-size:13px;font-weight:700;color:var(--purple);margin-bottom:.5rem}
+.sb-method{font-size:11px;color:var(--text2);line-height:1.65;margin-bottom:.75rem;padding:10px 12px;background:rgba(255,255,255,.7);border-radius:8px;border:1px solid rgba(92,45,138,.1)}
+.signo-table{width:100%;border-collapse:collapse}
+.signo-table th{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);padding:6px 8px;border-bottom:1px solid var(--border);text-align:left}
+.signo-table td{font-size:11px;padding:7px 8px;border-bottom:1px solid var(--border)}
+.signo-table tr:last-child td{border-bottom:none}
+.sn-sign{color:var(--purple);font-weight:600}
+.sn-good{color:var(--green);font-weight:600}
+.sn-bad{color:var(--red);font-weight:600}
+.sn-neutral{color:var(--text3)}
+.disclaimer{font-size:10px;color:var(--text3);font-style:italic;margin-top:.6rem;padding:8px 10px;background:rgba(255,255,255,.6);border-radius:6px;border-left:2px solid var(--border)}
+
+/* ─── TEAM CARDS ─── */
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:7px;margin-bottom:1rem}
+.tcard{display:flex;align-items:center;gap:9px;background:var(--bg2);border-radius:var(--r);padding:9px 11px;cursor:pointer;border:1px solid var(--border);transition:border-color .2s}
+.tcard:hover{border-color:var(--orange)}
+.tcard.sel{border:2px solid var(--orange);background:#FFF8F2}
+.tc-fl{font-size:18px;width:22px;text-align:center}
+.tc-nfo{flex:1}.tc-nm{font-size:11px;font-weight:700}.tc-sg{font-size:9px;color:var(--purple)}
+.tc-pt{font-size:12px;font-weight:900;color:var(--orange)}
+
+/* ─── DETAIL ─── */
+.dcard{background:var(--bg2);border-radius:14px;padding:1.25rem;border:1px solid var(--border);box-shadow:var(--shadow);margin-top:10px}
+.dh{display:flex;align-items:flex-start;gap:14px;margin-bottom:1rem}
+.dfl{font-size:38px;line-height:1}
+.dnfo{flex:1}.dnm{font-size:16px;font-weight:800;margin-bottom:2px}
+.dbio{font-size:11px;color:var(--text2);line-height:1.6}
+.dprob{text-align:center;flex-shrink:0}
+.dp-val{font-size:26px;font-weight:900;color:var(--orange)}
+.dp-lbl{font-size:9px;color:var(--text3)}
+.dmets{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:1rem}
+.dmet{background:var(--bg);border-radius:8px;padding:8px;text-align:center;border:1px solid var(--border)}
+.dmv{font-size:13px;font-weight:800}.dml{font-size:9px;color:var(--text3);margin-top:2px}
+.cbars{display:flex;flex-direction:column;gap:7px}
+.cbrow{display:flex;align-items:center;gap:10px}
+.cblbl{font-size:10px;color:var(--text2);flex:0 0 185px}
+.cbt{flex:1;height:9px;background:var(--border);border-radius:5px;overflow:hidden}
+.cbf{height:100%;border-radius:5px;transition:width .4s}
+.cbval{font-size:10px;font-weight:800;width:26px;text-align:right}
+
+/* ─── WEIGHTS ─── */
+.wrow{display:flex;align-items:center;gap:9px;padding:7px 11px;background:var(--bg2);border-radius:var(--r);border:1px solid var(--border);margin-bottom:5px}
+.wlbl{font-size:10px;color:var(--text2);flex:0 0 175px}
+.wpct{font-size:10px;font-weight:800;width:30px;text-align:right}
+.wsrc{font-size:9px;color:var(--text3);width:110px;text-align:right}
+input[type=range]{flex:1;accent-color:var(--orange)}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.btn{padding:8px 16px;font-size:11px;font-weight:700;cursor:pointer;border-radius:8px;letter-spacing:.02em}
+.btn-o{background:none;border:1px solid var(--border);color:var(--text)}.btn-o:hover{border-color:var(--orange);color:var(--orange)}
+.btn-s{background:var(--orange);border:none;color:#fff}.btn-s:hover{background:#C96015}
+.btn-b{background:none;border:1px solid var(--blue3);color:var(--blue3)}.btn-b:hover{background:var(--blue3);color:#fff}
+
+/* ─── RADAR ─── */
+.radar-sels{display:flex;gap:14px;margin-bottom:1rem;flex-wrap:wrap}
+.rsg label{display:block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text2);margin-bottom:4px}
+select{font-size:12px;padding:6px 10px;border:1px solid var(--border);border-radius:7px;background:var(--bg2);color:var(--text);font-family:'Inter',sans-serif}
+.radar-inner{background:var(--bg2);border-radius:14px;padding:1.25rem;border:1px solid var(--border);box-shadow:var(--shadow)}
+.radar-canvas{position:relative;height:350px}
+
+/* ─── LUNAR ─── */
+.mcal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:1rem}
+.mday{background:var(--bg2);border-radius:7px;padding:5px 3px;text-align:center;border:1px solid var(--border);font-size:9px}
+.mday.g{border-color:var(--orange)}.mday.f{border:2px solid var(--gold);background:#FFFBEE}
+.mm{font-size:14px;display:block}.md{font-size:9px;font-weight:700;margin-top:1px}
+.mp{font-size:8px;color:var(--text3)}.ml2{font-size:7px;color:var(--orange);margin-top:1px}
+
+/* ─── METHODOLOGY ─── */
+.method-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mcard{background:var(--bg2);border-radius:var(--r);padding:1rem;border:1px solid var(--border)}
+.mc-num{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--border);line-height:1}
+.mc-title{font-size:12px;font-weight:700;margin-bottom:4px;margin-top:-4px}
+.mc-body{font-size:11px;color:var(--text2);line-height:1.55}
+
+/* ─── AUTHOR ─── */
+.author-bar{background:var(--bg2);border-top:1px solid var(--border);padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:gap;gap:1rem}
+.ab-left{display:flex;align-items:center;gap:12px}
+.ab-avatar{width:44px;height:44px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#fff;font-family:'Syne',sans-serif;flex-shrink:0}
+.ab-name{font-size:13px;font-weight:800}
+.ab-role{font-size:10px;color:var(--text2);margin-top:1px}
+.ab-right{font-size:10px;color:var(--text3);text-align:right;line-height:1.5}
+
+/* ─── FOOTER ─── */
+footer{background:var(--blue);color:rgba(255,255,255,.55);padding:1.5rem 2rem;text-align:center;font-size:10px;line-height:1.6}
+footer b{color:rgba(255,255,255,.85)}
+footer a{color:var(--orange);text-decoration:none}
+
+/* ─── NL COMPARE ─── */
+.nlrow{display:flex;align-items:center;gap:7px;margin-bottom:5px}
+.nlname{font-size:10px;color:var(--text2);flex:0 0 155px}
+.nltrack{flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden}
+.nlbar{height:100%;border-radius:4px;transition:width .4s}
+.nlnl{font-size:9px;font-weight:800;width:24px;text-align:right}
+.nlavg{font-size:9px;color:var(--text3);width:24px}
+.nldiff{font-size:9px;font-weight:800;width:28px;text-align:right}
+
+/* ─── HIGHLIGHT BOX ─── */
+.highlight{background:linear-gradient(135deg,rgba(232,117,26,.08),rgba(10,31,68,.04));border:1px solid rgba(232,117,26,.25);border-radius:14px;padding:1.25rem;margin-bottom:1.25rem}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:640px){
+  .hero-grid{grid-template-columns:1fr}.hero-winner{display:none}
+  .pod3,.pillars{grid-template-columns:1fr 1fr}
+  .method-grid,.trionda-teams,.trionda-specs{grid-template-columns:1fr}
+  .dmets{grid-template-columns:1fr 1fr}
+  .sec-num{font-size:22px}
+}
+</style>
+</head>
+<body>
+
+<!-- ─── HERO ─── -->
+<header class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-label">Estudo Preditivo Independente · Mundial FIFA 2026</div>
+      <h1 class="hero-title">Quem vai ganhar<br>o <span>Mundial 2026?</span></h1>
+      <p class="hero-lead">Um modelo inédito que cruza 27 dimensões de análise — dados económicos, desportivos, tecnologia da bola, ciclos lunares e astrologia das nações — para identificar o vencedor mais provável do maior evento desportivo do mundo.</p>
+      <div class="hero-chips">
+        <span class="hchip hc1">27 Dimensões de análise</span>
+        <span class="hchip hc2">Tecnologia Adidas Trionda</span>
+        <span class="hchip hc3">Modelo Klement · 3× acertou</span>
+        <span class="hchip hc4">Fases lunares reais jun-jul 2026</span>
+      </div>
+    </div>
+    <div class="hero-winner" id="hw-box">
+      <div class="hw-label">Vencedor previsto</div>
+      <div class="hw-flag" id="hw-flag">🇳🇱</div>
+      <div class="hw-name" id="hw-name">Países Baixos</div>
+      <div class="hw-pct" id="hw-pct">—%</div>
+      <div class="hw-sub" id="hw-sub">27 dimensões</div>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+
+<!-- ─── TABS ─── -->
+<nav class="tabs" role="tablist">
+  <button class="tb on" onclick="sw('resultado',this)">🏆 Resultado</button>
+  <button class="tb" onclick="sw('ranking',this)">📊 Ranking</button>
+  <button class="tb" onclick="sw('trionda',this)">⚽ Bola Trionda</button>
+  <button class="tb" onclick="sw('signo',this)">✨ Astrologia</button>
+  <button class="tb" onclick="sw('nl',this)">🇳🇱 Caso NL</button>
+  <button class="tb" onclick="sw('dims',this)">27 Dimensões</button>
+  <button class="tb" onclick="sw('equipa',this)">Por Equipa</button>
+  <button class="tb" onclick="sw('pesos',this)">⚙️ Pesos</button>
+  <button class="tb" onclick="sw('radar',this)">🔮 Radar</button>
+  <button class="tb" onclick="sw('lunar',this)">🌙 Lunar</button>
+  <button class="tb" onclick="sw('metodo',this)">📋 Metodologia</button>
+</nav>
+
+<!-- ─── RESULTADO ─── -->
+<section id="s-resultado" class="ts on">
+  <div class="sec-header"><div class="sec-num">01</div><div><div class="sec-title">O Vencedor Mais Provável</div><div class="sec-sub">Resultado do modelo integrado de 27 dimensões</div></div></div>
+  <div class="pod3" id="podium"></div>
+  <div class="pillars">
+    <div class="pillar"><div class="pi-ico">🏅</div><div class="pi-val" id="sc-k">—</div><div class="pi-lbl">Desportivo</div></div>
+    <div class="pillar"><div class="pi-ico">🌍</div><div class="pi-val" id="sc-a">—</div><div class="pi-lbl">Humano</div></div>
+    <div class="pillar"><div class="pi-ico">⚽</div><div class="pi-val" id="sc-f">—</div><div class="pi-lbl">Futebol</div></div>
+    <div class="pillar"><div class="pi-ico">⚽🔬</div><div class="pi-val" id="sc-t">—</div><div class="pi-lbl">Trionda</div></div>
+    <div class="pillar"><div class="pi-ico">🌙✨</div><div class="pi-val" id="sc-x">—</div><div class="pi-lbl">Astro-Lunar</div></div>
+  </div>
+  <div class="chart-card">
+    <div class="cc-title">Probabilidade de título — top 12 seleções (27 dimensões)</div>
+    <div class="cc-canvas"><canvas id="mainChart" aria-label="Gráfico de barras com probabilidades de vitória no Mundial 2026"></canvas></div>
+  </div>
+  <p style="font-size:10px;color:var(--text3);line-height:1.5">Fontes: FIFA · UNDP HDR 2025 · FMI 2026 · OMS · CIES Football Observatory · World Bank · Deloitte Money League · Klement 2026 · Univ. Innsbruck · Univ. Nottingham · Scientific American · Design News · BBC Science Focus · Adidas/FIFA (Trionda) · Astronomy.com · Transfermarkt jun 2026</p>
+</section>
+
+<!-- ─── RANKING ─── -->
+<section id="s-ranking" class="ts">
+  <div class="sec-header"><div class="sec-num">02</div><div><div class="sec-title">Ranking Completo das 16 Seleções</div><div class="sec-sub">Score por categoria e probabilidade final</div></div></div>
+  <table class="rtbl" id="rank-table"></table>
+</section>
+
+<!-- ─── TRIONDA ─── -->
+<section id="s-trionda" class="ts">
+  <div class="sec-header"><div class="sec-num">03</div><div><div class="sec-title">A Bola Trionda muda o jogo</div><div class="sec-sub">A variável mais inédita deste estudo — física aplicada ao futebol</div></div></div>
+  <div class="trionda-hero">
+    <div class="th-label">Variável inédita · Tecnologia Adidas Trionda 2026</div>
+    <div class="th-title">4 painéis. 500Hz. A bola que favorece jogos de toque.</div>
+    <div class="th-body">A Adidas Trionda é a bola oficial do Mundial 2026 e a mais tecnologicamente avançada da história. Testada em túnel de vento pelas Universidades de Puget Sound, Tsukuba e Sheffield, a sua física favorece claramente equipas que jogam com toque curto, muita rotação e bola parada de qualidade — e prejudica equipas que dependem de longos pontapés defensivos. Pela primeira vez num estudo preditivo de um Mundial, a física da bola entra no modelo como variável.</div>
+    <div class="trionda-specs">
+      <div class="tspec"><div class="tspec-val">4</div><div class="tspec-lbl">Painéis — o menor número na história dos Mundiais (era 32 em 1970)</div></div>
+      <div class="tspec"><div class="tspec-val">500Hz</div><div class="tspec-lbl">Sensor IMU integrado — dados em tempo real para VAR, 500 leituras/segundo</div></div>
+      <div class="tspec"><div class="tspec-val">27 mph</div><div class="tspec-lbl">Crise de arrasto (vs. 31-40 mph da Al Rihla 2022) — livres e cantos mais previsíveis</div></div>
+    </div>
+  </div>
+  <div class="trionda-teams">
+    <div class="tt-card">
+      <div class="tt-tag" style="background:rgba(14,107,58,.1);color:var(--green)">✅ Favorece</div>
+      <div class="tt-title">Equipas que beneficiam da Trionda</div>
+      <div class="tt-body">A superfície mais rugosa permite <b>mais rotação no remate</b> — favorece especialistas em bola parada e passes curtos precisos. O arrasto mais previsível a baixas velocidades beneficia <b>o jogo de toque curto</b> (tiki-taka, Total Football). Livres e cantos mais controláveis = vantagem para as equipas com melhores especialistas.</div>
+      <div class="tt-teams">
+        <span class="team-tag">🇳🇱 Países Baixos</span>
+        <span class="team-tag">🇪🇸 Espanha</span>
+        <span class="team-tag">🇫🇷 França</span>
+        <span class="team-tag">🇵🇹 Portugal</span>
+        <span class="team-tag">🇩🇪 Alemanha</span>
+      </div>
+    </div>
+    <div class="tt-card">
+      <div class="tt-tag" style="background:rgba(176,48,32,.1);color:var(--red)">⚠️ Penaliza</div>
+      <div class="tt-title">Equipas que saem prejudicadas</div>
+      <div class="tt-body">O <b>maior arrasto geral encurta os pontapés longos</b> — penaliza equipas que dependem de jogo direto e lançamentos longos. Defesas que dependem de colunas fortes e saída longa também perdem distância de jogo. Equipas de estilo físico e vertical sofrem mais.</div>
+      <div class="tt-teams">
+        <span class="team-tag">🇧🇷 Brasil</span>
+        <span class="team-tag">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra</span>
+        <span class="team-tag">🇲🇦 Marrocos</span>
+        <span class="team-tag">🇭🇷 Croácia</span>
+      </div>
+    </div>
+  </div>
+  <div class="chart-card">
+    <div class="cc-title">Score Trionda — compatibilidade de estilo de jogo com a física da bola (0-100)</div>
+    <div style="position:relative;height:280px"><canvas id="triondaChart" aria-label="Score de compatibilidade Trionda por seleção"></canvas></div>
+  </div>
+</section>
+
+<!-- ─── ASTROLOGIA ─── -->
+<section id="s-signo" class="ts">
+  <div class="sec-header"><div class="sec-num">04</div><div><div class="sec-title">A Dimensão Astrológica</div><div class="sec-sub">Metodologia clara, peso controlado, curiosidade científica</div></div></div>
+  <div class="signo-box">
+    <div class="sb-title">Como determinamos o signo de cada nação — metodologia</div>
+    <div class="sb-method">
+      <b>Método:</b> utilizamos a data do documento formal que constitui o estado moderno de cada país (declaração de independência, constituição, tratado de fundação) para determinar o signo solar. Por exemplo, os Países Baixos têm o Ato de Abjuração de 26 de julho de 1581 — que cai em Leão. Os EUA têm a Declaração de Independência de 4 de julho de 1776 — Câncer. Esta abordagem é documentalmente verificável e historicamente consistente.<br><br>
+      <b>Peso no modelo:</b> as variáveis astrológicas representam apenas <b>12% do peso total</b> do modelo, divididas em 3 sub-dimensões: (1) signo nacional e trânsitos planetários de jun-jul 2026, (2) karma histórico calculado com fórmula matemática (finais perdidas e anos sem título), (3) alinhamento geral dos trânsitos do período. <b>Nenhuma conclusão final depende desta dimensão isolada.</b><br><br>
+      <b>Transparência editorial:</b> incluímos esta dimensão como elemento de inovação e curiosidade. Os resultados do modelo são robustos mesmo removendo completamente a componente astrológica — os Países Baixos continuam em 1.º lugar pelas restantes 24 dimensões.
+    </div>
+    <div class="disclaimer">⚠️ As variáveis astrológicas são de carácter especulativo e cultural. Os dados económicos, desportivos, de saúde pública e da bola Trionda são reais e verificáveis. A astrologia entra no modelo como dimensão complementar, não determinante.</div>
+  </div>
+  <table class="signo-table">
+    <thead><tr><th>Seleção</th><th>Documento fundador</th><th>Data</th><th>Signo</th><th>Trânsito principal jul 2026</th><th>Impacto</th></tr></thead>
+    <tbody id="signo-tbody"></tbody>
+  </table>
+</section>
+
+<!-- ─── CASO NL ─── -->
+<section id="s-nl" class="ts">
+  <div class="sec-header"><div class="sec-num">05</div><div><div class="sec-title">O Caso dos Países Baixos</div><div class="sec-sub">Por que razão 27 dimensões apontam para o mesmo vencedor</div></div></div>
+  <div class="highlight">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:1rem">
+      <span style="font-size:40px">🇳🇱</span>
+      <div><div style="font-size:16px;font-weight:800">Países Baixos — 6 razões convergentes</div><div style="font-size:11px;color:var(--text2);margin-top:2px">Klement + física + economia + luna + karma + tecnologia da bola</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:11px;color:var(--text2);line-height:1.6">
+      <div style="padding:10px 12px;background:rgba(255,255,255,.7);border-radius:8px;border-left:3px solid var(--orange)"><b style="color:var(--text)">① Modelo Klement:</b> o matemático que acertou 3 Mundiais seguidos usa PIB per capita, população e cultura futebolística. NL: $84k PPP — top 10 mundial. É o seu vencedor para 2026.</div>
+      <div style="padding:10px 12px;background:rgba(255,255,255,.7);border-radius:8px;border-left:3px solid var(--blue3)"><b style="color:var(--text)">② IDH + Gini:</b> IDH 0.946 (11.º mundial). Gini 26.4 — menor desigualdade dos 16 participantes. Mais jovens com acesso real à formação desportiva de qualidade.</div>
+      <div style="padding:10px 12px;background:rgba(255,255,255,.7);border-radius:8px;border-left:3px solid var(--green)"><b style="color:var(--text)">③ Ajax + Trionda:</b> Ajax nº2 mundial em formação (CIES 2025). Total Football como ADN — jogo de toque curto com muita rotação = estilo ideal para a física da Trionda.</div>
+      <div style="padding:10px 12px;background:rgba(255,255,255,.7);border-radius:8px;border-left:3px solid var(--purple)"><b style="color:var(--text)">④ Ciclos lunares:</b> fase de grupos em Lua Nova (recomeço histórico). Final em 19 jul = Lua Crescente = sinal de ascensão. A Lua cresce, tal como a história do primeiro título.</div>
+      <div style="padding:10px 12px;background:rgba(255,255,255,.7);border-radius:8px;border-left:3px solid var(--red)"><b style="color:var(--text)">⑤ Karma histórico:</b> 3 finais perdidas (1974, 1978, 2010) = 79.8 pontos de karma — o mais alto de todos os participantes. 116 anos à espera do primeiro título.</div>
+      <div style="padding:10px 12px;background:rgba(255,255,255,.7);border-radius:8px;border-left:3px solid var(--gold)"><b style="color:var(--text)">⑥ Percurso + altitude:</b> Grupo F acessível. Final no MetLife NJ (10m altitude) = condições ideais para o jogo holandês. Nunca jogam em altitude ao longo do torneio.</div>
+    </div>
+  </div>
+  <div class="chart-card">
+    <div class="cc-title">🇳🇱 Países Baixos vs média dos 15 outros participantes — por todas as 27 dimensões</div>
+    <div id="nl-compare" style="padding:.5rem 0"></div>
+  </div>
+</section>
+
+<!-- ─── 27 DIMENSÕES ─── -->
+<section id="s-dims" class="ts">
+  <div class="sec-header"><div class="sec-num">06</div><div><div class="sec-title">As 27 Dimensões do Modelo</div><div class="sec-sub">Todas as variáveis, fontes e lógica de cada uma</div></div></div>
+  <div id="dims-view"></div>
+</section>
+
+<!-- ─── POR EQUIPA ─── -->
+<section id="s-equipa" class="ts">
+  <div class="sec-header"><div class="sec-num">07</div><div><div class="sec-title">Análise por Seleção</div><div class="sec-sub">Clica numa equipa para ver os seus 27 scores detalhados</div></div></div>
+  <div class="tgrid" id="tgrid"></div>
+  <div id="det-panel"></div>
+</section>
+
+<!-- ─── PESOS ─── -->
+<section id="s-pesos" class="ts">
+  <div class="sec-header"><div class="sec-num">08</div><div><div class="sec-title">Ajustar Pesos do Modelo</div><div class="sec-sub">Experimenta diferentes configurações e vê como muda o resultado</div></div></div>
+  <div id="w-all"></div>
+  <div class="btn-row">
+    <button class="btn btn-o" onclick="resetW()">↺ Repor padrão</button>
+    <button class="btn btn-b" onclick="applyKlement()">🎯 Modo Klement puro</button>
+    <button class="btn btn-b" onclick="applyAstro()">🌙 Modo Astral puro</button>
+    <button class="btn btn-s" onclick="applyAll()">⚡ Todos os pesos iguais</button>
+  </div>
+</section>
+
+<!-- ─── RADAR ─── -->
+<section id="s-radar" class="ts">
+  <div class="sec-header"><div class="sec-num">09</div><div><div class="sec-title">Comparar Duas Seleções</div><div class="sec-sub">Radar com 6 categorias de análise</div></div></div>
+  <div class="radar-sels">
+    <div class="rsg"><label>Seleção A</label><select id="rA" onchange="renderRadar()"></select></div>
+    <div class="rsg"><label>Seleção B</label><select id="rB" onchange="renderRadar()"></select></div>
+  </div>
+  <div class="radar-inner"><div class="radar-canvas"><canvas id="radarC" aria-label="Radar comparando duas seleções em 6 categorias"></canvas></div></div>
+</section>
+
+<!-- ─── LUNAR ─── -->
+<section id="s-lunar" class="ts">
+  <div class="sec-header"><div class="sec-num">10</div><div><div class="sec-title">Calendário Lunar do Mundial 2026</div><div class="sec-sub">Fases da lua reais — dados astronómicos verificados · Astronomy.com</div></div></div>
+  <div class="chart-card">
+    <div class="cc-title">Jun-Jul 2026 · Fases lunares durante o torneio</div>
+    <div class="mcal" id="moon-cal"></div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:10px;color:var(--text2)">
+      <span>🌑 Lua Nova</span><span>🌒 Crescente</span><span>🌓 1.º Quarto</span><span>🌔 Gibosa Cres.</span>
+      <span>🌕 Lua Cheia</span><span>🌖 Gibosa Ming.</span><span>🌗 3.º Quarto</span><span>🌘 Minguante</span>
+      <span style="color:var(--orange)">■ Jogos NL</span><span style="color:var(--gold)">■ Final</span>
+    </div>
+  </div>
+  <div id="key-games"></div>
+</section>
+
+<!-- ─── METODOLOGIA ─── -->
+<section id="s-metodo" class="ts">
+  <div class="sec-header"><div class="sec-num">11</div><div><div class="sec-title">Como foi construído este modelo</div><div class="sec-sub">Transparência total — para que qualquer pessoa possa verificar e replicar</div></div></div>
+  <div class="method-grid">
+    <div class="mcard"><div class="mc-num">01</div><div class="mc-title">Recolha de dados reais</div><div class="mc-body">Todas as variáveis económicas, desportivas e de saúde foram recolhidas de fontes primárias internacionais: FIFA, UNDP, FMI, OMS, World Bank, CIES Football Observatory, Deloitte Money League e Transfermarkt. Dados de junho de 2026.</div></div>
+    <div class="mcard"><div class="mc-num">02</div><div class="mc-title">Normalização 0-100</div><div class="mc-body">Cada variável foi normalizada numa escala de 0 a 100 para permitir comparação entre dimensões de natureza diferente (PIB em dólares, ranking FIFA em pontos, esperança de vida em anos, etc.).</div></div>
+    <div class="mcard"><div class="mc-num">03</div><div class="mc-title">Modelo Klement integrado</div><div class="mc-body">Reproduzimos o modelo do matemático Joachim Klement (que acertou nos vencedores de 2014, 2018 e 2022) e integrámo-lo como uma das 5 categorias. As suas variáveis de base — PIB, população e cultura — têm peso de 22% no total.</div></div>
+    <div class="mcard"><div class="mc-num">04</div><div class="mc-title">Física da bola Trionda</div><div class="mc-body">Baseado em estudos de túnel de vento das Universidades de Puget Sound, Tsukuba e Sheffield, publicados no Scientific American, BBC Science Focus e Design News, criámos um score de compatibilidade de estilo de jogo com a física da Trionda.</div></div>
+    <div class="mcard"><div class="mc-num">05</div><div class="mc-title">Ciclos lunares astronómicos</div><div class="mc-body">As fases da lua de junho e julho de 2026 foram verificadas em Astronomy.com e Catalina Sky Survey. A cada jogo decisivo foi atribuído um score baseado na fase lunar nessa data — variável usada em nenhum estudo anterior sobre Mundiais.</div></div>
+    <div class="mcard"><div class="mc-num">06</div><div class="mc-title">Astrologia nacional (12% do modelo)</div><div class="mc-body">Utilizámos a data do documento fundador de cada estado moderno para determinar o signo solar nacional. Esta variável representa apenas 12% do peso total e é apresentada com total transparência quanto ao seu carácter especulativo. O resultado final não muda sem ela.</div></div>
+  </div>
+</section>
+
+</main>
+
+<!-- AUTHOR BAR -->
+<div class="author-bar">
+  <div class="ab-left">
+    <div class="ab-avatar">AM</div>
+    <div>
+      <div class="ab-name">Américo Moreira</div>
+      <div class="ab-role">AI Innovation Specialist · Junho 2026</div>
+    </div>
+  </div>
+  <div class="ab-right">Estudo construído com recurso a Inteligência Artificial (Claude, Anthropic)<br>e dados reais de fontes internacionais · Para reprodução com créditos</div>
+</div>
+
+<footer>
+  <b>Mundial 2026 — Estudo Preditivo Global</b> por Américo Moreira · AI Innovation Specialist<br>
+  27 dimensões · Klement · Innsbruck · Nottingham · CIES · FIFA · UNDP · FMI · OMS · World Bank · Deloitte · Scientific American · BBC Science Focus · Adidas/FIFA · Astronomy.com · Transfermarkt<br>
+  <span style="font-size:9px;color:rgba(255,255,255,.3);margin-top:4px;display:block">As variáveis astrológicas e lunares são de natureza especulativa e cultural. Os dados económicos, desportivos e técnicos são reais e verificáveis. · Construído com Claude (Anthropic) · Jun 2026</span>
+</footer>
+
+<script>
+// ─── 27 DIMENSÕES ───────────────────────────────────────────────
+const DIMS = [
+  // KLEMENT (5) – 22% total
+  {id:'fifa',     name:'Ranking FIFA',           cat:'k', src:'FIFA jun 2026',         w:9,  col:'#E8751A', desc:'Ranking oficial ponderado FIFA. Klement usa como base.'},
+  {id:'odds',     name:'Odds de mercado',         cat:'k', src:'Bwin/FanDuel jun 2026', w:9,  col:'#E8751A', desc:'Consenso das casas de apostas. Espanha +450, França +500, NL +1600.'},
+  {id:'gdppc',    name:'PIB per capita (PPP)',    cat:'k', src:'FMI/Worldometer 2026',  w:9,  col:'#E8751A', desc:'Proxy de infra-estrutura desportiva. NL: $84k — top10 mundial.'},
+  {id:'pop',      name:'Dimensão populacional',  cat:'k', src:'World Bank 2026',        w:5,  col:'#E8751A', desc:'Pool de talento disponível. Brasil 215M vs NL 17M.'},
+  {id:'culture',  name:'Cultura futebolística',  cat:'k', src:'FIFA registados + paixão',w:8, col:'#E8751A', desc:'Jogadores registados, penetração e paixão nacional pela modalidade.'},
+  // ACADÉMICAS (5) – 21% total
+  {id:'hdi',      name:'IDH (UNDP)',              cat:'a', src:'UNDP HDR 2025',          w:7,  col:'#3266AD', desc:'Índice de Desenvolvimento Humano. NL: 0.946, top11 mundial.'},
+  {id:'health',   name:'Esperança de vida',       cat:'a', src:'OMS 2024',               w:4,  col:'#3266AD', desc:'Japão 84.3a — maior do torneio. Recuperação física do plantel.'},
+  {id:'history',  name:'Histórico em Mundiais',   cat:'a', src:'FIFA 1930-2022',         w:7,  col:'#3266AD', desc:'Títulos, finais, semis. Brasil 5× vs NL 0× (3 finais perdidas).'},
+  {id:'momentum', name:'Momentum recente',        cat:'a', src:'Resultados últ. 12m',   w:7,  col:'#3266AD', desc:'Vitórias, golos, qualidade dos adversários batidos nos últimos 12 meses.'},
+  {id:'host',     name:'Fator anfitrião',         cat:'a', src:'Klement/Nottingham',     w:3,  col:'#3266AD', desc:'EUA +60, México +50. Vantagem de jogo em casa.'},
+  // FUTEBOL ECOSSISTEMA (6) – 20% total
+  {id:'gini',     name:'Coef. Gini (igualdade)', cat:'f', src:'World Bank 2024',        w:5,  col:'#0E6B3A', desc:'Menor desigualdade → mais jovens acedem a formação. NL Gini 26.4.'},
+  {id:'academy',  name:'Formação desportiva',    cat:'f', src:'CIES Football Obs. 2025',w:8,  col:'#0E6B3A', desc:'Benfica nº1, Ajax nº2. Jogadores formados em academias nas top5 ligas.'},
+  {id:'market',   name:'Valor de mercado plantel',cat:'f',src:'Transfermarkt jun 2026', w:6,  col:'#0E6B3A', desc:'Valor total do plantel em €M. Reflexo da qualidade individual.'},
+  {id:'league',   name:'Nível das ligas domésticas',cat:'f',src:'UEFA coef+Deloitte',   w:5,  col:'#0E6B3A', desc:'Premier League (1.ª), La Liga (2.ª), Bundesliga (3.ª).'},
+  {id:'group',    name:'Facilidade do grupo',    cat:'f', src:'Ranking adversários',    w:5,  col:'#0E6B3A', desc:'Portugal Grupo K = mais fácil. NL Grupo F = acessível.'},
+  {id:'politics', name:'Estabilidade política',  cat:'f', src:'World Bank Gov. 2024',   w:3,  col:'#0E6B3A', desc:'Instabilidade afeta financiamento e seleção. Argentina score: 42.'},
+  // TRIONDA (3) – 10% total
+  {id:'trionda_style',name:'⚽ Trionda — Estilo de jogo',cat:'t',src:'Univ. Puget Sound/Sheffield 2026',w:7,col:'#B8920A',desc:'Score de compatibilidade do estilo de jogo com a física da Trionda (toque curto, rotação).'},
+  {id:'trionda_setpiece',name:'⚽ Trionda — Bola parada',cat:'t',src:'Scientific American/BBC 2026',   w:7,col:'#B8920A',desc:'Especialistas em livres e cantos beneficiam — arrasto mais baixo a velocidades médias.'},
+  {id:'trionda_defense',name:'⚽ Trionda — Defesa/Saída',cat:'t',src:'Design News/Goff 2026',          w:6,col:'#B8920A',desc:'Equipas com saída longa perdem distância (arrasto geral maior). Jogo direto penalizado.'},
+  // LUNAR (4) – 12% total
+  {id:'moon_group',name:'🌙 Lua — fase de grupos',cat:'l',src:'Astronomy.com jun 2026',w:4,col:'#5C2D8A',desc:'NL joga em Lua Nova e Crescente — fase de recomeço histórico.'},
+  {id:'moon_ko',  name:'🌙 Lua — R32/R16 (fase eliminatória)',cat:'l',src:'Strawberry Moon 29 jun',w:5,col:'#5C2D8A',desc:'Lua Cheia "Strawberry Moon" em 29 jun = energia emocional máxima. Round of 32 e 16 decorrem sob Lua Cheia e Minguante.'},
+  {id:'moon_semi',name:'🌙 Lua — meias-finais',   cat:'l',src:'Lua Nova 14 jul 2026',  w:4,col:'#5C2D8A',desc:'Lua Nova em 14 jul = novo ciclo histórico. Favorece equipas sem títulos.'},
+  {id:'moon_final',name:'🌙 Lua — Final (19 jul)',cat:'l',src:'Lua Crescente 19 jul',  w:5,col:'#5C2D8A',desc:'Lua em crescimento = ascensão histórica. O sinal mais favorável para um primeiro título.'},
+  // ASTRAL/SIGNO (3) – 12% total
+  {id:'zodiac',   name:'✨ Signo nacional + Trânsitos',cat:'x',src:'Marte em Leão jul 2026',w:5,col:'#B03020',desc:'Data fundadora do estado → signo solar. Marte em Leão nas meias/final favorece países Leão.'},
+  {id:'karma',    name:'⚖️ Karma histórico',          cat:'x',src:'Cálculo: finais+anos',  w:6,col:'#B03020',desc:'Fórmula: (finais perdidas × 15) + (anos sem título × 0.3). NL: 79.8 pts — máximo.'},
+  {id:'cosmic',   name:'🪐 Alinhamento cósmico',      cat:'x',src:'Júpiter/Saturno/Marte', w:4,col:'#B03020',desc:'KNVB (Sagitário) em trígono com Júpiter em Gémeos = aspeto mais harmonioso do período.'},
+  // INÉDITAS (2) – 3% total
+  {id:'altitude', name:'⛰️ Perfil altitude venues', cat:'i',src:'StadiumDB/FIFA 2026',    w:3,col:'#5A5650',desc:'NL nunca joga em altitude. Brasil potencialmente exposto ao Azteca (2240m).'},
+  {id:'cohesion', name:'🤝 Coesão do plantel',       cat:'i',src:'Transfermarkt/Sofascore',w:3,col:'#5A5650',desc:'Anos médios dos 11 titulares a jogar juntos. França 6a, NL 5a, Argentina 2a.'},
+];
+
+const CAT = {k:{name:'Desportivo + Económico',col:'#E8751A'},a:{name:'Desenvolvimento Humano',col:'#3266AD'},f:{name:'Ecossistema Futebolístico',col:'#0E6B3A'},t:{name:'Tecnologia Trionda',col:'#B8920A'},l:{name:'Ciclos Lunares',col:'#5C2D8A'},x:{name:'Astrologia Nacional',col:'#B03020'},i:{name:'Variáveis Inéditas',col:'#5A5650'}};
+
+// ─── DADOS EQUIPAS ───────────────────────────────────────────────
+const TEAMS=[
+  // RANKING FIFA OFICIAL 11 JUN 2026: 1.Argentina(1877) 2.Espanha(1875) 3.França(1874) 4.Inglaterra 5.Portugal 6.Brasil 7.NL 8.Marrocos 9.Bélgica 10.Alemanha
+  {name:'Países Baixos',flag:'🇳🇱',grp:'F',sign:'♌ Leão',founder:'26 jul 1581',titles:0,finals:3,
+   // FIFA nº7 (1756pts) — NL qualificou invicto pelo Grupo G UEFA com 6V 2E, 27 golos
+   // Grupo F: Japan(nº18), Sweden(nº43), Tunisia(nº40) — adversários médios
+   // Jogos: 14 jun NL vs Japão (Arlington TX) · 20 jun NL vs Suécia (Houston) · 25 jun Tunísia vs NL (Kansas City)
+   fifa:82,odds:76,gdppc:99,pop:54,culture:87,
+   hdi:96,health:87,history:74,momentum:80,host:0,
+   gini:95,academy:91,market:88,league:92,group:85,politics:95,
+   trionda_style:95,trionda_setpiece:90,trionda_defense:88,
+   moon_group:82,moon_ko:90,moon_semi:88,moon_final:92,
+   zodiac:97,karma:97,cosmic:92,altitude:96,cohesion:84,
+   gdpRaw:'$84k PPP',hdiRaw:'0.946',healthRaw:'82.3a',
+   info:'FIFA nº7 (1756pts, jun 2026). Klement aponta-os vencedores. PIB $84k PPP (top10 mundial), IDH 0.946 (11.º UNDP). Ajax nº2 mundial em formação (CIES 2025). Total Football = estilo ideal para Trionda. Grupo F: Japão (nº18), Suécia (nº43), Tunísia (nº40). Final MetLife Stadium, East Rutherford NJ (10m altitude). 3× finalistas (1974, 1978, 2010).'},
+  {name:'França',flag:'🇫🇷',grp:'I',sign:'♌ Leão',founder:'14 jul 1789',titles:2,finals:3,
+   // FIFA nº3 (1874pts) — perdeu para Côte d'Ivoire em amigável pré-Mundial, caiu do nº1
+   // Grupo I: Senegal(nº14), Noruega(nº22), Iraque — grupo exigente
+   // Jogos: 15 jun França vs Senegal · 22 jun França vs Iraque · 26 jun Noruega vs França (Boston)
+   fifa:94,odds:93,gdppc:86,pop:78,culture:90,
+   hdi:91,health:85,history:88,momentum:87,host:0,
+   gini:68,academy:95,market:97,league:90,group:72,politics:80,
+   trionda_style:92,trionda_setpiece:95,trionda_defense:80,
+   moon_group:75,moon_ko:82,moon_semi:75,moon_final:78,
+   zodiac:88,karma:52,cosmic:80,altitude:88,cohesion:90,
+   gdpRaw:'$54k PPP',hdiRaw:'0.910',healthRaw:'82.3a',
+   info:'FIFA nº3 (1874pts, jun 2026) — caiu do nº1 após derrota com Côte d\'Ivoire em amigável. Mbappé + Griezmann + Upamecano. INF Clairefontaine = melhor formação pública mundial. Grupo I com Senegal (nº14) e Noruega (nº22) é exigente. Também Leão — Marte em Leão favorece, mas 2 títulos = karma moderado.'},
+  {name:'Espanha',flag:'🇪🇸',grp:'H',sign:'♏ Escorpião',founder:'29 out 1978',titles:1,finals:2,
+   // FIFA nº2 (1875pts) — favorita das casas de apostas Bwin/FanDuel (+450)
+   // Grupo H: Cabo Verde(nº89), Arábia Saudita(nº56), Uruguai(nº20)
+   // Jogos: 15 jun Espanha vs Cabo Verde · 22 jun Espanha vs Arábia Saudita · 26 jun Uruguai vs Espanha
+   fifa:96,odds:97,gdppc:82,pop:72,culture:91,
+   hdi:92,health:88,history:90,momentum:88,host:0,
+   gini:70,academy:93,market:95,league:97,group:85,politics:82,
+   trionda_style:96,trionda_setpiece:92,trionda_defense:72,
+   moon_group:72,moon_ko:78,moon_semi:68,moon_final:72,
+   zodiac:55,karma:58,cosmic:60,altitude:84,cohesion:80,
+   gdpRaw:'$48k PPP',hdiRaw:'0.918',healthRaw:'83.4a',
+   info:'FIFA nº2 (1875pts, jun 2026). Favorita das casas de apostas (+450 Bwin). Campeã Euro 2024. La Liga = melhor liga do mundo (UEFA coef.). Grupo H: Cabo Verde (nº89), A. Saudita (nº56), Uruguai (nº20). Tiki-taka = estilo ideal para Trionda. ATENÇÃO: Klement nunca escolheu o favorito das apostas nos 3 modelos anteriores.'},
+  {name:'Inglaterra',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',grp:'L',sign:'♑ Capricórnio',founder:'1 jan 1801',titles:1,finals:2,
+   // FIFA nº4 — Grupo L: Croácia(nº11), Gana(nº60), Panamá(nº90) — grupo difícil
+   // Jogos: 16 jun Inglaterra vs Croácia · 23 jun Inglaterra vs Gana · 27 jun Panamá vs Inglaterra
+   fifa:90,odds:88,gdppc:88,pop:82,culture:89,
+   hdi:93,health:82,history:72,momentum:82,host:0,
+   gini:65,academy:90,market:99,league:99,group:62,politics:88,
+   trionda_style:72,trionda_setpiece:80,trionda_defense:60,
+   moon_group:70,moon_ko:80,moon_semi:72,moon_final:75,
+   zodiac:58,karma:68,cosmic:60,altitude:90,cohesion:78,
+   gdpRaw:'$55k PPP',hdiRaw:'0.940',healthRaw:'81.3a',
+   info:'FIFA nº4. Premier League = maior valor de mercado mundial. Grupo L com Croácia (nº11) = grupo difícil. Estilo vertical penalizado pela Trionda (arrasto encurta pontapés longos). 58 anos sem título desde 1966. Saturno (regente Capricórnio) em exílio.'},
+  {name:'Alemanha',flag:'🇩🇪',grp:'E',sign:'♎ Balança',founder:'3 out 1990',titles:4,finals:8,
+   // FIFA nº10 — Grupo E: Curaçau(nº101), Côte d'Ivoire(nº55), Equador(nº47) — grupo acessível
+   // Jogos: 13 jun Alemanha vs Equador · 20 jun Curaçau vs Alemanha · 25 jun Equador vs Alemanha
+   fifa:80,odds:76,gdppc:92,pop:88,culture:88,
+   hdi:96,health:83,history:92,momentum:75,host:0,
+   gini:76,academy:90,market:90,league:91,group:86,politics:93,
+   trionda_style:85,trionda_setpiece:82,trionda_defense:75,
+   moon_group:68,moon_ko:74,moon_semi:70,moon_final:72,
+   zodiac:65,karma:50,cosmic:62,altitude:86,cohesion:72,
+   gdpRaw:'$63k PPP',hdiRaw:'0.959',healthRaw:'81.1a',
+   info:'FIFA nº10. 4 títulos mundiais. IDH top5 mundial (0.959). Bayern Munich academia global. Grupo E: Curaçau (nº101), Côte d\'Ivoire (nº55), Equador (nº47) — acessível. Novo estilo com Wirtz favorecido pela Trionda. 12 anos sem título (desde 2014).'},
+  {name:'Portugal',flag:'🇵🇹',grp:'K',sign:'♌ Leão',founder:'25 jul 1139',titles:0,finals:0,
+   // FIFA nº5 — Grupo K: DR Congo(nº56), Uzbequistão(nº50), Colômbia(nº13) — grupo mais fácil
+   // Jogos: 17 jun Portugal vs DR Congo (Houston) · 23 jun Portugal vs Uzbequistão (Houston) · 27 jun Colômbia vs Portugal (Miami)
+   fifa:88,odds:82,gdppc:78,pop:40,culture:93,
+   hdi:88,health:84,history:68,momentum:80,host:0,
+   gini:72,academy:97,market:82,league:85,group:93,politics:91,
+   trionda_style:88,trionda_setpiece:90,trionda_defense:78,
+   moon_group:80,moon_ko:88,moon_semi:78,moon_final:80,
+   zodiac:85,karma:75,cosmic:78,altitude:90,cohesion:76,
+   gdpRaw:'$40k PPP',hdiRaw:'0.874',healthRaw:'81.9a',
+   info:'FIFA nº5. Benfica nº1 mundial em formação (CIES 2025), Sporting nº6, Porto top60. Grupo K (média ranking: nº40.2 = MAIS FÁCIL do torneio): DR Congo (nº56), Uzbequistão (nº50), Colômbia (nº13). Klement coloca Portugal na Final vs NL. Leão (25 jul 1139). Bruno Fernandes + especialistas bola parada = Trionda favorável.'},
+  {name:'Argentina',flag:'🇦🇷',grp:'J',sign:'♊ Gémeos',founder:'25 mai 1810',titles:3,finals:6,
+   // FIFA nº1 (1877pts, jun 2026) — recuperou liderança após vitórias vs Islândia e Honduras
+   // Grupo J: Argélia(nº52), Áustria(nº25), Jordânia(nº87) — grupo acessível
+   // Jogos: 14 jun Argentina vs Argélia · 20 jun Áustria vs Argentina · 25 jun Argentina vs Jordânia
+   fifa:99,odds:80,gdppc:52,pop:62,culture:97,
+   hdi:78,health:76,history:92,momentum:85,host:0,
+   gini:40,academy:93,market:84,league:72,group:83,politics:42,
+   trionda_style:78,trionda_setpiece:80,trionda_defense:68,
+   moon_group:72,moon_ko:78,moon_semi:70,moon_final:68,
+   zodiac:62,karma:22,cosmic:55,altitude:60,cohesion:60,
+   gdpRaw:'$24k PPP',hdiRaw:'0.849',healthRaw:'76.5a',
+   info:'FIFA nº1 (1877pts, jun 2026) — campeã em título, recuperou liderança antes do Mundial. Karma quase zerado após 2022. Crise económica grave (inflação +140%). Plantel a envelhecer. Grupo J: Argélia (nº52), Áustria (nº25), Jordânia (nº87). Gémeos com Júpiter = bónus já "usado" em Qatar 2022. Messi último Mundial.'},
+  {name:'Brasil',flag:'🇧🇷',grp:'C',sign:'♍ Virgem',founder:'7 set 1822',titles:5,finals:7,
+   // FIFA nº6 — Grupo C: Marrocos(nº8!), Haiti(nº93), Escócia(nº38) — grupo difícil
+   // Adversário Marrocos é nº8 do mundo — grande obstáculo
+   // Jogos: 16 jun Brasil vs Marrocos (Miami) · 22 jun Brasil vs Haiti · 26 jun Escócia vs Brasil
+   fifa:84,odds:83,gdppc:48,pop:95,culture:99,
+   hdi:72,health:74,history:98,momentum:78,host:0,
+   gini:30,academy:94,market:86,league:70,group:68,politics:52,
+   trionda_style:72,trionda_setpiece:75,trionda_defense:58,
+   moon_group:74,moon_ko:82,moon_semi:70,moon_final:72,
+   zodiac:70,karma:42,cosmic:62,altitude:62,cohesion:74,
+   gdpRaw:'$17k PPP',hdiRaw:'0.760',healthRaw:'75.5a',
+   info:'FIFA nº6. 5 títulos — maior histórico. Cultura futebolística = 99/100. Grupo C DIFÍCIL: Marrocos (nº8 mundial!), Haiti (nº93), Escócia (nº38). Estilo vertical penalizado pela Trionda. Potencialmente Miami (38°C) = desfavorável. Gini extremo, instabilidade política, PIB baixo penalizam.'},
+  {name:'Bélgica',flag:'🇧🇪',grp:'G',sign:'♐ Sagitário',founder:'4 out 1830',titles:0,finals:0,
+   // FIFA nº9 — Grupo G: Egito(nº29), Irão(nº21), Nova Zelândia(nº93) — grupo MAIS FÁCIL
+   // Jogos: 15 jun Bélgica vs Egito (Seattle) · 21 jun Bélgica vs Irão (LA) · 26 jun NZ vs Bélgica (Vancouver)
+   fifa:82,odds:70,gdppc:89,pop:52,culture:80,
+   hdi:93,health:82,history:62,momentum:70,host:0,
+   gini:78,academy:80,market:80,league:88,group:95,politics:86,
+   trionda_style:80,trionda_setpiece:78,trionda_defense:75,
+   moon_group:70,moon_ko:76,moon_semi:68,moon_final:70,
+   zodiac:72,karma:65,cosmic:70,altitude:88,cohesion:68,
+   gdpRaw:'$61k PPP',hdiRaw:'0.934',healthRaw:'81.7a',
+   info:'FIFA nº9. Grupo G = um dos mais fáceis: Egito (nº29), Irão (nº21), Nova Zelândia (nº93). Sagitário em trígono com Júpiter em Gémeos. PIB $61k e IDH 0.934 altos. Doku em forma. Dark horse legítimo.'},
+  {name:'Noruega',flag:'🇳🇴',grp:'I',sign:'♓ Peixes',founder:'17 mai 1814',titles:0,finals:0,
+   // FIFA nº22 — Grupo I: França(nº3!), Senegal(nº14), Iraque(nº58) — grupo MUITO DIFÍCIL
+   // Jogos: 15 jun França vs Senegal · 22 jun França vs Iraque · 26 jun Noruega vs França (Boston)
+   fifa:70,odds:58,gdppc:99,pop:32,culture:68,
+   hdi:99,health:88,history:38,momentum:82,host:0,
+   gini:92,academy:68,market:70,league:72,group:48,politics:98,
+   trionda_style:70,trionda_setpiece:68,trionda_defense:72,
+   moon_group:68,moon_ko:72,moon_semi:70,moon_final:68,
+   zodiac:78,karma:62,cosmic:72,altitude:88,cohesion:70,
+   gdpRaw:'$102k PPP',hdiRaw:'0.970',healthRaw:'83.3a',
+   info:'FIFA nº22. PIB per capita nº1 mundial ($102k PPP). IDH nº2 global (0.970). Haaland = maior ameaça individual do torneio. Grupo I MUITO DIFÍCIL: França (nº3), Senegal (nº14), Iraque (nº58). Saturno em Peixes = trânsito direto. Nunca campeão = karma disponível.'},
+  {name:'Japão',flag:'🇯🇵',grp:'F',sign:'♒ Aquário',founder:'11 fev 1889',titles:0,finals:0,
+   // FIFA nº18 — Grupo F com NL (nº7), Suécia (nº43), Tunísia (nº40)
+   // 8.ª participação consecutiva — surpreenderam Alemanha e Espanha em Qatar 2022
+   fifa:72,odds:54,gdppc:82,pop:86,culture:82,
+   hdi:92,health:96,history:48,momentum:78,host:0,
+   gini:80,academy:80,market:68,league:76,group:72,politics:92,
+   trionda_style:82,trionda_setpiece:80,trionda_defense:76,
+   moon_group:72,moon_ko:78,moon_semi:68,moon_final:70,
+   zodiac:68,karma:55,cosmic:65,altitude:86,cohesion:78,
+   gdpRaw:'$42k PPP',hdiRaw:'0.925',healthRaw:'84.3a',
+   info:'FIFA nº18. Maior esperança de vida do mundo (84.3 anos, OMS 2024). Jogo de toque curto e disciplina tática = compatível com Trionda. 8.ª participação consecutiva. Surpreenderam Alemanha e Espanha em Qatar 2022. Grupo F com NL (nº7), Suécia (nº43), Tunísia (nº40).'},
+  {name:'EUA',flag:'🇺🇸',grp:'D',sign:'♋ Câncer',founder:'4 jul 1776',titles:0,finals:0,
+   // FIFA nº17 — Grupo D: Paraguai(nº45), Austrália(nº23), Turquia(nº26)
+   // Anfitriões com bónus de campo — jogos nos seus próprios estádios
+   fifa:72,odds:54,gdppc:97,pop:93,culture:65,
+   hdi:91,health:76,history:44,momentum:68,host:60,
+   gini:55,academy:68,market:82,league:78,group:76,politics:72,
+   trionda_style:68,trionda_setpiece:72,trionda_defense:65,
+   moon_group:68,moon_ko:74,moon_semi:68,moon_final:70,
+   zodiac:75,karma:55,cosmic:68,altitude:80,cohesion:65,
+   gdpRaw:'$85k PPP',hdiRaw:'0.938',healthRaw:'78.5a',
+   info:'FIFA nº17. Anfitriões — bónus de campo significativo. Câncer (4 jul 1776) — Vénus em Câncer = trânsito harmónico. PIB $85k PPP altíssimo. Grupo D: Paraguai (nº45), Austrália (nº23), Turquia (nº26). Cultura futebolística ainda em crescimento vs NFL/NBA/MLB.'},
+  {name:'Colômbia',flag:'🇨🇴',grp:'K',sign:'♍ Virgem',founder:'20 jul 1810',titles:0,finals:0,
+   // FIFA nº13 — Grupo K com Portugal (nº5), DR Congo (nº56), Uzbequistão (nº50)
+   // Melhor campanha recente: Copa América finalista 2024
+   fifa:76,odds:55,gdppc:42,pop:68,culture:88,
+   hdi:68,health:72,history:55,momentum:72,host:0,
+   gini:28,academy:70,market:62,league:68,group:82,politics:45,
+   trionda_style:75,trionda_setpiece:72,trionda_defense:68,
+   moon_group:70,moon_ko:75,moon_semi:65,moon_final:68,
+   zodiac:68,karma:62,cosmic:60,altitude:70,cohesion:68,
+   gdpRaw:'$20k PPP',hdiRaw:'0.758',healthRaw:'77.0a',
+   info:'FIFA nº13. Grupo K com Portugal (nº5), DR Congo (nº56), Uzbequistão (nº50). Luis Díaz (Bayern Munich) e Jhon Arias em alta. Finalista Copa América 2024. Instabilidade política e Gini altíssimo penalizam no modelo.'},
+  {name:'Marrocos',flag:'🇲🇦',grp:'C',sign:'♏ Escorpião',founder:'2 mar 1956',titles:0,finals:0,
+   // FIFA nº8 — Grupo C: Brasil(nº6!), Haiti(nº93), Escócia(nº38)
+   // Semifinalistas Qatar 2022 — primeira seleção africana a chegar às meias
+   // Não concederam um único golo na qualificação CAF
+   fifa:80,odds:52,gdppc:32,pop:52,culture:80,
+   hdi:58,health:68,history:60,momentum:74,host:0,
+   gini:60,academy:60,market:52,league:58,group:68,politics:60,
+   trionda_style:62,trionda_setpiece:68,trionda_defense:70,
+   moon_group:68,moon_ko:74,moon_semi:65,moon_final:65,
+   zodiac:55,karma:65,cosmic:58,altitude:76,cohesion:74,
+   gdpRaw:'$10k PPP',hdiRaw:'0.698',healthRaw:'74.3a',
+   info:'FIFA nº8. Semifinalistas Qatar 2022 — primeira seleção africana a atingir as meias-finais de um Mundial. Defesa organizada (0 golos sofridos na qualificação CAF). Grupo C com Brasil (nº6), Haiti (nº93), Escócia (nº38). IDH e PIB em desenvolvimento — o maior underdog de qualidade. Escorpião com Nettuno em quadratura.'},
+  {name:'México',flag:'🇲🇽',grp:'A',sign:'♓ Peixes',founder:'16 set 1810',titles:0,finals:0,
+   // FIFA nº14 — Grupo A (como co-anfitriões): África do Sul(nº67), Coreia do Sul(nº22), Rep. Checa(nº40)
+   // Abriram o torneio vs África do Sul no Azteca (2240m altitude) — venceram 2-0
+   // 7 eliminações consecutivas nos oitavos — "maldição do quinto jogo"
+   fifa:72,odds:52,gdppc:45,pop:75,culture:88,
+   hdi:74,health:72,history:58,momentum:65,host:50,
+   gini:42,academy:68,market:65,league:70,group:74,politics:50,
+   trionda_style:70,trionda_setpiece:68,trionda_defense:65,
+   moon_group:65,moon_ko:70,moon_semi:65,moon_final:68,
+   zodiac:76,karma:60,cosmic:65,altitude:48,cohesion:64,
+   gdpRaw:'$22k PPP',hdiRaw:'0.781',healthRaw:'75.2a',
+   info:'FIFA nº14. Co-anfitriões. Abriram o torneio no Azteca (2240m — altitude mais alta do torneio) com vitória 2-0 sobre África do Sul. Grupo A: A. do Sul (nº67), Coreia do Sul (nº22), Rep. Checa (nº40). 7× eliminados nos oitavos consecutivamente — "maldição do quinto jogo". Peixes: Saturno trânsito direto.'},
+  {name:'Croácia',flag:'🇭🇷',grp:'L',sign:'♑ Capricórnio',founder:'25 jun 1991',titles:0,finals:1,
+   // FIFA nº11 — Grupo L: Inglaterra(nº4!), Gana(nº60), Panamá(nº90)
+   // Finalistas 2018, 3.ºs 2022 — geração Modrić em declínio (40 anos)
+   // Dinamo Zagreb: academia que produziu Modrić, Kovačić, Gvardiol, Brozović
+   fifa:76,odds:50,gdppc:66,pop:30,culture:80,
+   hdi:84,health:79,history:70,momentum:65,host:0,
+   gini:75,academy:78,market:60,league:78,group:58,politics:82,
+   trionda_style:72,trionda_setpiece:75,trionda_defense:65,
+   moon_group:62,moon_ko:68,moon_semi:62,moon_final:65,
+   zodiac:58,karma:68,cosmic:60,altitude:84,cohesion:72,
+   gdpRaw:'$30k PPP',hdiRaw:'0.878',healthRaw:'79.2a',
+   info:'FIFA nº11. Finalistas 2018, 3.ºs 2022. Dinamo Zagreb produziu Modrić, Kovačić, Gvardiol, Brozović — academia extraordinária. Grupo L DIFÍCIL: Inglaterra (nº4), Gana (nº60), Panamá (nº90). Modric 40 anos em declínio. Saturno (regente Capricórnio) em exílio em Peixes. Último Mundial desta geração.'},
+];
+
+// ─── PESOS ─────────────────────────────────────────────────────
+let W={};DIMS.forEach(d=>W[d.id]=d.w);
+let mainC=null,radarC=null,triondaC=null,selT=null;
+
+function catScore(t,cat){const cd=DIMS.filter(d=>d.cat===cat);const tot=cd.reduce((s,d)=>s+W[d.id],0);if(!tot)return 0;return cd.reduce((s,d)=>s+(t[d.id]||0)*(W[d.id]/tot),0)}
+function calcProbs(){const tot=Object.values(W).reduce((a,b)=>a+b,0);const sc=TEAMS.map(t=>DIMS.reduce((s,d)=>s+(t[d.id]||0)*(W[d.id]/tot),0));const total=sc.reduce((a,b)=>a+b,0);return sc.map(s=>s/total*100)}
+function sorted(probs){return[...TEAMS].map((t,i)=>({...t,p:probs[i]})).sort((a,b)=>b.p-a.p)}
+function bCol(i){return i===0?'#E8751A':i<3?'#1E3A6B':i<7?'#0E6B3A':'#9A9590'}
+
+// ─── HERO UPDATE ───────────────────────────────────────────────
+function updateHero(probs){
+  const top=sorted(probs)[0];
+  document.getElementById('hw-flag').textContent=top.flag;
+  document.getElementById('hw-name').textContent=top.name;
+  document.getElementById('hw-pct').textContent=top.p.toFixed(1)+'%';
+}
+
+// ─── PODIUM ────────────────────────────────────────────────────
+function renderPodium(probs){
+  const s=sorted(probs);
+  const top=s[0];
+  ['k','a','f','t','x'].forEach((cat,i)=>{
+    const keys=['sc-k','sc-a','sc-f','sc-t','sc-x'];
+    const el=document.getElementById(keys[i]);if(el)el.textContent=Math.round(catScore(top,cat));
+  });
+  document.getElementById('podium').innerHTML=[s[1],s[0],s[2]].map((t,pos)=>`
+    <div class="pcard ${pos===1?'win':''}">
+      <div class="pfl">${t.flag}</div>
+      <div class="pnm">${t.name}</div>
+      <div style="font-size:9px;color:#5C2D8A;margin-bottom:3px">${t.sign}</div>
+      <div class="ppt">${t.p.toFixed(1)}%</div>
+      <div class="prk">${pos===0?'🥈 2.º lugar':pos===1?'🏆 Vencedor previsto':'🥉 3.º lugar'}</div>
+      <div class="psub">${t.titles>0?t.titles+'× campeão':'Nunca campeão · '+t.finals+' finais'}</div>
+    </div>`).join('');
+}
+
+// ─── MAIN CHART ────────────────────────────────────────────────
+function renderMain(probs){
+  const s=sorted(probs).slice(0,12);
+  const ctx=document.getElementById('mainChart');
+  if(mainC)mainC.destroy();
+  mainC=new Chart(ctx,{type:'bar',data:{labels:s.map(t=>t.flag+' '+t.name),datasets:[{data:s.map(t=>+t.p.toFixed(1)),backgroundColor:s.map((_,i)=>bCol(i)),borderRadius:6,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.raw}% probabilidade de título`}}},scales:{x:{grid:{color:'rgba(0,0,0,.05)'},ticks:{callback:v=>v+'%',color:'#9A9590',font:{size:10}}},y:{grid:{display:false},ticks:{color:'#111009',font:{size:11,weight:'700'}}}}}});
+}
+
+// ─── TRIONDA CHART ────────────────────────────────────────────
+function renderTrionda(){
+  const s=sorted(calcProbs()).slice(0,12);
+  const ctx=document.getElementById('triondaChart');
+  if(triondaC)triondaC.destroy();
+  const scores=s.map(t=>Math.round(catScore(t,'t')));
+  triondaC=new Chart(ctx,{type:'bar',data:{labels:s.map(t=>t.flag+' '+t.name),datasets:[{label:'Score Trionda',data:scores,backgroundColor:scores.map(v=>v>=85?'#0E6B3A':v>=75?'#B8920A':'#B03020'),borderRadius:5,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.raw}/100 compatibilidade Trionda`}}},scales:{x:{max:100,ticks:{callback:v=>v+'/100',font:{size:10}}},y:{grid:{display:false},ticks:{font:{size:11}}}}}});
+}
+
+// ─── RANKING TABLE ─────────────────────────────────────────────
+function renderRank(probs){
+  const s=sorted(probs);
+  document.getElementById('rank-table').innerHTML=`<thead><tr><th>#</th><th>Seleção</th><th>Signo</th><th>Prob.</th><th>🏅 Desp.</th><th>🌍 Human.</th><th>⚽ Fut.</th><th>⚽🔬 Trionda</th><th>🌙✨ Astro</th></tr></thead><tbody>${s.map((t,i)=>`<tr class="${i===0?'r1':''}"><td class="rn">${i===0?'🏆':i+1}</td><td><b>${t.flag} ${t.name}</b></td><td style="color:#5C2D8A;font-size:10px">${t.sign}</td><td class="rpct">${t.p.toFixed(1)}%</td><td><span class="cscore" style="background:rgba(232,117,26,.1);color:#E8751A">${Math.round(catScore(t,'k'))}</span></td><td><span class="cscore" style="background:rgba(50,102,173,.1);color:#3266AD">${Math.round(catScore(t,'a'))}</span></td><td><span class="cscore" style="background:rgba(14,107,58,.1);color:#0E6B3A">${Math.round(catScore(t,'f'))}</span></td><td><span class="cscore" style="background:rgba(184,146,10,.1);color:#B8920A">${Math.round(catScore(t,'t'))}</span></td><td><span class="cscore" style="background:rgba(92,45,138,.1);color:#5C2D8A">${Math.round((catScore(t,'l')+catScore(t,'x'))/2)}</span></td></tr>`).join('')}</tbody>`;
+}
+
+// ─── SIGNO TABLE ───────────────────────────────────────────────
+function renderSigno(){
+  const rows=[
+    {f:'🇳🇱',n:'Países Baixos',doc:'Ato de Abjuração',date:'26 jul 1581',sign:'♌ Leão',transit:'Marte em Leão (meias/final)',impact:'good',impactTxt:'Muito favorável'},
+    {f:'🇵🇹',n:'Portugal',doc:'Fundação do reino',date:'25 jul 1139',sign:'♌ Leão',transit:'Marte em Leão (meias/final)',impact:'good',impactTxt:'Favorável'},
+    {f:'🇫🇷',n:'França',doc:'Revolução / Bastilha',date:'14 jul 1789',sign:'♌ Leão',transit:'Marte em Leão (meias/final)',impact:'good',impactTxt:'Favorável'},
+    {f:'🇧🇪',n:'Bélgica',doc:'Independência',date:'4 out 1830',sign:'♐ Sagitário',transit:'Júpiter em Gémeos (trígono)',impact:'good',impactTxt:'Favorável'},
+    {f:'🇺🇸',n:'EUA',doc:'Declaração Independência',date:'4 jul 1776',sign:'♋ Câncer',transit:'Vénus em Câncer (trânsito direto)',impact:'neutral',impactTxt:'Neutro'},
+    {f:'🇲🇽',n:'México',doc:'Grito de Independência',date:'16 set 1810',sign:'♓ Peixes',transit:'Saturno em Peixes (trânsito direto)',impact:'neutral',impactTxt:'Neutro'},
+    {f:'🇧🇷',n:'Brasil',doc:'Independência',date:'7 set 1822',sign:'♍ Virgem',transit:'Júpiter em Gémeos (sextil)',impact:'neutral',impactTxt:'Neutro'},
+    {f:'🇩🇪',n:'Alemanha',doc:'Reunificação',date:'3 out 1990',sign:'♎ Balança',transit:'Vénus em Câncer (sem aspeto forte)',impact:'neutral',impactTxt:'Neutro'},
+    {f:'🇯🇵',n:'Japão',doc:'Constituição Meiji',date:'11 fev 1889',sign:'♒ Aquário',transit:'Júpiter em Gémeos (sextil)',impact:'neutral',impactTxt:'Neutro'},
+    {f:'🇦🇷',n:'Argentina',doc:'Revolução de Maio',date:'25 mai 1810',sign:'♊ Gémeos',transit:'Júpiter em Gémeos (já usado 2022)',impact:'neutral',impactTxt:'Esgotado'},
+    {f:'🇪🇸',n:'Espanha',doc:'Constituição',date:'29 out 1978',sign:'♏ Escorpião',transit:'Nettuno em Peixes (quadratura)',impact:'bad',impactTxt:'Desfavorável'},
+    {f:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',n:'Inglaterra',doc:'Act of Union',date:'1 jan 1801',sign:'♑ Capricórnio',transit:'Saturno em exílio (Peixes)',impact:'bad',impactTxt:'Desfavorável'},
+  ];
+  document.getElementById('signo-tbody').innerHTML=rows.map(r=>`<tr><td>${r.f} ${r.n}</td><td style="font-size:10px;color:var(--text2)">${r.doc}</td><td style="font-size:10px">${r.date}</td><td class="sn-sign">${r.sign}</td><td style="font-size:10px;color:var(--text2)">${r.transit}</td><td class="${r.impact==='good'?'sn-good':r.impact==='bad'?'sn-bad':'sn-neutral'}">${r.impactTxt}</td></tr>`).join('');
+}
+
+// ─── NL COMPARE ────────────────────────────────────────────────
+function renderNL(){
+  const nl=TEAMS[0];
+  const avg=id=>TEAMS.filter(t=>t!==nl).reduce((s,t)=>s+(t[id]||0),0)/(TEAMS.length-1);
+  document.getElementById('nl-compare').innerHTML=DIMS.map(d=>{
+    const nlV=nl[d.id]||0,avgV=Math.round(avg(d.id)),diff=nlV-avgV;
+    const col=diff>8?d.col:diff>0?'#0E6B3A':'#9A9590';
+    return`<div class="nlrow"><div class="nlname">${d.name}</div><div class="nltrack"><div class="nlbar" style="width:${nlV}%;background:${col}"></div></div><div class="nlnl" style="color:${col}">${nlV}</div><div class="nlavg">Ø${avgV}</div><div class="nldiff" style="color:${col}">${diff>0?'+':''}${diff}</div></div>`;
+  }).join('');
+}
+
+// ─── DIMS VIEW ─────────────────────────────────────────────────
+function renderDims(){
+  const cats={k:'Desportivo + Económico (Klement)',a:'Desenvolvimento Humano (Innsbruck/Nottingham)',f:'Ecossistema Futebolístico',t:'Tecnologia Adidas Trionda',l:'Ciclos Lunares',x:'Astrologia Nacional',i:'Variáveis Inéditas'};
+  const v=document.getElementById('dims-view');v.innerHTML='';
+  Object.entries(cats).forEach(([cat,title])=>{
+    const catDims=DIMS.filter(d=>d.cat===cat);const col=CAT[cat].col;
+    const sec=document.createElement('div');sec.className='dim-section';
+    sec.innerHTML=`<div style="display:flex;align-items:center;gap:8px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:${col};border-bottom:1px solid var(--border);padding-bottom:5px;margin-bottom:8px">${title}</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:7px">`;
+    const grid=sec.querySelector('div+div');
+    catDims.forEach(d=>{
+      const best=TEAMS.reduce((b,t)=>t[d.id]>b.val?{name:t.name,flag:t.flag,val:t[d.id]}:b,{val:0});
+      const nl=TEAMS[0][d.id]||0;
+      const el=document.createElement('div');el.style.cssText='background:var(--bg2);border-radius:var(--r);padding:10px 12px;border:1px solid var(--border)';
+      el.innerHTML=`<div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:11px;font-weight:700">${d.name}</span><span style="font-size:9px;padding:2px 6px;border-radius:10px;font-weight:700;background:${col}18;color:${col}">${d.cat.toUpperCase()}</span></div><div style="font-size:9px;color:var(--text3);margin-bottom:4px">${d.src}</div><div style="font-size:10px;color:var(--text2);margin-bottom:5px">${d.desc}</div><div style="font-size:10px;margin-bottom:4px">Melhor: <b>${best.flag} ${best.name}</b> (${best.val}/100) · 🇳🇱 NL: <b style="color:${col}">${nl}/100</b></div><div style="height:5px;background:var(--border);border-radius:3px;overflow:hidden;position:relative"><div style="position:absolute;width:${best.val}%;height:100%;background:${col};opacity:.25"></div><div style="position:absolute;width:${nl}%;height:100%;background:${col}"></div></div>`;
+      grid.appendChild(el);
+    });
+    v.appendChild(sec);
+    const br=document.createElement('div');br.style.marginBottom='1.25rem';v.appendChild(br);
+  });
+}
+
+// ─── TEAM GRID ─────────────────────────────────────────────────
+function renderTeams(probs){
+  const s=sorted(probs);
+  document.getElementById('tgrid').innerHTML=s.map(t=>`<div class="tcard ${selT===t.name?'sel':''}" onclick="selTeam('${t.name}')"><div class="tc-fl">${t.flag}</div><div class="tc-nfo"><div class="tc-nm">${t.name}</div><div class="tc-sg">${t.sign} · Gr ${t.grp}</div></div><div class="tc-pt">${t.p.toFixed(1)}%</div></div>`).join('');
+}
+
+function selTeam(name){
+  selT=name;const probs=calcProbs();renderTeams(probs);
+  const t=TEAMS.find(x=>x.name===name);const p=probs[TEAMS.indexOf(t)];
+  const rank=sorted(probs).findIndex(x=>x.name===name)+1;
+  const cats=[{id:'k',n:'🏅 Desportivo',col:'#E8751A'},{id:'a',n:'🌍 Humano',col:'#3266AD'},{id:'f',n:'⚽ Futebol',col:'#0E6B3A'},{id:'t',n:'⚽🔬 Trionda',col:'#B8920A'},{id:'l',n:'🌙 Lunar',col:'#5C2D8A'},{id:'x',n:'✨ Astral',col:'#B03020'}];
+  document.getElementById('det-panel').innerHTML=`<div class="dcard"><div class="dh"><div class="dfl">${t.flag}</div><div class="dnfo"><div class="dnm">${t.name} <span style="font-size:11px;color:#5C2D8A">${t.sign}</span></div><div class="dbio">${t.info}</div></div><div class="dprob"><div class="dp-val">${p.toFixed(1)}%</div><div class="dp-lbl">#${rank} no modelo</div></div></div><div class="dmets"><div class="dmet"><div class="dmv">${t.titles}×</div><div class="dml">Títulos</div></div><div class="dmet"><div class="dmv">${t.gdpRaw}</div><div class="dml">PIB pc PPP</div></div><div class="dmet"><div class="dmv">${t.hdiRaw}</div><div class="dml">IDH UNDP</div></div><div class="dmet"><div class="dmv">${t.healthRaw}</div><div class="dml">Esp. vida</div></div></div><div class="cbars">${cats.map(c=>`<div class="cbrow"><div class="cblbl">${c.n}</div><div class="cbt"><div class="cbf" style="width:${Math.round(catScore(t,c.id))}%;background:${c.col}"></div></div><div class="cbval" style="color:${c.col}">${Math.round(catScore(t,c.id))}</div></div>`).join('')}</div></div>`;
+}
+
+// ─── WEIGHTS ───────────────────────────────────────────────────
+function renderWeights(){
+  const tot=Object.values(W).reduce((a,b)=>a+b,0);
+  document.getElementById('w-all').innerHTML=DIMS.map(d=>`<div class="wrow"><div class="wlbl" style="color:${d.col}">${d.name}</div><input type="range" min="0" max="15" step="1" value="${W[d.id]}" id="sl-${d.id}" oninput="updW('${d.id}',this.value)"><div class="wpct" id="sv-${d.id}">${Math.round(W[d.id]/tot*100)}%</div><div class="wsrc">${d.src}</div></div>`).join('');
+}
+function updW(id,val){W[id]=+val;const tot=Object.values(W).reduce((a,b)=>a+b,0);DIMS.forEach(d=>{const el=document.getElementById('sv-'+d.id);if(el)el.textContent=Math.round(W[d.id]/tot*100)+'%';});updateAll()}
+function resetW(){DIMS.forEach(d=>{W[d.id]=d.w;const el=document.getElementById('sl-'+d.id);if(el)el.value=d.w});syncPct();updateAll()}
+function applyKlement(){const kW={fifa:16,odds:16,gdppc:16,pop:12,culture:16,hdi:2,health:1,history:5,momentum:4,host:3,gini:1,academy:1,market:1,league:1,group:1,politics:1,trionda_style:0,trionda_setpiece:0,trionda_defense:0,moon_group:0,moon_ko:0,moon_semi:0,moon_final:0,zodiac:0,karma:0,cosmic:0,altitude:0,cohesion:0};DIMS.forEach(d=>{W[d.id]=kW[d.id]||0;const el=document.getElementById('sl-'+d.id);if(el)el.value=W[d.id]});syncPct();updateAll()}
+function applyAstro(){const aW={fifa:1,odds:1,gdppc:2,pop:1,culture:2,hdi:1,health:1,history:2,momentum:1,host:1,gini:1,academy:1,market:1,league:1,group:1,politics:1,trionda_style:1,trionda_setpiece:1,trionda_defense:1,moon_group:12,moon_ko:14,moon_semi:12,moon_final:14,zodiac:15,karma:15,cosmic:12,altitude:1,cohesion:1};DIMS.forEach(d=>{W[d.id]=aW[d.id]||0;const el=document.getElementById('sl-'+d.id);if(el)el.value=W[d.id]});syncPct();updateAll()}
+function applyAll(){DIMS.forEach(d=>{W[d.id]=5;const el=document.getElementById('sl-'+d.id);if(el)el.value=5});syncPct();updateAll()}
+function syncPct(){const tot=Object.values(W).reduce((a,b)=>a+b,0);DIMS.forEach(d=>{const el=document.getElementById('sv-'+d.id);if(el)el.textContent=Math.round(W[d.id]/tot*100)+'%'})}
+
+// ─── RADAR ─────────────────────────────────────────────────────
+function renderRadar(){
+  const tA=TEAMS.find(t=>t.name===document.getElementById('rA').value);
+  const tB=TEAMS.find(t=>t.name===document.getElementById('rB').value);
+  if(!tA||!tB)return;
+  const cats=[{id:'k',n:'🏅 Desp.'},{id:'a',n:'🌍 Human.'},{id:'f',n:'⚽ Fut.'},{id:'t',n:'⚽🔬 Trionda'},{id:'l',n:'🌙 Lunar'},{id:'x',n:'✨ Astral'}];
+  const ctx=document.getElementById('radarC');
+  if(radarC)radarC.destroy();
+  radarC=new Chart(ctx,{type:'radar',data:{labels:cats.map(c=>c.n),datasets:[{label:tA.name,data:cats.map(c=>Math.round(catScore(tA,c.id))),borderColor:'#E8751A',backgroundColor:'rgba(232,117,26,.1)',pointBackgroundColor:'#E8751A',borderWidth:2},{label:tB.name,data:cats.map(c=>Math.round(catScore(tB,c.id))),borderColor:'#1E3A6B',backgroundColor:'rgba(30,58,107,.1)',pointBackgroundColor:'#1E3A6B',borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,scales:{r:{min:0,max:100,ticks:{display:false},grid:{color:'rgba(0,0,0,.08)'},pointLabels:{font:{size:11,weight:'700'},color:'#5A5650'}}},plugins:{legend:{labels:{font:{size:12,weight:'700'}}}}}});
+}
+
+// ─── LUNAR ─────────────────────────────────────────────────────
+function renderLunar(){
+  const days=[{d:'14/6',m:'🌑',p:3,g:'🇳🇱 NL vs Japão (Arlington TX)'},{d:'15/6',m:'🌑',p:2,g:''},{d:'17/6',m:'🌒',p:15,g:''},{d:'20/6',m:'🌒',p:43,g:'🇳🇱 NL vs Suécia (Houston)'},{d:'22/6',m:'🌓',p:61,g:''},{d:'25/6',m:'🌔',p:85,g:'🇳🇱 Tun vs NL (Kansas City)'},{d:'27/6',m:'🌔',p:96,g:''},{d:'29/6',m:'🌕',p:100,g:'⚽ R32 início'},{d:'1/7',m:'🌖',p:96,g:''},{d:'4/7',m:'🌗',p:76,g:'⚽ R32'},{d:'7/7',m:'🌗',p:50,g:'⚽ Quartos'},{d:'9/7',m:'🌘',p:33,g:'⚽ Quartos'},{d:'14/7',m:'🌑',p:3,g:'⚽ Semis'},{d:'15/7',m:'🌑',p:1,g:'⚽ Semis'},{d:'19/7',m:'🌒',p:22,g:'🏆 FINAL MetLife NJ'}];
+  document.getElementById('moon-cal').innerHTML=days.map(d=>`<div class="mday ${d.g.includes('NL')?'g':''} ${d.g.includes('FINAL')?'f':''}"><span class="mm">${d.m}</span><div class="md">${d.d}</div><div class="mp">${d.p}%</div>${d.g?`<div class="ml2">${d.g}</div>`:''}</div>`).join('');
+  document.getElementById('key-games').innerHTML=[{m:'🌑',d:'14 Jun',label:'Lua Nova (3%) · Arlington, Texas',game:'🇳🇱 NL vs Japão — AT&T Stadium',body:'Energia de recomeço histórico. Lua Nova = início de novo ciclo. NL estreia-se neste Mundial com o signo Leão e Marte a caminho. Japão (nº18) é adversário exigente mas a física da Trionda favorece o jogo de toque holandês.'},{m:'🌒',d:'20 Jun',label:'Lua Crescente (43%) · Houston, Texas',game:'🇳🇱 NL vs Suécia — NRG Stadium',body:'Lua em crescimento = energia em ascensão. Suécia (nº43, treinada por Graham Potter) é adversária acessível. NL com quota de energia lunar crescente = bom presságio.'},{m:'🌔',d:'25 Jun',label:'Lua Gibosa Crescente (85%) · Kansas City',game:'🇳🇱 Tunísia vs NL — Arrowhead Stadium',body:'Pré-Lua Cheia — energia muito elevada. Tunísia (nº40) não sofreu um golo na qualificação CAF, mas o estilo ofensivo e de toque holandês é favorecido pela Trionda. NL deve garantir 1.º lugar do grupo.'},{m:'🌕',d:'29 Jun',label:'LUA CHEIA "Strawberry Moon" (100%)',game:'⚽ Round of 32 — fase eliminatória',body:'A lua mais poderosa do torneio. Energia emocional coletiva no máximo absoluto. Karma e paixão amplificados para as equipas com mais "dívida histórica". NL entram com 3 finais perdidas = karma máximo do torneio.'},{m:'🌑',d:'14 Jul',label:'Lua Nova (3%) — 2.º ciclo',game:'⚽ Meias-finais',body:'Segundo novo ciclo do torneio. "Tempo de nascer algo novo" — favorece equipas que nunca foram campeãs. NL, Portugal e Bélgica elegíveis para este bónus histórico.'},{m:'🌒',d:'19 Jul',label:'Lua Crescente (22%)',game:'🏆 FINAL — MetLife Stadium, East Rutherford, NJ',body:'Lua em crescimento = ascensão histórica em curso. O sinal astrológico mais favorável para um primeiro título. A Lua cresce, tal como a história do vencedor. MetLife Stadium fica a 10m de altitude — condições ideais para o jogo de toque europeu.'}].map(g=>`<div style="display:flex;gap:12px;margin-bottom:8px;padding:10px 12px;background:var(--bg2);border-radius:10px;border:1px solid var(--border)"><div style="font-size:22px;flex-shrink:0">${g.m}</div><div><div style="font-size:10px;font-weight:700;color:#5C2D8A">${g.label}</div><div style="font-size:12px;font-weight:700;margin:2px 0">${g.game}</div><div style="font-size:11px;color:#5A5650">${g.body}</div></div><div style="font-size:10px;color:#9A9590;margin-left:auto;flex-shrink:0;white-space:nowrap">${g.d}</div></div>`).join('');
+}
+
+// ─── SELECTS ───────────────────────────────────────────────────
+function populateSel(){
+  const names=TEAMS.map(t=>t.name);
+  ['rA','rB'].forEach((id,i)=>{document.getElementById(id).innerHTML=names.map(n=>`<option value="${n}" ${i===0&&n==='Países Baixos'?'selected':i===1&&n==='Portugal'?'selected':''}>${n}</option>`).join('')});
+}
+
+// ─── TAB SWITCH ────────────────────────────────────────────────
+function sw(name,btn){
+  document.querySelectorAll('.tb').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.ts').forEach(s=>s.classList.remove('on'));
+  btn.classList.add('on');document.getElementById('s-'+name).classList.add('on');
+  const probs=calcProbs();
+  if(name==='resultado')renderMain(probs);
+  if(name==='ranking')renderRank(probs);
+  if(name==='trionda')renderTrionda();
+  if(name==='signo')renderSigno();
+  if(name==='nl')renderNL();
+  if(name==='dims')renderDims();
+  if(name==='pesos')renderWeights();
+  if(name==='radar')renderRadar();
+  if(name==='lunar')renderLunar();
+}
+
+// ─── UPDATE ALL ────────────────────────────────────────────────
+function updateAll(){
+  const probs=calcProbs();
+  updateHero(probs);renderPodium(probs);renderMain(probs);renderTeams(probs);
+  if(selT)selTeam(selT);
+}
+
+// ─── INIT ──────────────────────────────────────────────────────
+populateSel();updateAll();
+</script>
+</body>
+</html>

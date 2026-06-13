@@ -208,13 +208,131 @@ footer a{color:var(--orange);text-decoration:none}
 /* ─── HIGHLIGHT BOX ─── */
 .highlight{background:linear-gradient(135deg,rgba(232,117,26,.08),rgba(10,31,68,.04));border:1px solid rgba(232,117,26,.25);border-radius:14px;padding:1.25rem;margin-bottom:1.25rem}
 
-/* ─── RESPONSIVE ─── */
-@media(max-width:640px){
-  .hero-grid{grid-template-columns:1fr}.hero-winner{display:none}
-  .pod3,.pillars{grid-template-columns:1fr 1fr}
-  .method-grid,.trionda-teams,.trionda-specs{grid-template-columns:1fr}
-  .dmets{grid-template-columns:1fr 1fr}
-  .sec-num{font-size:22px}
+/* ─── RESPONSIVE MOBILE ─── */
+@media(max-width:768px){
+  /* Hero */
+  .hero{padding:1.5rem 1rem 1.5rem}
+  .hero-grid{grid-template-columns:1fr}
+  .hero-winner{display:none}
+  .hero-title{font-size:clamp(28px,8vw,42px)}
+  .hero-lead{font-size:12px}
+
+  /* Main padding */
+  .main{padding:1rem .75rem 4rem}
+
+  /* Tabs — scroll horizontal com indicador visual */
+  .tabs{margin-bottom:1rem;padding-bottom:2px}
+  .tb{padding:8px 10px;font-size:10px;letter-spacing:0}
+
+  /* Pódio — 1 coluna no mobile, vencedor em destaque no topo */
+  .pod3{
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+  .pcard{padding:.9rem .75rem}
+  .pfl{font-size:36px}
+  .pnm{font-size:14px}
+  .ppt{font-size:26px}
+  /* Reordenar: vencedor primeiro no mobile */
+  .pod3{display:flex;flex-direction:column}
+  .pod3 .pcard:nth-child(2){order:-1}
+
+  /* Pillars — 3 colunas no mobile */
+  .pillars{grid-template-columns:repeat(3,1fr);gap:5px}
+  .pi-val{font-size:14px}
+  .pi-lbl{font-size:8px}
+  .pi-ico{font-size:13px}
+
+  /* Charts */
+  .cc-canvas{height:300px}
+  .chart-card{padding:.85rem}
+
+  /* Section header */
+  .sec-num{font-size:20px}
+  .sec-title{font-size:15px}
+  .sec-sub{font-size:11px}
+
+  /* Ranking table — scroll horizontal */
+  .rtbl{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;font-size:10px}
+  .rtbl thead th{padding:7px 8px;font-size:8px}
+  .rtbl tbody td{padding:6px 8px}
+
+  /* Trionda */
+  .trionda-hero{padding:1rem}
+  .th-title{font-size:15px}
+  .th-body{font-size:11px}
+  .trionda-specs{grid-template-columns:1fr;gap:7px}
+  .tspec-val{font-size:20px}
+  .trionda-teams{grid-template-columns:1fr;gap:8px}
+
+  /* NL hero */
+  .highlight>div:first-child{flex-direction:column;gap:8px}
+  .highlight>div>div:first-child+div{grid-template-columns:1fr;gap:7px}
+
+  /* NL compare */
+  .nlname{flex:0 0 120px;font-size:9px}
+  .nlnl,.nlavg,.nldiff{font-size:8px;width:20px}
+
+  /* Team cards */
+  .tgrid{grid-template-columns:1fr 1fr;gap:6px}
+  .tc-fl{font-size:15px;width:18px}
+  .tc-nm{font-size:10px}
+  .tc-pt{font-size:11px}
+
+  /* Detail card */
+  .dcard{padding:.85rem}
+  .dh{flex-direction:column;gap:8px}
+  .dfl{font-size:30px}
+  .dnm{font-size:14px}
+  .dbio{font-size:10px}
+  .dprob{text-align:left}
+  .dp-val{font-size:22px}
+  .dmets{grid-template-columns:repeat(2,1fr);gap:5px}
+  .dmv{font-size:12px}
+  .dml{font-size:8px}
+  .cblbl{flex:0 0 130px;font-size:9px}
+  .cbval{font-size:9px}
+
+  /* Signo table */
+  .signo-table{font-size:9px;display:block;overflow-x:auto}
+
+  /* Method grid */
+  .method-grid{grid-template-columns:1fr}
+
+  /* Weights */
+  .wrow{flex-wrap:wrap;gap:5px;padding:6px 8px}
+  .wlbl{flex:0 0 100%;font-size:10px}
+  .wr-src{display:none}
+  .wpct{width:28px}
+
+  /* Radar selects */
+  .radar-sels{gap:8px}
+  .radar-canvas{height:260px}
+
+  /* Moon cal */
+  .mcal{grid-template-columns:repeat(5,1fr);gap:3px}
+  .mm{font-size:12px}
+  .md{font-size:8px}
+  .mp{font-size:7px}
+  .ml2{font-size:6px}
+
+  /* Author bar */
+  .author-bar{flex-direction:column;padding:1rem;gap:.75rem}
+  .ab-right{text-align:left}
+
+  /* Dims */
+  .dim-cards{grid-template-columns:1fr!important}
+
+  /* Btn row */
+  .btn-row{gap:6px}
+  .btn{padding:7px 10px;font-size:10px}
+}
+
+@media(max-width:380px){
+  .tgrid{grid-template-columns:1fr}
+  .pillars{grid-template-columns:repeat(3,1fr)}
+  .hero-title{font-size:26px}
+  .mcal{grid-template-columns:repeat(4,1fr)}
 }
 </style>
 </head>
@@ -227,6 +345,15 @@ footer a{color:var(--orange);text-decoration:none}
       <div class="hero-label">Estudo Preditivo Independente · Mundial FIFA 2026</div>
       <h1 class="hero-title">Quem vai ganhar<br>o <span>Mundial 2026?</span></h1>
       <p class="hero-lead">Um modelo inédito que cruza 27 dimensões de análise — dados económicos, desportivos, tecnologia da bola, ciclos lunares e astrologia das nações — para identificar o vencedor mais provável do maior evento desportivo do mundo.</p>
+      <!-- Vencedor visível no mobile (dentro do hero) -->
+      <div id="hw-mobile" style="display:none;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:.85rem 1rem;margin-bottom:1rem;display:flex;align-items:center;gap:12px">
+        <span id="hw-flag-m" style="font-size:32px">🇳🇱</span>
+        <div>
+          <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:2px">Vencedor previsto</div>
+          <div id="hw-name-m" style="font-size:14px;font-weight:800;color:#fff">Países Baixos</div>
+        </div>
+        <div id="hw-pct-m" style="font-size:26px;font-weight:900;color:var(--orange);margin-left:auto">—%</div>
+      </div>
       <div class="hero-chips">
         <span class="hchip hc1">27 Dimensões de análise</span>
         <span class="hchip hc2">Tecnologia Adidas Trionda</span>
@@ -696,9 +823,17 @@ function bCol(i){return i===0?'#E8751A':i<3?'#1E3A6B':i<7?'#0E6B3A':'#9A9590'}
 // ─── HERO UPDATE ───────────────────────────────────────────────
 function updateHero(probs){
   const top=sorted(probs)[0];
-  document.getElementById('hw-flag').textContent=top.flag;
-  document.getElementById('hw-name').textContent=top.name;
-  document.getElementById('hw-pct').textContent=top.p.toFixed(1)+'%';
+  // Desktop
+  const hf=document.getElementById('hw-flag');if(hf)hf.textContent=top.flag;
+  const hn=document.getElementById('hw-name');if(hn)hn.textContent=top.name;
+  const hp=document.getElementById('hw-pct');if(hp)hp.textContent=top.p.toFixed(1)+'%';
+  // Mobile
+  const mf=document.getElementById('hw-flag-m');if(mf)mf.textContent=top.flag;
+  const mn=document.getElementById('hw-name-m');if(mn)mn.textContent=top.name;
+  const mp=document.getElementById('hw-pct-m');if(mp)mp.textContent=top.p.toFixed(1)+'%';
+  // Mostrar caixa mobile apenas em ecrãs pequenos
+  const mob=document.getElementById('hw-mobile');
+  if(mob){mob.style.display=window.innerWidth<=768?'flex':'none';}
 }
 
 // ─── PODIUM ────────────────────────────────────────────────────
@@ -870,6 +1005,7 @@ function updateAll(){
 
 // ─── INIT ──────────────────────────────────────────────────────
 populateSel();updateAll();
+window.addEventListener('resize',()=>{const probs=calcProbs();updateHero(probs);});
 </script>
 </body>
 </html>

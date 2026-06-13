@@ -1,1 +1,1 @@
-# Mundial2026
+index.html

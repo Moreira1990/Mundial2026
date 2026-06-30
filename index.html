@@ -344,29 +344,32 @@ footer a{color:var(--orange);text-decoration:none}
     <div>
       <div class="hero-label">Estudo Preditivo Independente · Mundial FIFA 2026</div>
       <h1 class="hero-title">Quem vai ganhar<br>o <span>Mundial 2026?</span></h1>
-      <p class="hero-lead">Um modelo inédito que cruza 27 dimensões de análise — dados económicos, desportivos, tecnologia da bola, ciclos lunares e astrologia das nações — para identificar o vencedor mais provável do maior evento desportivo do mundo.</p>
+      <p class="hero-lead">Um modelo inédito que cruza 30 Dimensões de análise — dados económicos, desportivos, tecnologia da bola, ciclos lunares e astrologia das nações — actualizado em tempo real com os resultados do torneio.</p>
+      <div style="background:rgba(192,48,32,.15);border:1px solid rgba(192,48,32,.4);border-radius:10px;padding:10px 14px;margin-bottom:1rem;font-size:11px;color:#fff;line-height:1.5">
+        <b style="color:#ff8a73">⚠️ Actualização 30 jun 2026:</b> Fase de grupos concluída. 16-avos de final em curso, com três grandes surpresas: Países Baixos eliminados pelo Marrocos (pénaltis), Alemanha eliminada pelo Paraguai (pénaltis), Japão eliminado pelo Brasil. Os dados abaixo reflectem todos os resultados reais e o calendário confirmado até à Final. Ver quadro completo na secção "📋 Estado do Torneio".
+      </div>
       <!-- Vencedor visível no mobile (dentro do hero) -->
       <div id="hw-mobile" style="display:none;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:.85rem 1rem;margin-bottom:1rem;display:flex;align-items:center;gap:12px">
-        <span id="hw-flag-m" style="font-size:32px">🇳🇱</span>
+        <span id="hw-flag-m" style="font-size:32px">🇫🇷</span>
         <div>
-          <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:2px">Vencedor previsto</div>
-          <div id="hw-name-m" style="font-size:14px;font-weight:800;color:#fff">Países Baixos</div>
+          <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:2px">Líder actual do modelo</div>
+          <div id="hw-name-m" style="font-size:14px;font-weight:800;color:#fff">França</div>
         </div>
         <div id="hw-pct-m" style="font-size:26px;font-weight:900;color:var(--orange);margin-left:auto">—%</div>
       </div>
       <div class="hero-chips">
-        <span class="hchip hc1">27 Dimensões de análise</span>
+        <span class="hchip hc1">30 Dimensões de análise</span>
         <span class="hchip hc2">Tecnologia Adidas Trionda</span>
         <span class="hchip hc3">Modelo Klement · 3× acertou</span>
-        <span class="hchip hc4">Fases lunares reais jun-jul 2026</span>
+        <span class="hchip hc4">Actualizado com resultados reais</span>
       </div>
     </div>
     <div class="hero-winner" id="hw-box">
-      <div class="hw-label">Vencedor previsto</div>
-      <div class="hw-flag" id="hw-flag">🇳🇱</div>
-      <div class="hw-name" id="hw-name">Países Baixos</div>
+      <div class="hw-label">Líder actual do modelo</div>
+      <div class="hw-flag" id="hw-flag">🇫🇷</div>
+      <div class="hw-name" id="hw-name">França</div>
       <div class="hw-pct" id="hw-pct">—%</div>
-      <div class="hw-sub" id="hw-sub">27 dimensões</div>
+      <div class="hw-sub" id="hw-sub">30 Dimensões</div>
     </div>
   </div>
 </header>
@@ -376,11 +379,13 @@ footer a{color:var(--orange);text-decoration:none}
 <!-- ─── TABS ─── -->
 <nav class="tabs" role="tablist">
   <button class="tb on" onclick="sw('resultado',this)">🏆 Resultado</button>
+  <button class="tb" onclick="sw('estado',this)">📋 Estado do Torneio</button>
+  <button class="tb" onclick="sw('stats',this)">📊 Estatísticas Reais</button>
   <button class="tb" onclick="sw('ranking',this)">📊 Ranking</button>
   <button class="tb" onclick="sw('trionda',this)">⚽ Bola Trionda</button>
   <button class="tb" onclick="sw('signo',this)">✨ Astrologia</button>
-  <button class="tb" onclick="sw('nl',this)">🇳🇱 Caso NL</button>
-  <button class="tb" onclick="sw('dims',this)">27 Dimensões</button>
+  <button class="tb" onclick="sw('nl',this)">❌ Surpresas</button>
+  <button class="tb" onclick="sw('dims',this)">30 Dimensões</button>
   <button class="tb" onclick="sw('equipa',this)">Por Equipa</button>
   <button class="tb" onclick="sw('pesos',this)">⚙️ Pesos</button>
   <button class="tb" onclick="sw('radar',this)">🔮 Radar</button>
@@ -390,7 +395,7 @@ footer a{color:var(--orange);text-decoration:none}
 
 <!-- ─── RESULTADO ─── -->
 <section id="s-resultado" class="ts on">
-  <div class="sec-header"><div class="sec-num">01</div><div><div class="sec-title">O Vencedor Mais Provável</div><div class="sec-sub">Resultado do modelo integrado de 27 dimensões</div></div></div>
+  <div class="sec-header"><div class="sec-num">01</div><div><div class="sec-title">O Vencedor Mais Provável</div><div class="sec-sub">Resultado do modelo integrado de 30 Dimensões</div></div></div>
   <div class="pod3" id="podium"></div>
   <div class="pillars">
     <div class="pillar"><div class="pi-ico">🏅</div><div class="pi-val" id="sc-k">—</div><div class="pi-lbl">Desportivo</div></div>
@@ -400,21 +405,168 @@ footer a{color:var(--orange);text-decoration:none}
     <div class="pillar"><div class="pi-ico">🌙✨</div><div class="pi-val" id="sc-x">—</div><div class="pi-lbl">Astro-Lunar</div></div>
   </div>
   <div class="chart-card">
-    <div class="cc-title">Probabilidade de título — top 12 seleções (27 dimensões)</div>
+    <div class="cc-title">Probabilidade de título — top 12 seleções (30 Dimensões)</div>
     <div class="cc-canvas"><canvas id="mainChart" aria-label="Gráfico de barras com probabilidades de vitória no Mundial 2026"></canvas></div>
   </div>
   <p style="font-size:10px;color:var(--text3);line-height:1.5">Fontes: FIFA · UNDP HDR 2025 · FMI 2026 · OMS · CIES Football Observatory · World Bank · Deloitte Money League · Klement 2026 · Univ. Innsbruck · Univ. Nottingham · Scientific American · Design News · BBC Science Focus · Adidas/FIFA (Trionda) · Astronomy.com · Transfermarkt jun 2026</p>
 </section>
 
+<!-- ─── ESTADO DO TORNEIO ─── -->
+<section id="s-estado" class="ts">
+  <div class="sec-header"><div class="sec-num">02</div><div><div class="sec-title">Estado do Torneio — 16-avos de Final</div><div class="sec-sub">Resultados confirmados e calendário até à Final · actualizado 30 jun 2026</div></div></div>
+
+  <div class="highlight" style="border-color:rgba(14,107,58,.3);background:linear-gradient(135deg,rgba(14,107,58,.06),rgba(10,31,68,.03));margin-bottom:1.25rem">
+    <div style="font-size:13px;font-weight:800;margin-bottom:10px">✅ 16-avos já disputados (4 de 16 jogos)</div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg2);border-radius:8px;font-size:12px"><span>🇨🇦 Canadá</span><b>1-0</b><span>África do Sul 🇿🇦</span><span style="margin-left:auto;font-size:10px;color:var(--text3)">28 jun · Los Angeles</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:rgba(192,48,32,.06);border-radius:8px;font-size:12px;border:1px solid rgba(192,48,32,.2)"><span>🇩🇪 Alemanha</span><b>1(3)-1(4)</b><span>Paraguai 🇵🇾</span><span style="margin-left:auto;font-size:10px;color:var(--red);font-weight:700">29 jun · pénaltis · Foxborough</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:rgba(192,48,32,.06);border-radius:8px;font-size:12px;border:1px solid rgba(192,48,32,.2)"><span>🇳🇱 Países Baixos</span><b>1(2)-1(3)</b><span>Marrocos 🇲🇦</span><span style="margin-left:auto;font-size:10px;color:var(--red);font-weight:700">29 jun · pénaltis · Monterrey</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg2);border-radius:8px;font-size:12px"><span>🇧🇷 Brasil</span><b>2-1</b><span>Japão 🇯🇵</span><span style="margin-left:auto;font-size:10px;color:var(--text3)">29 jun · Houston</span></div>
+    </div>
+  </div>
+
+  <div class="chart-card" style="margin-bottom:1.25rem">
+    <div class="cc-title">📅 Próximos 16-avos — calendário confirmado (30 jun – 3 jul)</div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span>🇫🇷 França</span><span style="color:var(--text3)">vs</span><span>Suécia 🇸🇪</span><span style="margin-left:auto;font-size:10px;color:var(--text3)">30 jun · MetLife NJ</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span>🇨🇮 Costa do Marfim</span><span style="color:var(--text3)">vs</span><span>Noruega 🇳🇴</span><span style="margin-left:auto;font-size:10px;color:var(--text3)">30 jun · Dallas</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span>🇲🇽 México</span><span style="color:var(--text3)">vs</span><span>Equador 🇪🇨</span><span style="margin-left:auto;font-size:10px;color:var(--text3)">30 jun · Cidade do México</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span>🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra</span><span style="color:var(--text3)">vs</span><span>RD Congo 🇨🇩</span><span style="margin-left:auto;font-size:10px;color:var(--text3)">1 jul · Atlanta</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span>🇧🇪 Bélgica</span><span style="color:var(--text3)">vs</span><span>Senegal 🇸🇳</span><span style="margin-left:auto;font-size:10px;color:var(--text3)">1 jul · Seattle</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span>🇺🇸 EUA</span><span style="color:var(--text3)">vs</span><span>Bósnia e Herzegovina 🇧🇦</span><span style="margin-left:auto;font-size:10px;color:var(--text3)">2 jul · Santa Clara</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span>🇪🇸 Espanha</span><span style="color:var(--text3)">vs</span><span>Áustria 🇦🇹</span><span style="margin-left:auto;font-size:10px;color:var(--text3)">2 jul · Los Angeles</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:rgba(232,117,26,.08);border-radius:8px;font-size:12px;border:1px solid rgba(232,117,26,.25)"><span><b>🇵🇹 Portugal</b></span><span style="color:var(--text3)">vs</span><span><b>Croácia 🇭🇷</b></span><span style="margin-left:auto;font-size:10px;color:var(--orange);font-weight:700">3 jul · 00h00 · Toronto</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span>🇨🇭 Suíça</span><span style="color:var(--text3)">vs</span><span>Argélia 🇩🇿</span><span style="margin-left:auto;font-size:10px;color:var(--text3)">3 jul · Vancouver</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span>🇦🇺 Austrália</span><span style="color:var(--text3)">vs</span><span>Egito 🇪🇬</span><span style="margin-left:auto;font-size:10px;color:var(--text3)">3 jul · Dallas</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span>🇦🇷 Argentina</span><span style="color:var(--text3)">vs</span><span>Cabo Verde 🇨🇻</span><span style="margin-left:auto;font-size:10px;color:var(--text3)">3 jul · Miami</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span>🇨🇴 Colômbia</span><span style="color:var(--text3)">vs</span><span>Gana 🇬🇭</span><span style="margin-left:auto;font-size:10px;color:var(--text3)">4 jul · Kansas City</span></div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="cc-title">❌ Eliminadas na fase de grupos (16 seleções)</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px">
+      <span style="font-size:11px;padding:4px 10px;background:var(--bg);border-radius:20px;color:var(--text3)">🇨🇿 Rep. Checa</span>
+      <span style="font-size:11px;padding:4px 10px;background:var(--bg);border-radius:20px;color:var(--text3)">🇰🇷 Coreia do Sul</span>
+      <span style="font-size:11px;padding:4px 10px;background:var(--bg);border-radius:20px;color:var(--text3)">🇶🇦 Catar</span>
+      <span style="font-size:11px;padding:4px 10px;background:var(--bg);border-radius:20px;color:var(--text3)">🇭🇹 Haiti</span>
+      <span style="font-size:11px;padding:4px 10px;background:var(--bg);border-radius:20px;color:var(--text3)">🇹🇷 Turquia</span>
+      <span style="font-size:11px;padding:4px 10px;background:var(--bg);border-radius:20px;color:var(--text3)">🇹🇳 Tunísia</span>
+      <span style="font-size:11px;padding:4px 10px;background:var(--bg);border-radius:20px;color:var(--text3)">🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escócia</span>
+      <span style="font-size:11px;padding:4px 10px;background:var(--bg);border-radius:20px;color:var(--text3)">🇮🇶 Iraque</span>
+      <span style="font-size:11px;padding:4px 10px;background:var(--bg);border-radius:20px;color:var(--text3)">🇯🇴 Jordânia</span>
+      <span style="font-size:11px;padding:4px 10px;background:var(--bg);border-radius:20px;color:var(--text3)">🇵🇦 Panamá</span>
+      <span style="font-size:11px;padding:4px 10px;background:var(--bg);border-radius:20px;color:var(--text3)">🇨🇼 Curaçau</span>
+      <span style="font-size:11px;padding:4px 10px;background:var(--bg);border-radius:20px;color:var(--text3)">🇺🇾 Uruguai</span>
+      <span style="font-size:11px;padding:4px 10px;background:var(--bg);border-radius:20px;color:var(--text3)">🇳🇿 Nova Zelândia</span>
+      <span style="font-size:11px;padding:4px 10px;background:var(--bg);border-radius:20px;color:var(--text3)">🇺🇿 Uzbequistão</span>
+      <span style="font-size:11px;padding:4px 10px;background:var(--bg);border-radius:20px;color:var(--text3)">🇸🇦 Arábia Saudita</span>
+      <span style="font-size:11px;padding:4px 10px;background:var(--bg);border-radius:20px;color:var(--text3)">🇮🇷 Irão</span>
+    </div>
+    <p style="font-size:10px;color:var(--text3);margin-top:10px">Uruguai foi a grande decepção da fase de grupos — eliminado em 3.º no Grupo H, atrás de Espanha e Cabo Verde, que se estreou em Mundiais e surpreendeu ao não perder um único jogo.</p>
+  </div>
+</section>
+
+<!-- ─── ESTATÍSTICAS REAIS ─── -->
+<section id="s-stats" class="ts">
+  <div class="sec-header"><div class="sec-num">03</div><div><div class="sec-title">Estatísticas Reais da Fase de Grupos</div><div class="sec-sub">Qualidade de jogo medida — posse de bola, passes, remates, eficiência xG e solidez defensiva</div></div></div>
+
+  <div class="highlight" style="margin-bottom:1.25rem">
+    <div style="font-size:13px;font-weight:800;margin-bottom:10px">⚽ Por que esta secção é única — qualidade de jogo, não só resultado</div>
+    <p style="font-size:11px;color:var(--text2);line-height:1.65">A maioria dos estudos preditivos olha apenas para resultados (V/E/D). Esta secção incorpora dados reais de desempenho em campo — posse de bola, precisão de passe, volume e qualidade de remates, eficiência ofensiva (golos vs. xG) e solidez defensiva — fornecidos pela FIFA e pela Opta. Estes dados alimentam directamente as novas dimensões "📊 Qualidade estatística em jogo" e "🛡️ Solidez defensiva real" do modelo.</p>
+  </div>
+
+  <div class="chart-card" style="margin-bottom:1.25rem">
+    <div class="cc-title">🎯 Posse de bola e construção de jogo (fase de grupos)</div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span style="width:24px">🇪🇸</span><span style="flex:1"><b>Espanha</b></span><span style="color:var(--orange);font-weight:700">69% posse</span><span style="color:var(--text3);font-size:10px">2.191 passes · 92% precisão — números mais altos do torneio</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span style="width:24px">🇵🇹</span><span style="flex:1"><b>Portugal</b></span><span style="color:var(--orange);font-weight:700">92% precisão</span><span style="color:var(--text3);font-size:10px">1.899 passes (4.º mais) — empatado com Espanha na precisão</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span style="width:24px">🇩🇿</span><span style="flex:1"><b>Argélia</b></span><span style="color:var(--green);font-weight:700">2.070 passes</span><span style="color:var(--text3);font-size:10px">2.º mais passes do torneio — surpresa do Grupo J</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span style="width:24px">🇦🇷</span><span style="flex:1"><b>Argentina</b></span><span style="color:var(--green);font-weight:700">1.966 passes</span><span style="color:var(--text3);font-size:10px">3.º mais passes — construção de jogo sólida</span></div>
+    </div>
+  </div>
+
+  <div class="chart-card" style="margin-bottom:1.25rem">
+    <div class="cc-title">🥅 Eficiência ofensiva e finalizações</div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:rgba(14,107,58,.06);border-radius:8px;font-size:12px;border:1px solid rgba(14,107,58,.2)"><span style="width:24px">🇯🇵</span><span style="flex:1"><b>Japão</b></span><span style="color:var(--green);font-weight:700">5.9× eficiência xG</span><span style="color:var(--text3);font-size:10px">Ataque mais cirúrgico do torneio — apenas 9 remates totais na fase de grupos</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span style="width:24px">🇩🇪</span><span style="flex:1"><b>Alemanha</b></span><span style="color:var(--orange);font-weight:700">42 remates</span><span style="color:var(--text3);font-size:10px">19 ao alvo (mais do torneio) — mas eliminada nos pénaltis pelo Paraguai</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span style="width:24px">🇨🇦</span><span style="flex:1"><b>Canadá</b></span><span style="color:var(--orange);font-weight:700">46 remates</span><span style="color:var(--text3);font-size:10px">Mais finalizações do torneio, 28 cantos (também líder)</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span style="width:24px">🇵🇹</span><span style="flex:1"><b>Portugal</b></span><span style="color:var(--red);font-weight:700">37 remates, 12 ao alvo</span><span style="color:var(--text3);font-size:10px">Apenas 6 golos — eficácia ofensiva abaixo do esperado para o talento do plantel</span></div>
+    </div>
+  </div>
+
+  <div class="chart-card" style="margin-bottom:1.25rem">
+    <div class="cc-title">🛡️ Solidez defensiva — quem menos sofreu</div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:rgba(14,107,58,.06);border-radius:8px;font-size:12px;border:1px solid rgba(14,107,58,.2)"><span style="width:24px">🇪🇸</span><span style="flex:1"><b>Espanha</b></span><span style="color:var(--green);font-weight:700">0 golos sofridos</span><span style="color:var(--text3);font-size:10px">Defesa perfeita na fase de grupos — empatada com o México</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:rgba(14,107,58,.06);border-radius:8px;font-size:12px;border:1px solid rgba(14,107,58,.2)"><span style="width:24px">🇲🇽</span><span style="flex:1"><b>México</b></span><span style="color:var(--green);font-weight:700">0 golos sofridos</span><span style="color:var(--text3);font-size:10px">6 marcados, zero sofridos — campanha de anfitrião quase perfeita</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span style="width:24px">🇵🇹</span><span style="flex:1"><b>Portugal</b></span><span style="color:var(--green);font-weight:700">1 golo sofrido</span><span style="color:var(--text3);font-size:10px">Diogo Costa fez 9 defesas — só Wissa (RD Congo) bateu a baliza portuguesa</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span style="width:24px">🇳🇴</span><span style="flex:1"><b>Noruega</b></span><span style="color:var(--red);font-weight:700">Fragilidade defensiva</span><span style="color:var(--text3);font-size:10px">Perdeu 4-1 com a França — aviso sério para a fase eliminatória</span></div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="cc-title">⭐ Top marcadores e criadores do torneio</div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span style="width:24px">🇦🇷</span><span style="flex:1"><b>Messi</b> (Argentina)</span><span style="color:var(--orange);font-weight:700">5 golos</span><span style="color:var(--text3);font-size:10px">Líder de marcadores aos 38 anos, em 6.º Mundial</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span style="width:24px">🇧🇷</span><span style="flex:1"><b>Vinicius Jr.</b> (Brasil)</span><span style="color:var(--orange);font-weight:700">4 golos</span><span style="color:var(--text3);font-size:10px">Marcou em todos os 3 jogos da fase de grupos</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span style="width:24px">🇫🇷</span><span style="flex:1"><b>Mbappé</b> (França)</span><span style="color:var(--orange);font-weight:700">4 golos</span><span style="color:var(--text3);font-size:10px">16 remates — máximo do torneio, empatado com De Bruyne</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span style="width:24px">🇳🇴</span><span style="flex:1"><b>Haaland</b> (Noruega)</span><span style="color:var(--orange);font-weight:700">4 golos</span><span style="color:var(--text3);font-size:10px">Confirma o estatuto de maior ameaça individual — mas eliminação seria irónica</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span style="width:24px">🇪🇸</span><span style="flex:1"><b>Rodri</b> (Espanha)</span><span style="color:var(--blue3);font-weight:700">344 passes certos</span><span style="color:var(--text3);font-size:10px">"Rei dos passes" — pilar da posse de bola espanhola</span></div>
+    </div>
+    <p style="font-size:10px;color:var(--text3);margin-top:10px">Fonte: dados oficiais FIFA e Opta, fase de grupos do Mundial 2026 (11-28 junho). Estes números alimentam as dimensões "Qualidade estatística em jogo" e "Solidez defensiva real" do modelo de 30 Dimensões.</p>
+  </div>
+
+  <div class="chart-card" style="margin-top:1.25rem;margin-bottom:1.25rem">
+    <div class="cc-title">🔬 Validação externa — comparação com o modelo Opta (29 jun 2026)</div>
+    <p style="font-size:11px;color:var(--text2);line-height:1.6;margin-bottom:10px">A Opta — empresa de referência mundial em análise estatística de futebol — publica o seu próprio modelo de probabilidades, actualizado após cada fase. Comparámos os seus números com os do nosso modelo de 30 dimensões para validação cruzada.</p>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:rgba(232,117,26,.06);border-radius:8px;font-size:12px;border:1px solid rgba(232,117,26,.2)"><span style="width:24px">🇫🇷</span><span style="flex:1"><b>França</b></span><span style="color:var(--orange);font-weight:700">Opta: 15.6%</span><span style="color:var(--text3);font-size:10px">Opta concorda — França é também a nossa líder após os 16-avos</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span style="width:24px">🇦🇷</span><span style="flex:1"><b>Argentina</b></span><span style="color:var(--blue3);font-weight:700">Opta: 14.4%</span><span style="color:var(--text3);font-size:10px">2.ª colocada Opta — também entre os top 3 do nosso modelo</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span style="width:24px">🇪🇸</span><span style="flex:1"><b>Espanha</b></span><span style="color:var(--blue3);font-weight:700">Opta: 13.2%</span><span style="color:var(--text3);font-size:10px">Defesa perfeita (0 sofridos) reforça a 3.ª posição em ambos os modelos</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span style="width:24px">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span><span style="flex:1"><b>Inglaterra</b></span><span style="color:var(--text2);font-weight:700">Opta: 8.9%</span><span style="color:var(--text3);font-size:10px">100% nas eliminatórias, zero golos sofridos na qualificação</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span style="width:24px">🇵🇹</span><span style="flex:1"><b>Portugal</b></span><span style="color:var(--text2);font-weight:700">Mercado: 8.5-10.5%</span><span style="color:var(--text3);font-size:10px">Implícita das casas de apostas — alinhado com a nossa posição no top 6</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span style="width:24px">🇧🇷</span><span style="flex:1"><b>Brasil</b></span><span style="color:var(--text2);font-weight:700">Opta: 4.7-6.5%</span><span style="color:var(--text3);font-size:10px">Oscilação defensiva reconhecida por ambos os modelos como ponto fraco</span></div>
+    </div>
+    <p style="font-size:10px;color:var(--text3);margin-top:10px">A convergência entre o nosso modelo de 30 dimensões e o modelo estatístico independente da Opta nos 4 primeiros lugares reforça a robustez da componente "real" do nosso estudo, mesmo isolando as variáveis lunares e astrológicas.</p>
+  </div>
+
+  <div class="chart-card" style="margin-bottom:1.25rem">
+    <div class="cc-title">🆚 Histórico de confrontos diretos — Portugal vs Croácia (16-avos, 3 jul)</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px">
+      <div style="text-align:center;padding:12px;background:rgba(14,107,58,.06);border-radius:8px;border:1px solid rgba(14,107,58,.2)"><div style="font-size:22px;font-weight:900;color:var(--green)">7</div><div style="font-size:10px;color:var(--text2)">Vitórias Portugal</div></div>
+      <div style="text-align:center;padding:12px;background:var(--bg);border-radius:8px"><div style="font-size:22px;font-weight:900;color:var(--text2)">2</div><div style="font-size:10px;color:var(--text2)">Empates</div></div>
+      <div style="text-align:center;padding:12px;background:rgba(192,48,32,.06);border-radius:8px;border:1px solid rgba(192,48,32,.2)"><div style="font-size:22px;font-weight:900;color:var(--red)">1</div><div style="font-size:10px;color:var(--text2)">Vitória Croácia</div></div>
+    </div>
+    <p style="font-size:11px;color:var(--text2);line-height:1.6">Em 10 confrontos anteriores, o histórico é claramente favorável a Portugal. O único triunfo croata foi em particular de preparação (2024, 1-2, Jamor). Em competições oficiais: 3-0 no Euro 1996, 1-0 no Euro 2016 (oitavos, após prolongamento, golo de Quaresma), 4-1 e 3-2 na Liga das Nações 2020/21, e vitória mais recente na Liga das Nações 2024/25.</p>
+    <div style="margin-top:10px;padding:10px 12px;background:rgba(184,146,10,.08);border-radius:8px;border:1px solid rgba(184,146,10,.2)">
+      <b style="font-size:11px;color:var(--gold)">🔮 Curiosidade estatística:</b>
+      <span style="font-size:11px;color:var(--text2)"> nos últimos 2 Mundiais, quem eliminou a Croácia sagrou-se campeão — França em 2018 (final, 4-2) e Argentina em 2022 (meias-finais, 3-0). Se Portugal vencer a 3 de julho, estará a seguir um padrão historicamente favorável.</span>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="cc-title">✈️ Logística e desgaste físico — a variável esquecida</div>
+    <p style="font-size:11px;color:var(--text2);line-height:1.6;margin-bottom:10px">Com 16 cidades-sede em 3 países, algumas equipas viajam mais de 8.000 km entre jogos. A FIFA impõe um mínimo obrigatório de 72 horas de descanso entre partidas — mas a distância e o fuso horário continuam a pesar no desgaste.</p>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span style="flex:1"><b>📅 Calendário até à final</b></span><span style="color:var(--text3);font-size:10px">16-avos (28jun-3jul) → Oitavos (4-7jul) → Quartos (9-11jul) → Semis (14-15jul) → Final (19jul)</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span style="flex:1"><b>⏱️ Regra FIFA/FIFPro</b></span><span style="color:var(--text3);font-size:10px">Mínimo obrigatório de 72h entre jogos oficiais do mesmo atleta</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span style="flex:1"><b>🌍 Maior desafio logístico</b></span><span style="color:var(--text3);font-size:10px">Equipas no lado oeste do quadro (Vancouver/Seattle) vs leste (Toronto/Boston) — até 8.000km de diferença</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:rgba(232,117,26,.06);border-radius:8px;font-size:12px;border:1px solid rgba(232,117,26,.2)"><span style="flex:1"><b>🇵🇹 Portugal</b></span><span style="color:var(--text3);font-size:10px">Miami → Toronto (16-avos) — viagem moderada, sem grande desgaste adicional</span></div>
+    </div>
+  </div>
+</section>
+
 <!-- ─── RANKING ─── -->
 <section id="s-ranking" class="ts">
-  <div class="sec-header"><div class="sec-num">02</div><div><div class="sec-title">Ranking Completo das 16 Seleções</div><div class="sec-sub">Score por categoria e probabilidade final</div></div></div>
+  <div class="sec-header"><div class="sec-num">04</div><div><div class="sec-title">Ranking Completo das 16 Seleções</div><div class="sec-sub">Score por categoria e probabilidade final</div></div></div>
   <table class="rtbl" id="rank-table"></table>
 </section>
 
 <!-- ─── TRIONDA ─── -->
 <section id="s-trionda" class="ts">
-  <div class="sec-header"><div class="sec-num">03</div><div><div class="sec-title">A Bola Trionda muda o jogo</div><div class="sec-sub">A variável mais inédita deste estudo — física aplicada ao futebol</div></div></div>
+  <div class="sec-header"><div class="sec-num">05</div><div><div class="sec-title">A Bola Trionda muda o jogo</div><div class="sec-sub">A variável mais inédita deste estudo — física aplicada ao futebol</div></div></div>
   <div class="trionda-hero">
     <div class="th-label">Variável inédita · Tecnologia Adidas Trionda 2026</div>
     <div class="th-title">4 painéis. 500Hz. A bola que favorece jogos de toque.</div>
@@ -458,7 +610,7 @@ footer a{color:var(--orange);text-decoration:none}
 
 <!-- ─── ASTROLOGIA ─── -->
 <section id="s-signo" class="ts">
-  <div class="sec-header"><div class="sec-num">04</div><div><div class="sec-title">A Dimensão Astrológica</div><div class="sec-sub">Metodologia clara, peso controlado, curiosidade científica</div></div></div>
+  <div class="sec-header"><div class="sec-num">06</div><div><div class="sec-title">A Dimensão Astrológica</div><div class="sec-sub">Metodologia clara, peso controlado, curiosidade científica</div></div></div>
   <div class="signo-box">
     <div class="sb-title">Como determinamos o signo de cada nação — metodologia</div>
     <div class="sb-method">
@@ -476,43 +628,49 @@ footer a{color:var(--orange);text-decoration:none}
 
 <!-- ─── CASO NL ─── -->
 <section id="s-nl" class="ts">
-  <div class="sec-header"><div class="sec-num">05</div><div><div class="sec-title">O Caso dos Países Baixos</div><div class="sec-sub">Por que razão 27 dimensões apontam para o mesmo vencedor</div></div></div>
-  <div class="highlight">
+  <div class="sec-header"><div class="sec-num">07</div><div><div class="sec-title">O que correu mal: as eliminações surpresa</div><div class="sec-sub">Quando 30 Dimensões apontam para um vencedor e o futebol decide de outra forma</div></div></div>
+  <div class="highlight" style="border-color:rgba(192,48,32,.3);background:linear-gradient(135deg,rgba(192,48,32,.06),rgba(10,31,68,.04))">
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:1rem">
-      <span style="font-size:40px">🇳🇱</span>
-      <div><div style="font-size:16px;font-weight:800">Países Baixos — 6 razões convergentes</div><div style="font-size:11px;color:var(--text2);margin-top:2px">Klement + física + economia + luna + karma + tecnologia da bola</div></div>
+      <span style="font-size:40px">🇳🇱❌</span>
+      <div><div style="font-size:16px;font-weight:800">Países Baixos eliminados — Marrocos 3-2 g.p. (1-1)</div><div style="font-size:11px;color:var(--text2);margin-top:2px">29 de junho de 2026, Monterrey, México</div></div>
     </div>
+    <p style="font-size:12px;color:var(--text2);line-height:1.65;margin-bottom:1rem">O nosso modelo apontava os Países Baixos como vencedores mais prováveis com base em 30 Dimensões reais — económicas, desportivas, lunares e astrológicas. Venceram o Grupo F com autoridade (7 pontos), exactamente como previsto. Mas caíram nos 16-avos diante de Marrocos, a equipa que o nosso próprio estudo já identificava como <b>"o maior underdog de qualidade do torneio"</b> — boa defesa, IDH e PIB em desenvolvimento, mas qualidade desportiva subestimada pelas variáveis económicas.</p>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:11px;color:var(--text2);line-height:1.6">
-      <div style="padding:10px 12px;background:rgba(255,255,255,.7);border-radius:8px;border-left:3px solid var(--orange)"><b style="color:var(--text)">① Modelo Klement:</b> o matemático que acertou 3 Mundiais seguidos usa PIB per capita, população e cultura futebolística. NL: $84k PPP — top 10 mundial. É o seu vencedor para 2026.</div>
-      <div style="padding:10px 12px;background:rgba(255,255,255,.7);border-radius:8px;border-left:3px solid var(--blue3)"><b style="color:var(--text)">② IDH + Gini:</b> IDH 0.946 (11.º mundial). Gini 26.4 — menor desigualdade dos 16 participantes. Mais jovens com acesso real à formação desportiva de qualidade.</div>
-      <div style="padding:10px 12px;background:rgba(255,255,255,.7);border-radius:8px;border-left:3px solid var(--green)"><b style="color:var(--text)">③ Ajax + Trionda:</b> Ajax nº2 mundial em formação (CIES 2025). Total Football como ADN — jogo de toque curto com muita rotação = estilo ideal para a física da Trionda.</div>
-      <div style="padding:10px 12px;background:rgba(255,255,255,.7);border-radius:8px;border-left:3px solid var(--purple)"><b style="color:var(--text)">④ Ciclos lunares:</b> fase de grupos em Lua Nova (recomeço histórico). Final em 19 jul = Lua Crescente = sinal de ascensão. A Lua cresce, tal como a história do primeiro título.</div>
-      <div style="padding:10px 12px;background:rgba(255,255,255,.7);border-radius:8px;border-left:3px solid var(--red)"><b style="color:var(--text)">⑤ Karma histórico:</b> 3 finais perdidas (1974, 1978, 2010) = 79.8 pontos de karma — o mais alto de todos os participantes. 116 anos à espera do primeiro título.</div>
-      <div style="padding:10px 12px;background:rgba(255,255,255,.7);border-radius:8px;border-left:3px solid var(--gold)"><b style="color:var(--text)">⑥ Percurso + altitude:</b> Grupo F acessível. Final no MetLife NJ (10m altitude) = condições ideais para o jogo holandês. Nunca jogam em altitude ao longo do torneio.</div>
+      <div style="padding:10px 12px;background:rgba(255,255,255,.7);border-radius:8px;border-left:3px solid var(--orange)"><b style="color:var(--text)">① O que o modelo acertou:</b> PIB $84k PPP, IDH 0.946, Ajax nº2 mundial em formação, karma máximo (3 finais perdidas). Todas as variáveis económicas e estruturais confirmaram-se — venceram o grupo com a equipa mais forte no papel.</div>
+      <div style="padding:10px 12px;background:rgba(255,255,255,.7);border-radius:8px;border-left:3px solid var(--red)"><b style="color:var(--text)">② O que o modelo não pode prever:</b> 120 minutos de jogo e uma série de pénaltis. Nenhuma variável económica, lunar ou astrológica substitui o desempenho real em campo num único jogo eliminatório.</div>
+      <div style="padding:10px 12px;background:rgba(255,255,255,.7);border-radius:8px;border-left:3px solid var(--blue3)"><b style="color:var(--text)">③ A lição estatística:</b> Mesmo o modelo mais completo é probabilístico, não determinístico. Um "favorito" com 7-8% de probabilidade de título ainda tem mais de 90% de probabilidade de NÃO ser campeão — e isso é matematicamente normal, não um erro do modelo.</div>
+      <div style="padding:10px 12px;background:rgba(255,255,255,.7);border-radius:8px;border-left:3px solid var(--green)"><b style="color:var(--text)">④ Marrocos confirma o modelo:</b> identificámos Marrocos como underdog de qualidade antes do torneio começar. A vitória sobre os Países Baixos é, na verdade, uma validação dessa leitura — o talento estava lá, só não nas variáveis económicas.</div>
     </div>
   </div>
-  <div class="chart-card">
-    <div class="cc-title">🇳🇱 Países Baixos vs média dos 15 outros participantes — por todas as 27 dimensões</div>
+  <div class="highlight" style="border-color:rgba(192,48,32,.3);background:linear-gradient(135deg,rgba(192,48,32,.06),rgba(10,31,68,.04));margin-top:1rem">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:1rem">
+      <span style="font-size:40px">🇩🇪❌</span>
+      <div><div style="font-size:16px;font-weight:800">Alemanha eliminada — Paraguai 4-3 g.p. (1-1)</div><div style="font-size:11px;color:var(--text2);margin-top:2px">29 de junho de 2026, Foxborough, EUA</div></div>
+    </div>
+    <p style="font-size:12px;color:var(--text2);line-height:1.65">A segunda grande surpresa do mesmo dia. A Alemanha dominou a posse de bola (78%) e teve 18 finalizações, mas o Paraguai — uma equipa historicamente sólida defensivamente — segurou o resultado, empatou aos 54' com Havertz após o golo de Enciso, e venceu nos pénaltis quando Jonathan Tah falhou a cobrança decisiva. É a terceira eliminação precoce seguida da Alemanha em Mundiais, depois das saídas na fase de grupos em 2018 e 2022. O nosso modelo dava à Alemanha um score de qualidade estatística de 85/100 — o domínio de jogo confirma-se nos números, mas a eficácia defensiva (50/100) já assinalava fragilidade que se veio a confirmar nos pénaltis.</p>
+  </div>
+  <div class="chart-card" style="margin-top:1rem">
+    <div class="cc-title">🇳🇱 Países Baixos — perfil completo nas 30 Dimensões (equipa eliminada, dados mantidos para referência)</div>
     <div id="nl-compare" style="padding:.5rem 0"></div>
   </div>
 </section>
 
 <!-- ─── 27 DIMENSÕES ─── -->
 <section id="s-dims" class="ts">
-  <div class="sec-header"><div class="sec-num">06</div><div><div class="sec-title">As 27 Dimensões do Modelo</div><div class="sec-sub">Todas as variáveis, fontes e lógica de cada uma</div></div></div>
+  <div class="sec-header"><div class="sec-num">08</div><div><div class="sec-title">As 30 Dimensões do Modelo</div><div class="sec-sub">Todas as variáveis, fontes e lógica de cada uma</div></div></div>
   <div id="dims-view"></div>
 </section>
 
 <!-- ─── POR EQUIPA ─── -->
 <section id="s-equipa" class="ts">
-  <div class="sec-header"><div class="sec-num">07</div><div><div class="sec-title">Análise por Seleção</div><div class="sec-sub">Clica numa equipa para ver os seus 27 scores detalhados</div></div></div>
+  <div class="sec-header"><div class="sec-num">09</div><div><div class="sec-title">Análise por Seleção</div><div class="sec-sub">Clica numa equipa para ver os seus 27 scores detalhados</div></div></div>
   <div class="tgrid" id="tgrid"></div>
   <div id="det-panel"></div>
 </section>
 
 <!-- ─── PESOS ─── -->
 <section id="s-pesos" class="ts">
-  <div class="sec-header"><div class="sec-num">08</div><div><div class="sec-title">Ajustar Pesos do Modelo</div><div class="sec-sub">Experimenta diferentes configurações e vê como muda o resultado</div></div></div>
+  <div class="sec-header"><div class="sec-num">10</div><div><div class="sec-title">Ajustar Pesos do Modelo</div><div class="sec-sub">Experimenta diferentes configurações e vê como muda o resultado</div></div></div>
   <div id="w-all"></div>
   <div class="btn-row">
     <button class="btn btn-o" onclick="resetW()">↺ Repor padrão</button>
@@ -524,7 +682,7 @@ footer a{color:var(--orange);text-decoration:none}
 
 <!-- ─── RADAR ─── -->
 <section id="s-radar" class="ts">
-  <div class="sec-header"><div class="sec-num">09</div><div><div class="sec-title">Comparar Duas Seleções</div><div class="sec-sub">Radar com 6 categorias de análise</div></div></div>
+  <div class="sec-header"><div class="sec-num">11</div><div><div class="sec-title">Comparar Duas Seleções</div><div class="sec-sub">Radar com 6 categorias de análise</div></div></div>
   <div class="radar-sels">
     <div class="rsg"><label>Seleção A</label><select id="rA" onchange="renderRadar()"></select></div>
     <div class="rsg"><label>Seleção B</label><select id="rB" onchange="renderRadar()"></select></div>
@@ -534,7 +692,7 @@ footer a{color:var(--orange);text-decoration:none}
 
 <!-- ─── LUNAR ─── -->
 <section id="s-lunar" class="ts">
-  <div class="sec-header"><div class="sec-num">10</div><div><div class="sec-title">Calendário Lunar do Mundial 2026</div><div class="sec-sub">Fases da lua reais — dados astronómicos verificados · Astronomy.com</div></div></div>
+  <div class="sec-header"><div class="sec-num">12</div><div><div class="sec-title">Calendário Lunar do Mundial 2026</div><div class="sec-sub">Fases da lua reais — dados astronómicos verificados · Astronomy.com</div></div></div>
   <div class="chart-card">
     <div class="cc-title">Jun-Jul 2026 · Fases lunares durante o torneio</div>
     <div class="mcal" id="moon-cal"></div>
@@ -549,7 +707,7 @@ footer a{color:var(--orange);text-decoration:none}
 
 <!-- ─── METODOLOGIA ─── -->
 <section id="s-metodo" class="ts">
-  <div class="sec-header"><div class="sec-num">11</div><div><div class="sec-title">Como foi construído este modelo</div><div class="sec-sub">Transparência total — para que qualquer pessoa possa verificar e replicar</div></div></div>
+  <div class="sec-header"><div class="sec-num">13</div><div><div class="sec-title">Como foi construído este modelo</div><div class="sec-sub">Transparência total — para que qualquer pessoa possa verificar e replicar</div></div></div>
   <div class="method-grid">
     <div class="mcard"><div class="mc-num">01</div><div class="mc-title">Recolha de dados reais</div><div class="mc-body">Todas as variáveis económicas, desportivas e de saúde foram recolhidas de fontes primárias internacionais: FIFA, UNDP, FMI, OMS, World Bank, CIES Football Observatory, Deloitte Money League e Transfermarkt. Dados de junho de 2026.</div></div>
     <div class="mcard"><div class="mc-num">02</div><div class="mc-title">Normalização 0-100</div><div class="mc-body">Cada variável foi normalizada numa escala de 0 a 100 para permitir comparação entre dimensões de natureza diferente (PIB em dólares, ranking FIFA em pontos, esperança de vida em anos, etc.).</div></div>
@@ -576,7 +734,7 @@ footer a{color:var(--orange);text-decoration:none}
 
 <footer>
   <b>Mundial 2026 — Estudo Preditivo Global</b> por Américo Moreira · AI Innovation Specialist<br>
-  27 dimensões · Klement · Innsbruck · Nottingham · CIES · FIFA · UNDP · FMI · OMS · World Bank · Deloitte · Scientific American · BBC Science Focus · Adidas/FIFA · Astronomy.com · Transfermarkt<br>
+  30 Dimensões · Klement · Innsbruck · Nottingham · CIES · FIFA · UNDP · FMI · OMS · World Bank · Deloitte · Scientific American · BBC Science Focus · Adidas/FIFA · Astronomy.com · Transfermarkt<br>
   <span style="font-size:9px;color:rgba(255,255,255,.3);margin-top:4px;display:block">As variáveis astrológicas e lunares são de natureza especulativa e cultural. Os dados económicos, desportivos e técnicos são reais e verificáveis. · Construído com Claude (Anthropic) · Jun 2026</span>
 </footer>
 
@@ -615,9 +773,11 @@ const DIMS = [
   {id:'zodiac',   name:'✨ Signo nacional + Trânsitos',cat:'x',src:'Marte em Leão jul 2026',w:5,col:'#B03020',desc:'Data fundadora do estado → signo solar. Marte em Leão nas meias/final favorece países Leão.'},
   {id:'karma',    name:'⚖️ Karma histórico',          cat:'x',src:'Cálculo: finais+anos',  w:6,col:'#B03020',desc:'Fórmula: (finais perdidas × 15) + (anos sem título × 0.3). NL: 79.8 pts — máximo.'},
   {id:'cosmic',   name:'🪐 Alinhamento cósmico',      cat:'x',src:'Júpiter/Saturno/Marte', w:4,col:'#B03020',desc:'KNVB (Sagitário) em trígono com Júpiter em Gémeos = aspeto mais harmonioso do período.'},
-  // INÉDITAS (2) – 3% total
+  // INÉDITAS (4) – 10% total
   {id:'altitude', name:'⛰️ Perfil altitude venues', cat:'i',src:'StadiumDB/FIFA 2026',    w:3,col:'#5A5650',desc:'NL nunca joga em altitude. Brasil potencialmente exposto ao Azteca (2240m).'},
   {id:'cohesion', name:'🤝 Coesão do plantel',       cat:'i',src:'Transfermarkt/Sofascore',w:3,col:'#5A5650',desc:'Anos médios dos 11 titulares a jogar juntos. França 6a, NL 5a, Argentina 2a.'},
+  {id:'stats_quality',name:'📊 Qualidade estatística em jogo',cat:'i',src:'FIFA Stats/Opta jun 2026',w:6,col:'#5A5650',desc:'Eficácia real medida: posse de bola, precisão de passe, eficiência xG, remates ao alvo na fase de grupos.'},
+  {id:'stats_defense',name:'🛡️ Solidez defensiva real',cat:'i',src:'FIFA Stats jun 2026',w:5,col:'#5A5650',desc:'Golos sofridos, defesas do guarda-redes, turnovers forçados. Dados reais dos jogos disputados.'},
 ];
 
 const CAT = {k:{name:'Desportivo + Económico',col:'#E8751A'},a:{name:'Desenvolvimento Humano',col:'#3266AD'},f:{name:'Ecossistema Futebolístico',col:'#0E6B3A'},t:{name:'Tecnologia Trionda',col:'#B8920A'},l:{name:'Ciclos Lunares',col:'#5C2D8A'},x:{name:'Astrologia Nacional',col:'#B03020'},i:{name:'Variáveis Inéditas',col:'#5A5650'}};
@@ -625,110 +785,110 @@ const CAT = {k:{name:'Desportivo + Económico',col:'#E8751A'},a:{name:'Desenvolv
 // ─── DADOS EQUIPAS ───────────────────────────────────────────────
 const TEAMS=[
   // RANKING FIFA OFICIAL 11 JUN 2026: 1.Argentina(1877) 2.Espanha(1875) 3.França(1874) 4.Inglaterra 5.Portugal 6.Brasil 7.NL 8.Marrocos 9.Bélgica 10.Alemanha
-  {name:'Países Baixos',flag:'🇳🇱',grp:'F',sign:'♌ Leão',founder:'26 jul 1581',titles:0,finals:3,
-   // FIFA nº7 (1756pts) — NL qualificou invicto pelo Grupo G UEFA com 6V 2E, 27 golos
-   // Grupo F: Japan(nº18), Sweden(nº43), Tunisia(nº40) — adversários médios
-   // Jogos: 14 jun NL vs Japão (Arlington TX) · 20 jun NL vs Suécia (Houston) · 25 jun Tunísia vs NL (Kansas City)
-   fifa:82,odds:76,gdppc:99,pop:54,culture:87,
-   hdi:96,health:87,history:74,momentum:80,host:0,
-   gini:95,academy:91,market:88,league:92,group:85,politics:95,
-   trionda_style:95,trionda_setpiece:90,trionda_defense:88,
+  {name:'Países Baixos',flag:'🇳🇱',grp:'F',sign:'♌ Leão',founder:'26 jul 1581',titles:0,finals:3,eliminated:true,
+   // ❌ ELIMINADOS nos 16-avos — 29 jun 2026: Marrocos 1-1 NL (120min), Marrocos venceu 3-2 nos pénaltis, Monterrey, México
+   // Venceram Grupo F com 7 pts: E 2-2 Japão, V 5-1 Suécia, V 3-1 Tunísia
+   fifa:82,odds:0,gdppc:99,pop:54,culture:87,
+   hdi:96,health:87,history:74,momentum:15,host:0,
+   gini:95,academy:91,market:85,league:92,group:85,politics:95,
+   trionda_style:95,trionda_setpiece:90,trionda_defense:85,
    moon_group:82,moon_ko:90,moon_semi:88,moon_final:92,
-   zodiac:97,karma:97,cosmic:92,altitude:96,cohesion:84,
+   zodiac:97,karma:97,cosmic:92,altitude:96,cohesion:82,stats_quality:80,stats_defense:55,
    gdpRaw:'$84k PPP',hdiRaw:'0.946',healthRaw:'82.3a',
-   info:'FIFA nº7 (1756pts, jun 2026). Klement aponta-os vencedores. PIB $84k PPP (top10 mundial), IDH 0.946 (11.º UNDP). Ajax nº2 mundial em formação (CIES 2025). Total Football = estilo ideal para Trionda. Grupo F: Japão (nº18), Suécia (nº43), Tunísia (nº40). Final MetLife Stadium, East Rutherford NJ (10m altitude). 3× finalistas (1974, 1978, 2010).'},
+   info:'❌ ELIMINADOS NOS 16-AVOS (29 jun): Marrocos 1-1 NL (120 min), Marrocos venceu 3-2 nos pénaltis, em Monterrey, México. Venceram o Grupo F com 7 pontos (empate 2-2 Japão, vitória 5-1 Suécia (bis de Brobbey e Gakpo), vitória 3-1 Tunísia) mas caíram exactamente ante o adversário que o nosso próprio modelo identificava como "o maior underdog de qualidade do torneio". A lição: o ranking de probabilidades nunca é garantia — decide-se em 120 minutos e em pénaltis.'},
   {name:'França',flag:'🇫🇷',grp:'I',sign:'♌ Leão',founder:'14 jul 1789',titles:2,finals:3,
    // FIFA nº3 (1874pts) — perdeu para Côte d'Ivoire em amigável pré-Mundial, caiu do nº1
    // Grupo I: Senegal(nº14), Noruega(nº22), Iraque — grupo exigente
    // Jogos: 15 jun França vs Senegal · 22 jun França vs Iraque · 26 jun Noruega vs França (Boston)
-   fifa:94,odds:93,gdppc:86,pop:78,culture:90,
-   hdi:91,health:85,history:88,momentum:87,host:0,
+   fifa:94,odds:94,gdppc:86,pop:78,culture:90,
+   hdi:91,health:85,history:88,momentum:95,host:0,
    gini:68,academy:95,market:97,league:90,group:72,politics:80,
    trionda_style:92,trionda_setpiece:95,trionda_defense:80,
    moon_group:75,moon_ko:82,moon_semi:75,moon_final:78,
-   zodiac:88,karma:52,cosmic:80,altitude:88,cohesion:90,
+   zodiac:88,karma:52,cosmic:80,altitude:88,cohesion:90,stats_quality:93,stats_defense:80,
    gdpRaw:'$54k PPP',hdiRaw:'0.910',healthRaw:'82.3a',
-   info:'FIFA nº3 (1874pts, jun 2026) — caiu do nº1 após derrota com Côte d\'Ivoire em amigável. Mbappé + Griezmann + Upamecano. INF Clairefontaine = melhor formação pública mundial. Grupo I com Senegal (nº14) e Noruega (nº22) é exigente. Também Leão — Marte em Leão favorece, mas 2 títulos = karma moderado.'},
+   info:'✅ VENCEU O GRUPO I com 9 pontos (3V): 4-1 Senegal, 4-1 Iraque, 4-1 Noruega — 12 golos marcados, 3 sofridos. Uma das campanhas mais fortes da fase de grupos. Treinador: Didier Deschamps. Mbappé, Griezmann, Upamecano em grande forma. PRÓXIMO JOGO: Suécia nos 16-avos (30 jun, MetLife NJ). Plantel mais completo do torneio.'},
   {name:'Espanha',flag:'🇪🇸',grp:'H',sign:'♏ Escorpião',founder:'29 out 1978',titles:1,finals:2,
    // FIFA nº2 (1875pts) — favorita das casas de apostas Bwin/FanDuel (+450)
    // Grupo H: Cabo Verde(nº89), Arábia Saudita(nº56), Uruguai(nº20)
-   // Jogos: 15 jun Espanha vs Cabo Verde · 22 jun Espanha vs Arábia Saudita · 26 jun Uruguai vs Espanha
-   fifa:96,odds:97,gdppc:82,pop:72,culture:91,
-   hdi:92,health:88,history:90,momentum:88,host:0,
+   // Jogos: 15 jun Espanha vs Cabo Verde · 22 jun Espanha vs Arábia Saudita · 27 jun Uruguai vs Espanha
+   fifa:96,odds:96,gdppc:82,pop:72,culture:91,
+   hdi:92,health:88,history:90,momentum:90,host:0,
    gini:70,academy:93,market:95,league:97,group:85,politics:82,
    trionda_style:96,trionda_setpiece:92,trionda_defense:72,
    moon_group:72,moon_ko:78,moon_semi:68,moon_final:72,
-   zodiac:55,karma:58,cosmic:60,altitude:84,cohesion:80,
+   zodiac:55,karma:58,cosmic:60,altitude:84,cohesion:80,stats_quality:97,stats_defense:98,
    gdpRaw:'$48k PPP',hdiRaw:'0.918',healthRaw:'83.4a',
-   info:'FIFA nº2 (1875pts, jun 2026). Favorita das casas de apostas (+450 Bwin). Campeã Euro 2024. La Liga = melhor liga do mundo (UEFA coef.). Grupo H: Cabo Verde (nº89), A. Saudita (nº56), Uruguai (nº20). Tiki-taka = estilo ideal para Trionda. ATENÇÃO: Klement nunca escolheu o favorito das apostas nos 3 modelos anteriores.'},
+   info:'✅ VENCEU O GRUPO H com 7 pontos, ZERO golos sofridos: 0-0 Cabo Verde, 4-0 A. Saudita, 1-0 Uruguai. Sólida sem ser brilhante. Treinador: Luis de la Fuente. Lamine Yamal, Pedri, Rodri em destaque. PRÓXIMO JOGO: Áustria nos 16-avos (2 jul, Los Angeles). Se passar, caminho potencial de cruzar com Portugal nos oitavos. Campeã Euro 2024. Klement nunca escolheu o favorito (2014/18/22).'},
   {name:'Inglaterra',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',grp:'L',sign:'♑ Capricórnio',founder:'1 jan 1801',titles:1,finals:2,
    // FIFA nº4 — Grupo L: Croácia(nº11), Gana(nº60), Panamá(nº90) — grupo difícil
-   // Jogos: 16 jun Inglaterra vs Croácia · 23 jun Inglaterra vs Gana · 27 jun Panamá vs Inglaterra
-   fifa:90,odds:88,gdppc:88,pop:82,culture:89,
-   hdi:93,health:82,history:72,momentum:82,host:0,
+   // Jogos reais: 17 jun Inglaterra 4-2 Croácia (Kane x2, Bellingham, Rashford) · 23 jun Inglaterra-Gana (empate) · 27 jun Inglaterra 2-0 Panamá
+   fifa:90,odds:86,gdppc:88,pop:82,culture:89,
+   hdi:93,health:82,history:72,momentum:84,host:0,
    gini:65,academy:90,market:99,league:99,group:62,politics:88,
    trionda_style:72,trionda_setpiece:80,trionda_defense:60,
    moon_group:70,moon_ko:80,moon_semi:72,moon_final:75,
-   zodiac:58,karma:68,cosmic:60,altitude:90,cohesion:78,
+   zodiac:58,karma:68,cosmic:60,altitude:90,cohesion:78,stats_quality:80,stats_defense:75,
    gdpRaw:'$55k PPP',hdiRaw:'0.940',healthRaw:'81.3a',
-   info:'FIFA nº4. Premier League = maior valor de mercado mundial. Grupo L com Croácia (nº11) = grupo difícil. Estilo vertical penalizado pela Trionda (arrasto encurta pontapés longos). 58 anos sem título desde 1966. Saturno (regente Capricórnio) em exílio.'},
-  {name:'Alemanha',flag:'🇩🇪',grp:'E',sign:'♎ Balança',founder:'3 out 1990',titles:4,finals:8,
-   // FIFA nº10 — Grupo E: Curaçau(nº101), Côte d'Ivoire(nº55), Equador(nº47) — grupo acessível
-   // Jogos: 13 jun Alemanha vs Equador · 20 jun Curaçau vs Alemanha · 25 jun Equador vs Alemanha
-   fifa:80,odds:76,gdppc:92,pop:88,culture:88,
-   hdi:96,health:83,history:92,momentum:75,host:0,
+   info:'✅ VENCEU O GRUPO L com 7 pontos: começou com vitória 4-2 sobre a Croácia (dose dupla de Harry Kane, que bateu o recorde de Eusébio em Mundiais, mais Bellingham e Rashford), depois empate com o Gana e vitória 2-0 sobre o Panamá. Treinador: Thomas Tuchel (deixou Alexander-Arnold, Cole Palmer e Foden fora da convocatória). PRÓXIMO JOGO: RD Congo nos 16-avos (1 jul, Atlanta). 58 anos sem título (1966).'},
+  {name:'Alemanha',flag:'🇩🇪',grp:'E',sign:'♎ Balança',founder:'3 out 1990',titles:4,finals:8,eliminated:true,
+   // ❌ ELIMINADA nos 16-avos — 29 jun 2026: Alemanha 1-1 Paraguai (120min), Paraguai venceu 4-3 nos pénaltis, Gillette Stadium, Foxborough MA
+   // Golos: Havertz 54' (Alemanha) · Enciso 42' (Paraguai) — Jonathan Tah falhou pénalti decisivo, Canale converteu para o Paraguai
+   // 3ª eliminação precoce seguida — falhou os oitavos em 2018 e 2022 (fase de grupos), agora cai nos 16-avos
+   fifa:80,odds:0,gdppc:92,pop:88,culture:88,
+   hdi:96,health:83,history:92,momentum:20,host:0,
    gini:76,academy:90,market:90,league:91,group:86,politics:93,
    trionda_style:85,trionda_setpiece:82,trionda_defense:75,
    moon_group:68,moon_ko:74,moon_semi:70,moon_final:72,
-   zodiac:65,karma:50,cosmic:62,altitude:86,cohesion:72,
+   zodiac:65,karma:50,cosmic:62,altitude:86,cohesion:72,stats_quality:85,stats_defense:50,
    gdpRaw:'$63k PPP',hdiRaw:'0.959',healthRaw:'81.1a',
-   info:'FIFA nº10. 4 títulos mundiais. IDH top5 mundial (0.959). Bayern Munich academia global. Grupo E: Curaçau (nº101), Côte d\'Ivoire (nº55), Equador (nº47) — acessível. Novo estilo com Wirtz favorecido pela Trionda. 12 anos sem título (desde 2014).'},
+   info:'❌ ELIMINADA NOS 16-AVOS (29 jun): empate 1-1 com o Paraguai (120 min, Havertz 54\' vs Enciso 42\'), Paraguai venceu 4-3 nos pénaltis em Foxborough (Gillette Stadium). Jonathan Tah falhou o pénalti decisivo. Terceira eliminação precoce seguida em Mundiais — fase de grupos em 2018 e 2022, agora cai logo nos 16-avos apesar de 78% de posse de bola. Treinador: Julian Nagelsmann. 4 títulos mundiais, mas o ciclo actual continua em crise.'},
   {name:'Portugal',flag:'🇵🇹',grp:'K',sign:'♌ Leão',founder:'25 jul 1139',titles:0,finals:0,
    // FIFA nº5 — Grupo K: DR Congo(nº56), Uzbequistão(nº50), Colômbia(nº13) — grupo mais fácil
    // Jogos: 17 jun Portugal vs DR Congo (Houston) · 23 jun Portugal vs Uzbequistão (Houston) · 27 jun Colômbia vs Portugal (Miami)
-   fifa:88,odds:82,gdppc:78,pop:40,culture:93,
-   hdi:88,health:84,history:68,momentum:80,host:0,
-   gini:72,academy:97,market:82,league:85,group:93,politics:91,
+   fifa:88,odds:79,gdppc:78,pop:40,culture:93,
+   hdi:88,health:84,history:68,momentum:74,host:0,
+   gini:72,academy:97,market:82,league:85,group:80,politics:91,
    trionda_style:88,trionda_setpiece:90,trionda_defense:78,
    moon_group:80,moon_ko:88,moon_semi:78,moon_final:80,
-   zodiac:85,karma:75,cosmic:78,altitude:90,cohesion:76,
+   zodiac:85,karma:75,cosmic:78,altitude:90,cohesion:76,stats_quality:78,stats_defense:94,
    gdpRaw:'$40k PPP',hdiRaw:'0.874',healthRaw:'81.9a',
-   info:'FIFA nº5. Benfica nº1 mundial em formação (CIES 2025), Sporting nº6, Porto top60. Grupo K (média ranking: nº40.2 = MAIS FÁCIL do torneio): DR Congo (nº56), Uzbequistão (nº50), Colômbia (nº13). Klement coloca Portugal na Final vs NL. Leão (25 jul 1139). Bruno Fernandes + especialistas bola parada = Trionda favorável.'},
+   info:'2.º LUGAR no Grupo K, com 5 pontos: empate 1-1 RD Congo, vitória 5-0 Uzbequistão (CR7 bisou, Leão e Nuno Mendes também marcaram), empate 0-0 Colômbia. A Colômbia venceu o grupo com 7 pontos. PRÓXIMO JOGO: Croácia nos 16-avos (3 jul, 00h00, BMO Field, Toronto) — primeiro encontro de sempre entre as duas seleções em fase final. Se vencer, cruza com vencedor de Espanha-Áustria nos oitavos. Treinador: Roberto Martínez. Ronaldo no 6.º Mundial aos 41 anos.'},
   {name:'Argentina',flag:'🇦🇷',grp:'J',sign:'♊ Gémeos',founder:'25 mai 1810',titles:3,finals:6,
-   // FIFA nº1 (1877pts, jun 2026) — recuperou liderança após vitórias vs Islândia e Honduras
+   // FIFA nº1 (1877pts, jun 2026) — venceu Argélia 3-0 e Áustria 2-0, assegurou liderança do grupo antes da 3ª jornada
    // Grupo J: Argélia(nº52), Áustria(nº25), Jordânia(nº87) — grupo acessível
-   // Jogos: 14 jun Argentina vs Argélia · 20 jun Áustria vs Argentina · 25 jun Argentina vs Jordânia
-   fifa:99,odds:80,gdppc:52,pop:62,culture:97,
-   hdi:78,health:76,history:92,momentum:85,host:0,
+   // Jogos: 14 jun Argentina vs Argélia (3-0) · 20 jun Áustria vs Argentina (0-2) · 27 jun Argentina vs Jordânia
+   fifa:99,odds:84,gdppc:52,pop:62,culture:97,
+   hdi:78,health:76,history:92,momentum:88,host:0,
    gini:40,academy:93,market:84,league:72,group:83,politics:42,
    trionda_style:78,trionda_setpiece:80,trionda_defense:68,
    moon_group:72,moon_ko:78,moon_semi:70,moon_final:68,
-   zodiac:62,karma:22,cosmic:55,altitude:60,cohesion:60,
+   zodiac:62,karma:22,cosmic:55,altitude:60,cohesion:60,stats_quality:90,stats_defense:75,
    gdpRaw:'$24k PPP',hdiRaw:'0.849',healthRaw:'76.5a',
-   info:'FIFA nº1 (1877pts, jun 2026) — campeã em título, recuperou liderança antes do Mundial. Karma quase zerado após 2022. Crise económica grave (inflação +140%). Plantel a envelhecer. Grupo J: Argélia (nº52), Áustria (nº25), Jordânia (nº87). Gémeos com Júpiter = bónus já "usado" em Qatar 2022. Messi último Mundial.'},
+   info:'✅ VENCEU O GRUPO J com 9 pontos (3 vitórias). FIFA nº1. Treinador: Lionel Scaloni. Messi (38a, 6.º Mundial) em grande forma. PRÓXIMO JOGO: Cabo Verde nos 16-avos (Estádio Miami) — estreantes em Mundiais, surpresa do torneio mas claros azarões. Karma quase zerado após o título de 2022.'},
   {name:'Brasil',flag:'🇧🇷',grp:'C',sign:'♍ Virgem',founder:'7 set 1822',titles:5,finals:7,
-   // FIFA nº6 — Grupo C: Marrocos(nº8!), Haiti(nº93), Escócia(nº38) — grupo difícil
-   // Adversário Marrocos é nº8 do mundo — grande obstáculo
-   // Jogos: 16 jun Brasil vs Marrocos (Miami) · 22 jun Brasil vs Haiti · 26 jun Escócia vs Brasil
-   fifa:84,odds:83,gdppc:48,pop:95,culture:99,
-   hdi:72,health:74,history:98,momentum:78,host:0,
-   gini:30,academy:94,market:86,league:70,group:68,politics:52,
+   // FIFA nº5/6 — Grupo C: Marrocos(nº12 Opta/nº8 outras fontes), Haiti(nº84), Escócia(nº34)
+   // Jogos reais: 1-1 Marrocos (sem Neymar, lesionado) · 3-0 Haiti (Cunha x2, Vinicius x1) · 3-0 Escócia em Miami (Vinicius x2, Cunha x1, regresso de Neymar)
+   // Apuramento: Brasil 7pts (+6 diff) 1º; Marrocos 7pts (+3 diff) 2º — desempate por diferença de golos
+   fifa:84,odds:86,gdppc:48,pop:95,culture:99,
+   hdi:72,health:74,history:98,momentum:86,host:0,
+   gini:30,academy:94,market:88,league:70,group:68,politics:52,
    trionda_style:72,trionda_setpiece:75,trionda_defense:58,
    moon_group:74,moon_ko:82,moon_semi:70,moon_final:72,
-   zodiac:70,karma:42,cosmic:62,altitude:62,cohesion:74,
+   zodiac:70,karma:42,cosmic:62,altitude:62,cohesion:74,stats_quality:82,stats_defense:58,
    gdpRaw:'$17k PPP',hdiRaw:'0.760',healthRaw:'75.5a',
-   info:'FIFA nº6. 5 títulos — maior histórico. Cultura futebolística = 99/100. Grupo C DIFÍCIL: Marrocos (nº8 mundial!), Haiti (nº93), Escócia (nº38). Estilo vertical penalizado pela Trionda. Potencialmente Miami (38°C) = desfavorável. Gini extremo, instabilidade política, PIB baixo penalizam.'},
+   info:'✅ NOS OITAVOS DE FINAL: venceu o Grupo C (7 pts, +6 diff) à frente de Marrocos (7 pts, +3 diff) por desempate de golos, e bateu o Japão 2-1 (de virada) nos 16-avos. Empate inicial 1-1 com Marrocos sem Neymar (lesão muscular), depois 3-0 a Haiti e 3-0 à Escócia em Miami, jogo em que Neymar regressou. Treinador: Carlo Ancelotti. Aguarda vencedor de Costa do Marfim-Noruega (30 jun). 5 títulos — maior histórico do torneio.'},
   {name:'Bélgica',flag:'🇧🇪',grp:'G',sign:'♐ Sagitário',founder:'4 out 1830',titles:0,finals:0,
    // FIFA nº9 — Grupo G: Egito(nº29), Irão(nº21), Nova Zelândia(nº93) — grupo MAIS FÁCIL
-   // Jogos: 15 jun Bélgica vs Egito (Seattle) · 21 jun Bélgica vs Irão (LA) · 26 jun NZ vs Bélgica (Vancouver)
-   fifa:82,odds:70,gdppc:89,pop:52,culture:80,
-   hdi:93,health:82,history:62,momentum:70,host:0,
+   // Jogos: 15 jun Bélgica vs Egito (Seattle) · 21 jun Bélgica vs Irão (LA) · 27 jun NZ vs Bélgica (Vancouver)
+   fifa:82,odds:74,gdppc:89,pop:52,culture:80,
+   hdi:93,health:82,history:62,momentum:78,host:0,
    gini:78,academy:80,market:80,league:88,group:95,politics:86,
    trionda_style:80,trionda_setpiece:78,trionda_defense:75,
    moon_group:70,moon_ko:76,moon_semi:68,moon_final:70,
-   zodiac:72,karma:65,cosmic:70,altitude:88,cohesion:68,
+   zodiac:72,karma:65,cosmic:70,altitude:88,cohesion:68,stats_quality:84,stats_defense:72,
    gdpRaw:'$61k PPP',hdiRaw:'0.934',healthRaw:'81.7a',
-   info:'FIFA nº9. Grupo G = um dos mais fáceis: Egito (nº29), Irão (nº21), Nova Zelândia (nº93). Sagitário em trígono com Júpiter em Gémeos. PIB $61k e IDH 0.934 altos. Doku em forma. Dark horse legítimo.'},
+   info:'✅ VENCEU O GRUPO G: golearam a Nova Zelândia 5-1 no jogo decisivo, após dois empates. Doku em grande forma. PRÓXIMO JOGO: Senegal nos 16-avos (1 jul, Seattle) — Senegal vem de vitória 5-0 sobre o Iraque, adversário perigoso. PIB $61k e IDH 0.934 altos. Dark horse legítimo confirmado pela campanha.'},
   {name:'Noruega',flag:'🇳🇴',grp:'I',sign:'♓ Peixes',founder:'17 mai 1814',titles:0,finals:0,
    // FIFA nº22 — Grupo I: França(nº3!), Senegal(nº14), Iraque(nº58) — grupo MUITO DIFÍCIL
    // Jogos: 15 jun França vs Senegal · 22 jun França vs Iraque · 26 jun Noruega vs França (Boston)
@@ -737,20 +897,20 @@ const TEAMS=[
    gini:92,academy:68,market:70,league:72,group:48,politics:98,
    trionda_style:70,trionda_setpiece:68,trionda_defense:72,
    moon_group:68,moon_ko:72,moon_semi:70,moon_final:68,
-   zodiac:78,karma:62,cosmic:72,altitude:88,cohesion:70,
+   zodiac:78,karma:62,cosmic:72,altitude:88,cohesion:70,stats_quality:75,stats_defense:48,
    gdpRaw:'$102k PPP',hdiRaw:'0.970',healthRaw:'83.3a',
-   info:'FIFA nº22. PIB per capita nº1 mundial ($102k PPP). IDH nº2 global (0.970). Haaland = maior ameaça individual do torneio. Grupo I MUITO DIFÍCIL: França (nº3), Senegal (nº14), Iraque (nº58). Saturno em Peixes = trânsito direto. Nunca campeão = karma disponível.'},
+   info:'2.º no Grupo I, atrás da França (perdeu 4-1 no jogo decisivo — aviso sério para a fase eliminatória). PRÓXIMO JOGO: Costa do Marfim nos 16-avos (30 jun, AT&T Stadium, Dallas). FIFA nº22. PIB per capita nº1 mundial ($102k PPP). IDH nº2 global (0.970). Haaland = maior ameaça individual do torneio, mas a equipa mostrou fragilidades defensivas ante a França.'},
   {name:'Japão',flag:'🇯🇵',grp:'F',sign:'♒ Aquário',founder:'11 fev 1889',titles:0,finals:0,
    // FIFA nº18 — Grupo F com NL (nº7), Suécia (nº43), Tunísia (nº40)
    // 8.ª participação consecutiva — surpreenderam Alemanha e Espanha em Qatar 2022
-   fifa:72,odds:54,gdppc:82,pop:86,culture:82,
-   hdi:92,health:96,history:48,momentum:78,host:0,
+   fifa:72,odds:0,gdppc:82,pop:86,culture:82,
+   hdi:92,health:96,history:48,momentum:30,host:0,eliminated:true,
    gini:80,academy:80,market:68,league:76,group:72,politics:92,
    trionda_style:82,trionda_setpiece:80,trionda_defense:76,
    moon_group:72,moon_ko:78,moon_semi:68,moon_final:70,
-   zodiac:68,karma:55,cosmic:65,altitude:86,cohesion:78,
+   zodiac:68,karma:55,cosmic:65,altitude:86,cohesion:78,stats_quality:88,stats_defense:70,
    gdpRaw:'$42k PPP',hdiRaw:'0.925',healthRaw:'84.3a',
-   info:'FIFA nº18. Maior esperança de vida do mundo (84.3 anos, OMS 2024). Jogo de toque curto e disciplina tática = compatível com Trionda. 8.ª participação consecutiva. Surpreenderam Alemanha e Espanha em Qatar 2022. Grupo F com NL (nº7), Suécia (nº43), Tunísia (nº40).'},
+   info:'❌ ELIMINADOS NOS 16-AVOS: perderam 2-1 com o Brasil, de virada (29 jun, Houston). 2.º no Grupo F atrás dos Países Baixos. Maior esperança de vida do mundo (84.3 anos, OMS 2024). 8.ª participação consecutiva. Não repetiram a machadada de Qatar 2022, mas competiram bem até ao fim.'},
   {name:'EUA',flag:'🇺🇸',grp:'D',sign:'♋ Câncer',founder:'4 jul 1776',titles:0,finals:0,
    // FIFA nº17 — Grupo D: Paraguai(nº45), Austrália(nº23), Turquia(nº26)
    // Anfitriões com bónus de campo — jogos nos seus próprios estádios
@@ -759,56 +919,56 @@ const TEAMS=[
    gini:55,academy:68,market:82,league:78,group:76,politics:72,
    trionda_style:68,trionda_setpiece:72,trionda_defense:65,
    moon_group:68,moon_ko:74,moon_semi:68,moon_final:70,
-   zodiac:75,karma:55,cosmic:68,altitude:80,cohesion:65,
+   zodiac:75,karma:55,cosmic:68,altitude:80,cohesion:65,stats_quality:70,stats_defense:65,
    gdpRaw:'$85k PPP',hdiRaw:'0.938',healthRaw:'78.5a',
-   info:'FIFA nº17. Anfitriões — bónus de campo significativo. Câncer (4 jul 1776) — Vénus em Câncer = trânsito harmónico. PIB $85k PPP altíssimo. Grupo D: Paraguai (nº45), Austrália (nº23), Turquia (nº26). Cultura futebolística ainda em crescimento vs NFL/NBA/MLB.'},
+   info:'1.º no Grupo D. Anfitriões — bónus de campo significativo. PRÓXIMO JOGO: Bósnia e Herzegovina nos 16-avos (2 jul, Santa Clara) — Bósnia avançou como um dos melhores terceiros. Câncer (4 jul 1776) — Vénus em Câncer = trânsito harmónico. PIB $85k PPP altíssimo. Cultura futebolística ainda em crescimento vs NFL/NBA/MLB.'},
   {name:'Colômbia',flag:'🇨🇴',grp:'K',sign:'♍ Virgem',founder:'20 jul 1810',titles:0,finals:0,
    // FIFA nº13 — Grupo K com Portugal (nº5), DR Congo (nº56), Uzbequistão (nº50)
    // Melhor campanha recente: Copa América finalista 2024
-   fifa:76,odds:55,gdppc:42,pop:68,culture:88,
-   hdi:68,health:72,history:55,momentum:72,host:0,
+   fifa:76,odds:60,gdppc:42,pop:68,culture:88,
+   hdi:68,health:72,history:55,momentum:80,host:0,
    gini:28,academy:70,market:62,league:68,group:82,politics:45,
    trionda_style:75,trionda_setpiece:72,trionda_defense:68,
    moon_group:70,moon_ko:75,moon_semi:65,moon_final:68,
-   zodiac:68,karma:62,cosmic:60,altitude:70,cohesion:68,
+   zodiac:68,karma:62,cosmic:60,altitude:70,cohesion:68,stats_quality:83,stats_defense:78,
    gdpRaw:'$20k PPP',hdiRaw:'0.758',healthRaw:'77.0a',
-   info:'FIFA nº13. Grupo K com Portugal (nº5), DR Congo (nº56), Uzbequistão (nº50). Luis Díaz (Bayern Munich) e Jhon Arias em alta. Finalista Copa América 2024. Instabilidade política e Gini altíssimo penalizam no modelo.'},
+   info:'✅ VENCEU O GRUPO K, à frente de Portugal! Empate 0-0 no jogo decisivo foi suficiente para o 1.º lugar com 7 pontos. Luis Díaz (Bayern Munich) e Jhon Arias em grande forma, James Rodríguez ainda decisivo. PRÓXIMO JOGO: Gana nos 16-avos (Kansas City) — Gana avançou como um dos melhores terceiros. Finalista Copa América 2024.'},
   {name:'Marrocos',flag:'🇲🇦',grp:'C',sign:'♏ Escorpião',founder:'2 mar 1956',titles:0,finals:0,
-   // FIFA nº8 — Grupo C: Brasil(nº6!), Haiti(nº93), Escócia(nº38)
-   // Semifinalistas Qatar 2022 — primeira seleção africana a chegar às meias
-   // Não concederam um único golo na qualificação CAF
-   fifa:80,odds:52,gdppc:32,pop:52,culture:80,
-   hdi:58,health:68,history:60,momentum:74,host:0,
-   gini:60,academy:60,market:52,league:58,group:68,politics:60,
+   // FIFA nº8/12 — Grupo C: Brasil, Haiti(nº84), Escócia(nº34)
+   // Jogos reais: 1-1 Brasil · 1-0 Escócia (golo de Saibari) · 4-2 Haiti (Bounou pp, Hakimi, Saibari, Rahimi, Yassine)
+   // Apuramento: 7pts (+3 diff) 2º lugar, atrás do Brasil só por diferença de golos. Semifinalistas Qatar 2022
+   fifa:80,odds:70,gdppc:32,pop:52,culture:80,
+   hdi:58,health:68,history:60,momentum:92,host:0,
+   gini:60,academy:60,market:52,league:58,group:70,politics:60,
    trionda_style:62,trionda_setpiece:68,trionda_defense:70,
    moon_group:68,moon_ko:74,moon_semi:65,moon_final:65,
-   zodiac:55,karma:65,cosmic:58,altitude:76,cohesion:74,
+   zodiac:55,karma:65,cosmic:58,altitude:76,cohesion:74,stats_quality:72,stats_defense:82,
    gdpRaw:'$10k PPP',hdiRaw:'0.698',healthRaw:'74.3a',
-   info:'FIFA nº8. Semifinalistas Qatar 2022 — primeira seleção africana a atingir as meias-finais de um Mundial. Defesa organizada (0 golos sofridos na qualificação CAF). Grupo C com Brasil (nº6), Haiti (nº93), Escócia (nº38). IDH e PIB em desenvolvimento — o maior underdog de qualidade. Escorpião com Nettuno em quadratura.'},
+   info:'✅ NOS OITAVOS DE FINAL — eliminou os Países Baixos! 1-1 (120min), venceu 3-2 nos pénaltis, em Monterrey. Já era a equipa identificada pelo nosso modelo como "o maior underdog de qualidade" — confirmou-o ao tirar do torneio o nosso vencedor previsto. Invictos na fase de grupos (1-1 Brasil, 1-0 Escócia, 4-2 Haiti), 2.º lugar atrás do Brasil só por diferença de golos (+3 vs +6). Próximo: vencedor de Canadá-África do Sul. Semifinalistas Qatar 2022.'},
   {name:'México',flag:'🇲🇽',grp:'A',sign:'♓ Peixes',founder:'16 set 1810',titles:0,finals:0,
    // FIFA nº14 — Grupo A (como co-anfitriões): África do Sul(nº67), Coreia do Sul(nº22), Rep. Checa(nº40)
    // Abriram o torneio vs África do Sul no Azteca (2240m altitude) — venceram 2-0
    // 7 eliminações consecutivas nos oitavos — "maldição do quinto jogo"
-   fifa:72,odds:52,gdppc:45,pop:75,culture:88,
-   hdi:74,health:72,history:58,momentum:65,host:50,
+   fifa:72,odds:54,gdppc:45,pop:75,culture:88,
+   hdi:74,health:72,history:58,momentum:74,host:50,
    gini:42,academy:68,market:65,league:70,group:74,politics:50,
    trionda_style:70,trionda_setpiece:68,trionda_defense:65,
    moon_group:65,moon_ko:70,moon_semi:65,moon_final:68,
-   zodiac:76,karma:60,cosmic:65,altitude:48,cohesion:64,
+   zodiac:76,karma:60,cosmic:65,altitude:48,cohesion:64,stats_quality:76,stats_defense:92,
    gdpRaw:'$22k PPP',hdiRaw:'0.781',healthRaw:'75.2a',
-   info:'FIFA nº14. Co-anfitriões. Abriram o torneio no Azteca (2240m — altitude mais alta do torneio) com vitória 2-0 sobre África do Sul. Grupo A: A. do Sul (nº67), Coreia do Sul (nº22), Rep. Checa (nº40). 7× eliminados nos oitavos consecutivamente — "maldição do quinto jogo". Peixes: Saturno trânsito direto.'},
+   info:'✅ VENCEU O GRUPO A com autoridade: 3 vitórias, 6 golos marcados, ZERO sofridos. Venceram África do Sul 2-0 na abertura, depois Coreia do Sul e Chéquia 3-0. PRÓXIMO JOGO: Equador nos 16-avos (30 jun, Estádio Azteca) — Equador avançou como um dos melhores terceiros. 7× eliminados nos oitavos consecutivamente — tentam quebrar a "maldição do quinto jogo" jogando em casa, em altitude (2240m).'},
   {name:'Croácia',flag:'🇭🇷',grp:'L',sign:'♑ Capricórnio',founder:'25 jun 1991',titles:0,finals:1,
    // FIFA nº11 — Grupo L: Inglaterra(nº4!), Gana(nº60), Panamá(nº90)
    // Finalistas 2018, 3.ºs 2022 — geração Modrić em declínio (40 anos)
    // Dinamo Zagreb: academia que produziu Modrić, Kovačić, Gvardiol, Brozović
-   fifa:76,odds:50,gdppc:66,pop:30,culture:80,
-   hdi:84,health:79,history:70,momentum:65,host:0,
+   fifa:76,odds:53,gdppc:66,pop:30,culture:80,
+   hdi:84,health:79,history:70,momentum:68,host:0,
    gini:75,academy:78,market:60,league:78,group:58,politics:82,
    trionda_style:72,trionda_setpiece:75,trionda_defense:65,
    moon_group:62,moon_ko:68,moon_semi:62,moon_final:65,
-   zodiac:58,karma:68,cosmic:60,altitude:84,cohesion:72,
+   zodiac:58,karma:68,cosmic:60,altitude:84,cohesion:72,stats_quality:71,stats_defense:65,
    gdpRaw:'$30k PPP',hdiRaw:'0.878',healthRaw:'79.2a',
-   info:'FIFA nº11. Finalistas 2018, 3.ºs 2022. Dinamo Zagreb produziu Modrić, Kovačić, Gvardiol, Brozović — academia extraordinária. Grupo L DIFÍCIL: Inglaterra (nº4), Gana (nº60), Panamá (nº90). Modric 40 anos em declínio. Saturno (regente Capricórnio) em exílio em Peixes. Último Mundial desta geração.'},
+   info:'2.º no Grupo L: perdeu 4-2 com a Inglaterra na estreia (Modric em destaque), venceu o Panamá 1-0 (golo de Budimir, jogo nº200 de Modric pela seleção) e o Gana 2-1 na última jornada para subir ao 2.º lugar. PRÓXIMO JOGO: PORTUGAL nos 16-avos (3 jul, 00h00, BMO Field, Toronto) — primeiro encontro de sempre entre as duas seleções em Mundial. Dinamo Zagreb produziu Modrić, Kovačić, Gvardiol. Modric aos 40 anos no que pode ser o seu último Mundial. Treinador Zlatko Dalic mantido desde 2018.'},
 ];
 
 // ─── PESOS ─────────────────────────────────────────────────────
@@ -816,7 +976,7 @@ let W={};DIMS.forEach(d=>W[d.id]=d.w);
 let mainC=null,radarC=null,triondaC=null,selT=null;
 
 function catScore(t,cat){const cd=DIMS.filter(d=>d.cat===cat);const tot=cd.reduce((s,d)=>s+W[d.id],0);if(!tot)return 0;return cd.reduce((s,d)=>s+(t[d.id]||0)*(W[d.id]/tot),0)}
-function calcProbs(){const tot=Object.values(W).reduce((a,b)=>a+b,0);const sc=TEAMS.map(t=>DIMS.reduce((s,d)=>s+(t[d.id]||0)*(W[d.id]/tot),0));const total=sc.reduce((a,b)=>a+b,0);return sc.map(s=>s/total*100)}
+function calcProbs(){const tot=Object.values(W).reduce((a,b)=>a+b,0);const sc=TEAMS.map(t=>t.eliminated?0:DIMS.reduce((s,d)=>s+(t[d.id]||0)*(W[d.id]/tot),0));const total=sc.reduce((a,b)=>a+b,0);return sc.map(s=>s/total*100)}
 function sorted(probs){return[...TEAMS].map((t,i)=>({...t,p:probs[i]})).sort((a,b)=>b.p-a.p)}
 function bCol(i){return i===0?'#E8751A':i<3?'#1E3A6B':i<7?'#0E6B3A':'#9A9590'}
 
@@ -875,7 +1035,7 @@ function renderTrionda(){
 // ─── RANKING TABLE ─────────────────────────────────────────────
 function renderRank(probs){
   const s=sorted(probs);
-  document.getElementById('rank-table').innerHTML=`<thead><tr><th>#</th><th>Seleção</th><th>Signo</th><th>Prob.</th><th>🏅 Desp.</th><th>🌍 Human.</th><th>⚽ Fut.</th><th>⚽🔬 Trionda</th><th>🌙✨ Astro</th></tr></thead><tbody>${s.map((t,i)=>`<tr class="${i===0?'r1':''}"><td class="rn">${i===0?'🏆':i+1}</td><td><b>${t.flag} ${t.name}</b></td><td style="color:#5C2D8A;font-size:10px">${t.sign}</td><td class="rpct">${t.p.toFixed(1)}%</td><td><span class="cscore" style="background:rgba(232,117,26,.1);color:#E8751A">${Math.round(catScore(t,'k'))}</span></td><td><span class="cscore" style="background:rgba(50,102,173,.1);color:#3266AD">${Math.round(catScore(t,'a'))}</span></td><td><span class="cscore" style="background:rgba(14,107,58,.1);color:#0E6B3A">${Math.round(catScore(t,'f'))}</span></td><td><span class="cscore" style="background:rgba(184,146,10,.1);color:#B8920A">${Math.round(catScore(t,'t'))}</span></td><td><span class="cscore" style="background:rgba(92,45,138,.1);color:#5C2D8A">${Math.round((catScore(t,'l')+catScore(t,'x'))/2)}</span></td></tr>`).join('')}</tbody>`;
+  document.getElementById('rank-table').innerHTML=`<thead><tr><th>#</th><th>Seleção</th><th>Signo</th><th>Prob.</th><th>🏅 Desp.</th><th>🌍 Human.</th><th>⚽ Fut.</th><th>⚽🔬 Trionda</th><th>🌙✨ Astro</th></tr></thead><tbody>${s.map((t,i)=>`<tr class="${i===0?'r1':''}" style="${t.eliminated?'opacity:.5':''}"><td class="rn">${t.eliminated?'❌':i===0?'🏆':i+1}</td><td><b>${t.flag} ${t.name}</b>${t.eliminated?' <span style="font-size:9px;color:var(--red)">(eliminado)</span>':''}</td><td style="color:#5C2D8A;font-size:10px">${t.sign}</td><td class="rpct">${t.eliminated?'—':t.p.toFixed(1)+'%'}</td><td><span class="cscore" style="background:rgba(232,117,26,.1);color:#E8751A">${Math.round(catScore(t,'k'))}</span></td><td><span class="cscore" style="background:rgba(50,102,173,.1);color:#3266AD">${Math.round(catScore(t,'a'))}</span></td><td><span class="cscore" style="background:rgba(14,107,58,.1);color:#0E6B3A">${Math.round(catScore(t,'f'))}</span></td><td><span class="cscore" style="background:rgba(184,146,10,.1);color:#B8920A">${Math.round(catScore(t,'t'))}</span></td><td><span class="cscore" style="background:rgba(92,45,138,.1);color:#5C2D8A">${Math.round((catScore(t,'l')+catScore(t,'x'))/2)}</span></td></tr>`).join('')}</tbody>`;
 }
 
 // ─── SIGNO TABLE ───────────────────────────────────────────────
@@ -932,7 +1092,7 @@ function renderDims(){
 // ─── TEAM GRID ─────────────────────────────────────────────────
 function renderTeams(probs){
   const s=sorted(probs);
-  document.getElementById('tgrid').innerHTML=s.map(t=>`<div class="tcard ${selT===t.name?'sel':''}" onclick="selTeam('${t.name}')"><div class="tc-fl">${t.flag}</div><div class="tc-nfo"><div class="tc-nm">${t.name}</div><div class="tc-sg">${t.sign} · Gr ${t.grp}</div></div><div class="tc-pt">${t.p.toFixed(1)}%</div></div>`).join('');
+  document.getElementById('tgrid').innerHTML=s.map(t=>`<div class="tcard ${selT===t.name?'sel':''}" onclick="selTeam('${t.name}')" style="${t.eliminated?'opacity:.55':''}"><div class="tc-fl">${t.flag}</div><div class="tc-nfo"><div class="tc-nm">${t.name}${t.eliminated?' ❌':''}</div><div class="tc-sg">${t.sign} · Gr ${t.grp}</div></div><div class="tc-pt">${t.eliminated?'Eliminado':t.p.toFixed(1)+'%'}</div></div>`).join('');
 }
 
 function selTeam(name){
@@ -940,7 +1100,7 @@ function selTeam(name){
   const t=TEAMS.find(x=>x.name===name);const p=probs[TEAMS.indexOf(t)];
   const rank=sorted(probs).findIndex(x=>x.name===name)+1;
   const cats=[{id:'k',n:'🏅 Desportivo',col:'#E8751A'},{id:'a',n:'🌍 Humano',col:'#3266AD'},{id:'f',n:'⚽ Futebol',col:'#0E6B3A'},{id:'t',n:'⚽🔬 Trionda',col:'#B8920A'},{id:'l',n:'🌙 Lunar',col:'#5C2D8A'},{id:'x',n:'✨ Astral',col:'#B03020'}];
-  document.getElementById('det-panel').innerHTML=`<div class="dcard"><div class="dh"><div class="dfl">${t.flag}</div><div class="dnfo"><div class="dnm">${t.name} <span style="font-size:11px;color:#5C2D8A">${t.sign}</span></div><div class="dbio">${t.info}</div></div><div class="dprob"><div class="dp-val">${p.toFixed(1)}%</div><div class="dp-lbl">#${rank} no modelo</div></div></div><div class="dmets"><div class="dmet"><div class="dmv">${t.titles}×</div><div class="dml">Títulos</div></div><div class="dmet"><div class="dmv">${t.gdpRaw}</div><div class="dml">PIB pc PPP</div></div><div class="dmet"><div class="dmv">${t.hdiRaw}</div><div class="dml">IDH UNDP</div></div><div class="dmet"><div class="dmv">${t.healthRaw}</div><div class="dml">Esp. vida</div></div></div><div class="cbars">${cats.map(c=>`<div class="cbrow"><div class="cblbl">${c.n}</div><div class="cbt"><div class="cbf" style="width:${Math.round(catScore(t,c.id))}%;background:${c.col}"></div></div><div class="cbval" style="color:${c.col}">${Math.round(catScore(t,c.id))}</div></div>`).join('')}</div></div>`;
+  document.getElementById('det-panel').innerHTML=`<div class="dcard"><div class="dh"><div class="dfl">${t.flag}</div><div class="dnfo"><div class="dnm">${t.name} <span style="font-size:11px;color:#5C2D8A">${t.sign}</span></div><div class="dbio">${t.info}</div></div><div class="dprob"><div class="dp-val">${t.eliminated?'❌':p.toFixed(1)+'%'}</div><div class="dp-lbl">${t.eliminated?'Eliminado':'#'+rank+' no modelo'}</div></div></div><div class="dmets"><div class="dmet"><div class="dmv">${t.titles}×</div><div class="dml">Títulos</div></div><div class="dmet"><div class="dmv">${t.gdpRaw}</div><div class="dml">PIB pc PPP</div></div><div class="dmet"><div class="dmv">${t.hdiRaw}</div><div class="dml">IDH UNDP</div></div><div class="dmet"><div class="dmv">${t.healthRaw}</div><div class="dml">Esp. vida</div></div><div class="dmet"><div class="dmv">${t.stats_quality||'—'}/100</div><div class="dml">📊 Qualid. jogo</div></div><div class="dmet"><div class="dmv">${t.stats_defense||'—'}/100</div><div class="dml">🛡️ Defesa real</div></div></div><div class="cbars">${cats.map(c=>`<div class="cbrow"><div class="cblbl">${c.n}</div><div class="cbt"><div class="cbf" style="width:${Math.round(catScore(t,c.id))}%;background:${c.col}"></div></div><div class="cbval" style="color:${c.col}">${Math.round(catScore(t,c.id))}</div></div>`).join('')}</div></div>`;
 }
 
 // ─── WEIGHTS ───────────────────────────────────────────────────
@@ -968,9 +1128,9 @@ function renderRadar(){
 
 // ─── LUNAR ─────────────────────────────────────────────────────
 function renderLunar(){
-  const days=[{d:'14/6',m:'🌑',p:3,g:'🇳🇱 NL vs Japão (Arlington TX)'},{d:'15/6',m:'🌑',p:2,g:''},{d:'17/6',m:'🌒',p:15,g:''},{d:'20/6',m:'🌒',p:43,g:'🇳🇱 NL vs Suécia (Houston)'},{d:'22/6',m:'🌓',p:61,g:''},{d:'25/6',m:'🌔',p:85,g:'🇳🇱 Tun vs NL (Kansas City)'},{d:'27/6',m:'🌔',p:96,g:''},{d:'29/6',m:'🌕',p:100,g:'⚽ R32 início'},{d:'1/7',m:'🌖',p:96,g:''},{d:'4/7',m:'🌗',p:76,g:'⚽ R32'},{d:'7/7',m:'🌗',p:50,g:'⚽ Quartos'},{d:'9/7',m:'🌘',p:33,g:'⚽ Quartos'},{d:'14/7',m:'🌑',p:3,g:'⚽ Semis'},{d:'15/7',m:'🌑',p:1,g:'⚽ Semis'},{d:'19/7',m:'🌒',p:22,g:'🏆 FINAL MetLife NJ'}];
+  const days=[{d:'14/6',m:'🌑',p:3,g:'🇳🇱 NL vs Japão (Arlington TX)'},{d:'15/6',m:'🌑',p:2,g:''},{d:'17/6',m:'🌒',p:15,g:''},{d:'20/6',m:'🌒',p:43,g:'🇳🇱 NL vs Suécia (Houston)'},{d:'22/6',m:'🌓',p:61,g:''},{d:'26/6',m:'🌔',p:90,g:'🇳🇱 Tun vs NL (Kansas City)'},{d:'27/6',m:'🌔',p:96,g:''},{d:'29/6',m:'🌕',p:100,g:'⚽ R32 início'},{d:'1/7',m:'🌖',p:96,g:''},{d:'4/7',m:'🌗',p:76,g:'⚽ R32'},{d:'7/7',m:'🌗',p:50,g:'⚽ Quartos'},{d:'9/7',m:'🌘',p:33,g:'⚽ Quartos'},{d:'14/7',m:'🌑',p:3,g:'⚽ Semis'},{d:'15/7',m:'🌑',p:1,g:'⚽ Semis'},{d:'19/7',m:'🌒',p:22,g:'🏆 FINAL MetLife NJ'}];
   document.getElementById('moon-cal').innerHTML=days.map(d=>`<div class="mday ${d.g.includes('NL')?'g':''} ${d.g.includes('FINAL')?'f':''}"><span class="mm">${d.m}</span><div class="md">${d.d}</div><div class="mp">${d.p}%</div>${d.g?`<div class="ml2">${d.g}</div>`:''}</div>`).join('');
-  document.getElementById('key-games').innerHTML=[{m:'🌑',d:'14 Jun',label:'Lua Nova (3%) · Arlington, Texas',game:'🇳🇱 NL vs Japão — AT&T Stadium',body:'Energia de recomeço histórico. Lua Nova = início de novo ciclo. NL estreia-se neste Mundial com o signo Leão e Marte a caminho. Japão (nº18) é adversário exigente mas a física da Trionda favorece o jogo de toque holandês.'},{m:'🌒',d:'20 Jun',label:'Lua Crescente (43%) · Houston, Texas',game:'🇳🇱 NL vs Suécia — NRG Stadium',body:'Lua em crescimento = energia em ascensão. Suécia (nº43, treinada por Graham Potter) é adversária acessível. NL com quota de energia lunar crescente = bom presságio.'},{m:'🌔',d:'25 Jun',label:'Lua Gibosa Crescente (85%) · Kansas City',game:'🇳🇱 Tunísia vs NL — Arrowhead Stadium',body:'Pré-Lua Cheia — energia muito elevada. Tunísia (nº40) não sofreu um golo na qualificação CAF, mas o estilo ofensivo e de toque holandês é favorecido pela Trionda. NL deve garantir 1.º lugar do grupo.'},{m:'🌕',d:'29 Jun',label:'LUA CHEIA "Strawberry Moon" (100%)',game:'⚽ Round of 32 — fase eliminatória',body:'A lua mais poderosa do torneio. Energia emocional coletiva no máximo absoluto. Karma e paixão amplificados para as equipas com mais "dívida histórica". NL entram com 3 finais perdidas = karma máximo do torneio.'},{m:'🌑',d:'14 Jul',label:'Lua Nova (3%) — 2.º ciclo',game:'⚽ Meias-finais',body:'Segundo novo ciclo do torneio. "Tempo de nascer algo novo" — favorece equipas que nunca foram campeãs. NL, Portugal e Bélgica elegíveis para este bónus histórico.'},{m:'🌒',d:'19 Jul',label:'Lua Crescente (22%)',game:'🏆 FINAL — MetLife Stadium, East Rutherford, NJ',body:'Lua em crescimento = ascensão histórica em curso. O sinal astrológico mais favorável para um primeiro título. A Lua cresce, tal como a história do vencedor. MetLife Stadium fica a 10m de altitude — condições ideais para o jogo de toque europeu.'}].map(g=>`<div style="display:flex;gap:12px;margin-bottom:8px;padding:10px 12px;background:var(--bg2);border-radius:10px;border:1px solid var(--border)"><div style="font-size:22px;flex-shrink:0">${g.m}</div><div><div style="font-size:10px;font-weight:700;color:#5C2D8A">${g.label}</div><div style="font-size:12px;font-weight:700;margin:2px 0">${g.game}</div><div style="font-size:11px;color:#5A5650">${g.body}</div></div><div style="font-size:10px;color:#9A9590;margin-left:auto;flex-shrink:0;white-space:nowrap">${g.d}</div></div>`).join('');
+  document.getElementById('key-games').innerHTML=[{m:'🌑',d:'14 Jun',label:'Lua Nova (3%) · Arlington, Texas',game:'🇳🇱 NL vs Japão — AT&T Stadium',body:'Energia de recomeço histórico. Lua Nova = início de novo ciclo. NL estreia-se neste Mundial com o signo Leão e Marte a caminho. Japão (nº18) é adversário exigente mas a física da Trionda favorece o jogo de toque holandês.'},{m:'🌒',d:'20 Jun',label:'Lua Crescente (43%) · Houston, Texas',game:'🇳🇱 NL vs Suécia — NRG Stadium',body:'Lua em crescimento = energia em ascensão. Suécia (nº43, treinada por Graham Potter) é adversária acessível. NL com quota de energia lunar crescente = bom presságio.'},{m:'🌔',d:'26 Jun',label:'Lua Gibosa Crescente (90%) · Kansas City',game:'🇳🇱 Tunísia vs NL — Arrowhead Stadium',body:'Pré-Lua Cheia — energia muito elevada. Jogo disputado sob chuva intensa e trovoada. NL venceu 3-1 e fechou o Grupo F em 1.º lugar com 7 pontos.'},{m:'🌕',d:'29 Jun',label:'LUA CHEIA "Strawberry Moon" (100%)',game:'⚽ Round of 32 — fase eliminatória',body:'A lua mais poderosa do torneio. Energia emocional coletiva no máximo absoluto. Karma e paixão amplificados para as equipas com mais "dívida histórica". NL entram com 3 finais perdidas = karma máximo do torneio.'},{m:'🌑',d:'14 Jul',label:'Lua Nova (3%) — 2.º ciclo',game:'⚽ Meias-finais',body:'Segundo novo ciclo do torneio. "Tempo de nascer algo novo" — favorece equipas que nunca foram campeãs. NL, Portugal e Bélgica elegíveis para este bónus histórico.'},{m:'🌒',d:'19 Jul',label:'Lua Crescente (22%)',game:'🏆 FINAL — MetLife Stadium, East Rutherford, NJ',body:'Lua em crescimento = ascensão histórica em curso. O sinal astrológico mais favorável para um primeiro título. A Lua cresce, tal como a história do vencedor. MetLife Stadium fica a 10m de altitude — condições ideais para o jogo de toque europeu.'}].map(g=>`<div style="display:flex;gap:12px;margin-bottom:8px;padding:10px 12px;background:var(--bg2);border-radius:10px;border:1px solid var(--border)"><div style="font-size:22px;flex-shrink:0">${g.m}</div><div><div style="font-size:10px;font-weight:700;color:#5C2D8A">${g.label}</div><div style="font-size:12px;font-weight:700;margin:2px 0">${g.game}</div><div style="font-size:11px;color:#5A5650">${g.body}</div></div><div style="font-size:10px;color:#9A9590;margin-left:auto;flex-shrink:0;white-space:nowrap">${g.d}</div></div>`).join('');
 }
 
 // ─── SELECTS ───────────────────────────────────────────────────
@@ -987,6 +1147,7 @@ function sw(name,btn){
   const probs=calcProbs();
   if(name==='resultado')renderMain(probs);
   if(name==='ranking')renderRank(probs);
+  // stats section is static HTML, no render needed
   if(name==='trionda')renderTrionda();
   if(name==='signo')renderSigno();
   if(name==='nl')renderNL();

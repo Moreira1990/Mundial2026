@@ -77,7 +77,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text)}
 /* ─── CHART CARD ─── */
 .chart-card{background:var(--bg2);border-radius:14px;padding:1.25rem;border:1px solid var(--border);box-shadow:var(--shadow);margin-bottom:1rem}
 .cc-title{font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:1rem}
-.cc-canvas{position:relative;height:380px}
+.cc-canvas{position:relative;height:520px}
 
 /* ─── RANKING TABLE ─── */
 .rtbl{width:100%;border-collapse:collapse;background:var(--bg2);border-radius:14px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow)}
@@ -240,7 +240,7 @@ footer a{color:var(--orange);text-decoration:none}
   .pi-ico{font-size:12px}
 
   /* Charts */
-  .cc-canvas{height:240px}
+  .cc-canvas{height:380px}
   .chart-card{padding:.75rem;margin-bottom:.85rem}
   .cc-title{font-size:11px;margin-bottom:.6rem}
 
@@ -494,7 +494,7 @@ footer a{color:var(--orange);text-decoration:none}
     <div class="pillar"><div class="pi-ico">🌙✨</div><div class="pi-val" id="sc-x">—</div><div class="pi-lbl">Astro-Lunar</div></div>
   </div>
   <div class="chart-card">
-    <div class="cc-title">Probabilidade de título — top 12 seleções (32 Dimensões)</div>
+    <div class="cc-title">Probabilidade de título — seleções em prova (32 Dimensões)</div>
     <div class="cc-canvas"><canvas id="mainChart" aria-label="Gráfico de barras com probabilidades de vitória no Mundial 2026"></canvas></div>
   </div>
   <p style="font-size:10px;color:var(--text3);line-height:1.5">Fontes: FIFA · UNDP HDR 2025 · FMI 2026 · OMS · CIES Football Observatory · World Bank · Deloitte Money League · Klement 2026 · Univ. Innsbruck · Univ. Nottingham · Scientific American · Design News · BBC Science Focus · Adidas/FIFA (Trionda) · Astronomy.com · Transfermarkt jun 2026</p>
@@ -724,7 +724,7 @@ footer a{color:var(--orange);text-decoration:none}
   </div>
   <div class="chart-card">
     <div class="cc-title">Score Trionda — compatibilidade de estilo de jogo com a física da bola (0-100)</div>
-    <div style="position:relative;height:280px"><canvas id="triondaChart" aria-label="Score de compatibilidade Trionda por seleção"></canvas></div>
+    <div style="position:relative;height:520px"><canvas id="triondaChart" aria-label="Score de compatibilidade Trionda por seleção"></canvas></div>
   </div>
 </section>
 
@@ -1139,19 +1139,60 @@ function renderPodium(probs){
 
 // ─── MAIN CHART ────────────────────────────────────────────────
 function renderMain(probs){
-  const s=sorted(probs).slice(0,12);
+  const all=sorted(probs);
   const ctx=document.getElementById('mainChart');
   if(mainC)mainC.destroy();
-  mainC=new Chart(ctx,{type:'bar',data:{labels:s.map(t=>t.flag+' '+t.name),datasets:[{data:s.map(t=>+t.p.toFixed(1)),backgroundColor:s.map((_,i)=>bCol(i)),borderRadius:6,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.raw}% probabilidade de título`}}},scales:{x:{grid:{color:'rgba(0,0,0,.05)'},ticks:{callback:v=>v+'%',color:'#9A9590',font:{size:10}}},y:{grid:{display:false},ticks:{color:'#111009',font:{size:11,weight:'700'}}}}}});
+  // Cores: em prova = cor normal, eliminadas = cinzento claro
+  const bgColors=all.map((t,i)=>t.eliminated?'rgba(180,175,168,0.35)':bCol(i));
+  const borderColors=all.map(t=>t.eliminated?'rgba(180,175,168,0.6)':'transparent');
+  const activeCount=all.filter(t=>!t.eliminated).length;
+  const titleEl=document.querySelector('.cc-title');
+  if(titleEl)titleEl.textContent=`PROBABILIDADE DE TÍTULO — TODAS AS 16 SELEÇÕES · ${activeCount} EM PROVA (32 DIMENSÕES)`;
+  mainC=new Chart(ctx,{type:'bar',data:{
+    labels:all.map(t=>t.eliminated?'❌ '+t.flag+' '+t.name:t.flag+' '+t.name),
+    datasets:[{
+      data:all.map(t=>+t.p.toFixed(1)),
+      backgroundColor:bgColors,
+      borderColor:borderColors,
+      borderWidth:1,
+      borderRadius:6,
+      borderSkipped:false
+    }]
+  },options:{
+    responsive:true,
+    maintainAspectRatio:false,
+    indexAxis:'y',
+    plugins:{
+      legend:{display:false},
+      tooltip:{callbacks:{label:c=>{
+        const t=all[c.dataIndex];
+        return t.eliminated?`${t.name} — eliminado`:`${c.raw}% probabilidade de título`;
+      }}}
+    },
+    scales:{
+      x:{grid:{color:'rgba(0,0,0,.05)'},ticks:{callback:v=>v+'%',color:'#9A9590',font:{size:10}}},
+      y:{grid:{display:false},ticks:{color:(ctx2)=>{
+        const t=all[ctx2.index];
+        return t&&t.eliminated?'#B4AFA8':'#111009';
+      },font:(ctx2)=>{
+        const t=all[ctx2.index];
+        return {size:11,weight:t&&!t.eliminated?'700':'400'};
+      }}}
+    }
+  }});
 }
 
 // ─── TRIONDA CHART ────────────────────────────────────────────
 function renderTrionda(){
-  const s=sorted(calcProbs()).slice(0,12);
+  const all=sorted(calcProbs());
   const ctx=document.getElementById('triondaChart');
   if(triondaC)triondaC.destroy();
-  const scores=s.map(t=>Math.round(catScore(t,'t')));
-  triondaC=new Chart(ctx,{type:'bar',data:{labels:s.map(t=>t.flag+' '+t.name),datasets:[{label:'Score Trionda',data:scores,backgroundColor:scores.map(v=>v>=85?'#0E6B3A':v>=75?'#B8920A':'#B03020'),borderRadius:5,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.raw}/100 compatibilidade Trionda`}}},scales:{x:{max:100,ticks:{callback:v=>v+'/100',font:{size:10}}},y:{grid:{display:false},ticks:{font:{size:11}}}}}});
+  const scores=all.map(t=>Math.round(catScore(t,'t')));
+  const bgColors=all.map((t,i)=>t.eliminated?'rgba(180,175,168,0.35)':scores[i]>=85?'#0E6B3A':scores[i]>=75?'#B8920A':'#B03020');
+  triondaC=new Chart(ctx,{type:'bar',data:{
+    labels:all.map(t=>t.eliminated?'❌ '+t.flag+' '+t.name:t.flag+' '+t.name),
+    datasets:[{label:'Score Trionda',data:scores,backgroundColor:bgColors,borderRadius:5,borderSkipped:false}]
+  },options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{const t=all[c.dataIndex];return t.eliminated?`${t.name} — eliminado`:`${c.raw}/100 compatibilidade Trionda`;}}}},scales:{x:{max:100,ticks:{callback:v=>v+'/100',font:{size:10}}},y:{grid:{display:false},ticks:{font:{size:11}}}}}});
 }
 
 // ─── RANKING TABLE ─────────────────────────────────────────────

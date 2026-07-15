@@ -214,87 +214,108 @@ footer a{color:var(--orange);text-decoration:none}
   .hero{padding:1.5rem 1rem 1.5rem}
   .hero-grid{grid-template-columns:1fr}
   .hero-winner{display:none}
-  .hero-title{font-size:clamp(28px,8vw,42px)}
-  .hero-lead{font-size:12px}
+  .hero-title{font-size:clamp(24px,6vw,36px)}
+  .hero-lead{font-size:11px}
+  .hchip{font-size:9px;padding:4px 8px}
 
   /* Main padding */
-  .main{padding:1rem .75rem 4rem}
+  .main{padding:.75rem .6rem 4rem}
 
-  /* Tabs — scroll horizontal com indicador visual */
-  .tabs{margin-bottom:1rem;padding-bottom:2px}
-  .tb{padding:8px 10px;font-size:10px;letter-spacing:0}
+  /* Tabs — scroll horizontal */
+  .tabs{margin-bottom:.85rem;padding-bottom:2px;gap:4px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px}
+  .tb{padding:7px 10px;font-size:10px;letter-spacing:0;white-space:nowrap;flex-shrink:0}
 
-  /* Pódio — 1 coluna no mobile, vencedor em destaque no topo */
-  .pod3{
-    grid-template-columns:1fr;
-    gap:8px;
-  }
+  /* Pódio — 1 coluna no mobile */
+  .pod3{grid-template-columns:1fr;gap:8px;display:flex;flex-direction:column}
+  .pod3 .pcard:nth-child(2){order:-1}
   .pcard{padding:.9rem .75rem}
   .pfl{font-size:36px}
   .pnm{font-size:14px}
   .ppt{font-size:26px}
-  /* Reordenar: vencedor primeiro no mobile */
-  .pod3{display:flex;flex-direction:column}
-  .pod3 .pcard:nth-child(2){order:-1}
 
   /* Pillars — 3 colunas no mobile */
   .pillars{grid-template-columns:repeat(3,1fr);gap:5px}
-  .pi-val{font-size:14px}
-  .pi-lbl{font-size:8px}
-  .pi-ico{font-size:13px}
+  .pi-val{font-size:13px}
+  .pi-lbl{font-size:7px}
+  .pi-ico{font-size:12px}
 
   /* Charts */
-  .cc-canvas{height:300px}
-  .chart-card{padding:.85rem}
+  .cc-canvas{height:240px}
+  .chart-card{padding:.75rem;margin-bottom:.85rem}
+  .cc-title{font-size:11px;margin-bottom:.6rem}
 
   /* Section header */
-  .sec-num{font-size:20px}
-  .sec-title{font-size:15px}
-  .sec-sub{font-size:11px}
+  .sec-num{font-size:18px}
+  .sec-title{font-size:14px}
+  .sec-sub{font-size:10px}
+  .sec-header{gap:10px;margin-bottom:1rem}
 
   /* Ranking table — scroll horizontal */
   .rtbl{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;font-size:10px}
-  .rtbl thead th{padding:7px 8px;font-size:8px}
-  .rtbl tbody td{padding:6px 8px}
+  .rtbl thead th{padding:6px 6px;font-size:8px}
+  .rtbl tbody td{padding:5px 6px}
 
   /* Trionda */
   .trionda-hero{padding:1rem}
-  .th-title{font-size:15px}
-  .th-body{font-size:11px}
+  .th-title{font-size:14px}
+  .th-body{font-size:10px}
   .trionda-specs{grid-template-columns:1fr;gap:7px}
-  .tspec-val{font-size:20px}
+  .tspec-val{font-size:18px}
   .trionda-teams{grid-template-columns:1fr;gap:8px}
 
-  /* NL hero */
+  /* Highlights — forçar 1 coluna */
+  .highlight{padding:1rem .85rem}
   .highlight>div:first-child{flex-direction:column;gap:8px}
-  .highlight>div>div:first-child+div{grid-template-columns:1fr;gap:7px}
+  .highlight div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
+  .highlight div[style*="grid-template-columns:repeat(3"]{grid-template-columns:1fr!important}
 
-  /* NL compare */
-  .nlname{flex:0 0 120px;font-size:9px}
-  .nlnl,.nlavg,.nldiff{font-size:8px;width:20px}
+  /* Estado torneio e stats — linhas de resultados adaptadas */
+  div[style*="display:flex;align-items:center;gap:10px;padding:8px 10px"],
+  div[style*="display:flex;align-items:center;gap:10px;padding:7px 10px"],
+  div[style*="display:flex;align-items:center;gap:10px;padding:10px 12px"],
+  div[style*="display:flex;align-items:center;gap:12px"]{
+    flex-wrap:wrap;gap:4px
+  }
+  div[style*="margin-left:auto;font-size:10px"],
+  div[style*="margin-left:auto;font-size:9px"]{
+    margin-left:0!important;width:100%;padding-top:2px
+  }
+  /* Esconder texto longo nas linhas de resultado no mobile */
+  span[style*="font-size:10px;color:var(--text3)"],
+  span[style*="font-size:9px;color:var(--text3)"]{
+    font-size:9px!important;width:100%;margin-top:2px
+  }
+
+  /* Grids inline com 3 colunas — forçar 2 colunas */
+  div[style*="grid-template-columns:repeat(3,1fr)"]{grid-template-columns:1fr 1fr!important}
+
+  /* NL/surpresas compare */
+  .nlname{flex:0 0 110px;font-size:8px}
+  .nlnl,.nlavg,.nldiff{font-size:7px;width:18px}
 
   /* Team cards */
-  .tgrid{grid-template-columns:1fr 1fr;gap:6px}
-  .tc-fl{font-size:15px;width:18px}
-  .tc-nm{font-size:10px}
-  .tc-pt{font-size:11px}
+  .tgrid{grid-template-columns:1fr 1fr;gap:5px}
+  .tc-fl{font-size:14px;width:16px}
+  .tc-nm{font-size:9px}
+  .tc-sg{font-size:8px}
+  .tc-pt{font-size:10px}
 
   /* Detail card */
-  .dcard{padding:.85rem}
+  .dcard{padding:.75rem}
   .dh{flex-direction:column;gap:8px}
-  .dfl{font-size:30px}
-  .dnm{font-size:14px}
-  .dbio{font-size:10px}
+  .dfl{font-size:28px}
+  .dnm{font-size:13px}
+  .dbio{font-size:10px;line-height:1.5}
   .dprob{text-align:left}
-  .dp-val{font-size:22px}
-  .dmets{grid-template-columns:repeat(2,1fr);gap:5px}
-  .dmv{font-size:12px}
-  .dml{font-size:8px}
-  .cblbl{flex:0 0 130px;font-size:9px}
-  .cbval{font-size:9px}
+  .dp-val{font-size:20px}
+  .dmets{grid-template-columns:repeat(2,1fr);gap:4px}
+  .dmv{font-size:11px}
+  .dml{font-size:7px}
+  .cblbl{flex:0 0 110px;font-size:8px}
+  .cbval{font-size:8px}
 
   /* Signo table */
-  .signo-table{font-size:9px;display:block;overflow-x:auto}
+  .signo-table{font-size:8px;display:block;overflow-x:auto}
 
   /* Method grid */
   .method-grid{grid-template-columns:1fr}
@@ -307,13 +328,13 @@ footer a{color:var(--orange);text-decoration:none}
 
   /* Radar selects */
   .radar-sels{gap:8px}
-  .radar-canvas{height:260px}
+  .radar-canvas{height:240px}
 
   /* Moon cal */
-  .mcal{grid-template-columns:repeat(5,1fr);gap:3px}
-  .mm{font-size:12px}
-  .md{font-size:8px}
-  .mp{font-size:7px}
+  .mcal{grid-template-columns:repeat(4,1fr);gap:3px}
+  .mm{font-size:11px}
+  .md{font-size:7px}
+  .mp{font-size:6px}
   .ml2{font-size:6px}
 
   /* Author bar */
@@ -326,13 +347,81 @@ footer a{color:var(--orange);text-decoration:none}
   /* Btn row */
   .btn-row{gap:6px}
   .btn{padding:7px 10px;font-size:10px}
+
+  /* NL compare */
+  .nlname{flex:0 0 110px;font-size:8px}
+  .nlnl,.nlavg,.nldiff{font-size:7px;width:18px}
+
+  /* Team cards */
+  .tgrid{grid-template-columns:1fr 1fr;gap:5px}
+  .tc-fl{font-size:14px;width:16px}
+  .tc-nm{font-size:9px}
+  .tc-sg{font-size:8px}
+  .tc-pt{font-size:10px}
+
+  /* Detail card */
+  .dcard{padding:.75rem}
+  .dh{flex-direction:column;gap:8px}
+  .dfl{font-size:28px}
+  .dnm{font-size:13px}
+  .dbio{font-size:10px;line-height:1.5}
+  .dprob{text-align:left}
+  .dp-val{font-size:20px}
+  .dmets{grid-template-columns:repeat(2,1fr);gap:4px}
+  .dmv{font-size:11px}
+  .dml{font-size:7px}
+  .cblbl{flex:0 0 120px;font-size:8px}
+  .cbval{font-size:8px}
+
+  /* Signo table */
+  .signo-table{font-size:8px;display:block;overflow-x:auto}
+
+  /* Method grid */
+  .method-grid{grid-template-columns:1fr}
+
+  /* Weights */
+  .wrow{flex-wrap:wrap;gap:5px;padding:6px 8px}
+  .wlbl{flex:0 0 100%;font-size:10px}
+  .wr-src{display:none}
+  .wpct{width:28px}
+
+  /* Radar selects */
+  .radar-sels{gap:8px}
+  .radar-canvas{height:240px}
+
+  /* Moon cal */
+  .mcal{grid-template-columns:repeat(4,1fr);gap:3px}
+  .mm{font-size:11px}
+  .md{font-size:7px}
+  .mp{font-size:6px}
+  .ml2{font-size:6px}
+
+  /* Author bar */
+  .author-bar{flex-direction:column;padding:1rem;gap:.75rem}
+  .ab-right{text-align:left}
+
+  /* Dims */
+  .dim-cards{grid-template-columns:1fr!important}
+
+  /* Btn row */
+  .btn-row{gap:6px}
+  .btn{padding:7px 10px;font-size:10px}
+
+  /* Validação externa / estatísticas */
+  div[style*="display:grid;grid-template-columns:repeat(3,1fr)"]{
+    grid-template-columns:1fr!important
+  }
+  div[style*="display:grid;grid-template-columns:1fr 1fr"]{
+    grid-template-columns:1fr!important
+  }
 }
 
 @media(max-width:380px){
   .tgrid{grid-template-columns:1fr}
   .pillars{grid-template-columns:repeat(3,1fr)}
-  .hero-title{font-size:26px}
-  .mcal{grid-template-columns:repeat(4,1fr)}
+  .hero-title{font-size:23px}
+  .mcal{grid-template-columns:repeat(3,1fr)}
+  .dmets{grid-template-columns:1fr!important}
 }
 </style>
 </head>
@@ -438,7 +527,7 @@ footer a{color:var(--orange);text-decoration:none}
       <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span>🇫🇷 França</span><b>2-0</b><span>Marrocos 🇲🇦</span><span style="margin-left:auto;font-size:10px;color:var(--text3)">9 jul · Foxborough · Mbappé 60', Dembélé 75' (saiu lesionado 78')</span></div>
       <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span>🇪🇸 Espanha</span><b>2-1</b><span>Bélgica 🇧🇪</span><span style="margin-left:auto;font-size:10px;color:var(--text3)">10 jul · Los Angeles · Fabián Ruiz + Merino ag.; De Ketelaere descontou</span></div>
       <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span>🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra</span><b>3-2 prol.</b><span>Noruega 🇳🇴</span><span style="margin-left:auto;font-size:10px;color:var(--text3)">11 jul · Miami · Schjelderup 1-0; Bellingham 45+2' e 93' prol.; Haaland 7 golos no torneio</span></div>
-      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span>🇦🇷 Argentina</span><b>3-1 prol.</b><span>Suíça 🇨🇭</span><span style="margin-left:auto;font-size:10px;color:var(--text3)">12 jul · Kansas City · Mac Allister; Ndoye E; Álvarez 112'; Lautaro · Embolo expulso</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span>🇦🇷 Argentina</span><b>3-1 prol.</b><span>Suíça 🇨🇭</span><span style="margin-left:auto;font-size:10px;color:var(--text3)">12 jul · Kansas City · Mac Allister; Embolo expulso; Ndoye E.; Álvarez 112'; Lautaro</span></div>
     </div>
   </div>
 
@@ -446,13 +535,14 @@ footer a{color:var(--orange);text-decoration:none}
   <div class="chart-card" style="margin-bottom:1rem">
     <div class="cc-title">✅ Oitavos de Final — Resultados (4-7 jul)</div>
     <div style="display:flex;flex-direction:column;gap:6px">
-      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span>🇫🇷 França</span><b>1-0</b><span>Paraguai 🇵🇾</span><span style="margin-left:auto;font-size:10px;color:var(--text3)">4 jul · pén. Mbappé 55'</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span>🇫🇷 França</span><b>1-0</b><span>Paraguai 🇵🇾</span><span style="margin-left:auto;font-size:10px;color:var(--text3)">4 jul · Filadélfia · Mbappé pén. 55'</span></div>
       <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span>🇲🇦 Marrocos</span><b>3-0</b><span>Canadá 🇨🇦</span><span style="margin-left:auto;font-size:10px;color:var(--text3)">4 jul · Ounahi x2, Sabiri</span></div>
-      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:rgba(192,48,32,.06);border-radius:8px;font-size:12px;border:1px solid rgba(192,48,32,.15)"><span>🇪🇸 Espanha</span><b>1-0</b><span>Portugal 🇵🇹</span><span style="margin-left:auto;font-size:10px;color:var(--red)">5 jul · Merino 90+1' — Portugal eliminado</span></div>
-      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span>🇧🇪 Bélgica</span><b>4-1</b><span>EUA 🇺🇸</span><span style="margin-left:auto;font-size:10px;color:var(--text3)">7 jul · Seattle · De Ketelaere x2, Lukaku, Doku</span></div>
-      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:rgba(192,48,32,.06);border-radius:8px;font-size:12px;border:1px solid rgba(192,48,32,.15)"><span>🇳🇴 Noruega</span><b>2-1</b><span>Brasil 🇧🇷</span><span style="margin-left:auto;font-size:10px;color:var(--red)">5 jul · Nova Iorque · Haaland decisivo — Brasil eliminado</span></div>
-      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span>🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra</span><b>3-2</b><span>México 🇲🇽</span><span style="margin-left:auto;font-size:10px;color:var(--text3)">6 jul · Azteca · Bellingham x2, Kane pen; Quiñones, Jiménez pen</span></div>
-      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span>🇦🇷 Argentina</span><b>2-1</b><span>Egipto 🇪🇬</span><span style="margin-left:auto;font-size:10px;color:var(--text3)">6 jul · prol. · Enzo Fernández ag. decisivo</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:rgba(192,48,32,.06);border-radius:8px;font-size:12px;border:1px solid rgba(192,48,32,.15)"><span>🇪🇸 Espanha</span><b>1-0</b><span>Portugal 🇵🇹</span><span style="margin-left:auto;font-size:10px;color:var(--red)">5 jul · Arlington · Merino 90+1' — Portugal eliminado</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:rgba(192,48,32,.06);border-radius:8px;font-size:12px;border:1px solid rgba(192,48,32,.15)"><span>🇳🇴 Noruega</span><b>2-1</b><span>Brasil 🇧🇷</span><span style="margin-left:auto;font-size:10px;color:var(--red)">5 jul · Nova Iorque · Haaland x2; Neymar pén. — Brasil eliminado</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span>🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra</span><b>2-1</b><span>RD Congo 🇨🇩</span><span style="margin-left:auto;font-size:10px;color:var(--text3)">1 jul · Atlanta · Cipenga 7' (RDC); Kane x2 virou</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span>🇧🇪 Bélgica</span><b>4-1</b><span>EUA 🇺🇸</span><span style="margin-left:auto;font-size:10px;color:var(--text3)">6 jul · Seattle · De Ketelaere x2, Lukaku, Doku</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span>🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra</span><b>3-2</b><span>México 🇲🇽</span><span style="margin-left:auto;font-size:10px;color:var(--text3)">6 jul · Azteca · Bellingham 36' e 38', Kane pén.; Quiñones, Jiménez pén.</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span>🇦🇷 Argentina</span><b>3-2</b><span>Egipto 🇪🇬</span><span style="margin-left:auto;font-size:10px;color:var(--text3)">7 jul · Atlanta · Ibrahim 15' e Ziko 67' (0-2); Cuti 79', Messi 83', Enzo 90+2'</span></div>
       <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:12px"><span>🇨🇭 Suíça</span><b>0(4)-0(3)</b><span>Colômbia 🇨🇴</span><span style="margin-left:auto;font-size:10px;color:var(--text3)">7 jul · Vancouver · 0-0 120min → Suíça pénaltis</span></div>
     </div>
   </div>
@@ -465,16 +555,16 @@ footer a{color:var(--orange);text-decoration:none}
       <div style="display:flex;align-items:center;gap:10px;padding:7px 10px;background:rgba(192,48,32,.06);border-radius:8px;font-size:11px;border:1px solid rgba(192,48,32,.15)"><span>🇵🇾 Paraguai</span><b>1(4)-1(3)</b><span>🇩🇪 Alemanha</span><span style="margin-left:auto;font-size:9px;color:var(--red)">29 jun · Foxborough · Alemanha eliminada</span></div>
       <div style="display:flex;align-items:center;gap:10px;padding:7px 10px;background:rgba(192,48,32,.06);border-radius:8px;font-size:11px;border:1px solid rgba(192,48,32,.15)"><span>🇲🇦 Marrocos</span><b>1(3)-1(2)</b><span>🇳🇱 Países Baixos</span><span style="margin-left:auto;font-size:9px;color:var(--red)">29 jun · Monterrey · NL eliminados</span></div>
       <div style="display:flex;align-items:center;gap:10px;padding:7px 10px;background:var(--bg);border-radius:8px;font-size:11px"><span>🇧🇷 Brasil</span><b>2-1</b><span>Japão 🇯🇵</span><span style="margin-left:auto;font-size:9px;color:var(--text3)">29 jun · Houston</span></div>
-      <div style="display:flex;align-items:center;gap:10px;padding:7px 10px;background:var(--bg);border-radius:8px;font-size:11px"><span>🇫🇷 França</span><b>1-0</b><span>Suécia</span><span style="margin-left:auto;font-size:9px;color:var(--text3)">30 jun · MetLife NJ</span></div>
-      <div style="display:flex;align-items:center;gap:10px;padding:7px 10px;background:var(--bg);border-radius:8px;font-size:11px"><span>🇳🇴 Noruega</span><b>vs</b><span>Costa do Marfim</span><span style="margin-left:auto;font-size:9px;color:var(--text3)">30 jun · Dallas · Noruega passou</span></div>
-      <div style="display:flex;align-items:center;gap:10px;padding:7px 10px;background:rgba(192,48,32,.06);border-radius:8px;font-size:11px;border:1px solid rgba(192,48,32,.15)"><span>🇲🇽 México</span><b>vs</b><span>Equador</span><span style="margin-left:auto;font-size:9px;color:var(--red)">30 jun · Azteca · México eliminado (8ª vez)</span></div>
-      <div style="display:flex;align-items:center;gap:10px;padding:7px 10px;background:var(--bg);border-radius:8px;font-size:11px"><span>🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra</span><b>1-0</b><span>RD Congo</span><span style="margin-left:auto;font-size:9px;color:var(--text3)">1 jul · Atlanta</span></div>
-      <div style="display:flex;align-items:center;gap:10px;padding:7px 10px;background:var(--bg);border-radius:8px;font-size:11px"><span>🇧🇪 Bélgica</span><b>vs</b><span>Senegal</span><span style="margin-left:auto;font-size:9px;color:var(--text3)">1 jul · Seattle · Bélgica passou</span></div>
-      <div style="display:flex;align-items:center;gap:10px;padding:7px 10px;background:rgba(192,48,32,.06);border-radius:8px;font-size:11px;border:1px solid rgba(192,48,32,.15)"><span>🇺🇸 EUA</span><b>vs</b><span>Bósnia</span><span style="margin-left:auto;font-size:9px;color:var(--red)">2 jul · Santa Clara · EUA eliminados em casa</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:7px 10px;background:var(--bg);border-radius:8px;font-size:11px"><span>🇫🇷 França</span><b>3-0</b><span>Suécia 🇸🇪</span><span style="margin-left:auto;font-size:9px;color:var(--text3)">30 jun · MetLife NJ · Mbappé 45' e 74', Barcola 53'</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:7px 10px;background:var(--bg);border-radius:8px;font-size:11px"><span>🇳🇴 Noruega</span><b>1-0</b><span>Costa do Marfim 🇨🇮</span><span style="margin-left:auto;font-size:9px;color:var(--text3)">30 jun · Dallas · Haaland decisivo</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:7px 10px;background:var(--bg);border-radius:8px;font-size:11px"><span>🇲🇽 México</span><b>2-0</b><span>Equador 🇪🇨</span><span style="margin-left:auto;font-size:9px;color:var(--text3)">30 jun · Azteca · Quiñones e Jiménez — México passou!</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:7px 10px;background:var(--bg);border-radius:8px;font-size:11px"><span>🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra</span><b>2-1</b><span>RD Congo 🇨🇩</span><span style="margin-left:auto;font-size:9px;color:var(--text3)">1 jul · Atlanta · Cipenga 7' (RDC); Kane x2 virou (74' e 87')</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:7px 10px;background:var(--bg);border-radius:8px;font-size:11px"><span>🇧🇪 Bélgica</span><b>3-2 a.p.</b><span>Senegal 🇸🇳</span><span style="margin-left:auto;font-size:9px;color:var(--text3)">1 jul · Seattle · Senegal 2-0; Bélgica virou 3-2 (Lukaku 86', Tielemans 89' e pén. a.p.)</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:7px 10px;background:rgba(192,48,32,.06);border-radius:8px;font-size:11px;border:1px solid rgba(192,48,32,.15)"><span>🇧🇦 Bósnia</span><b>vs</b><span>EUA 🇺🇸</span><span style="margin-left:auto;font-size:9px;color:var(--red)">2 jul · Santa Clara · Bósnia eliminou anfitriões</span></div>
       <div style="display:flex;align-items:center;gap:10px;padding:7px 10px;background:var(--bg);border-radius:8px;font-size:11px"><span>🇪🇸 Espanha</span><b>vs</b><span>Áustria</span><span style="margin-left:auto;font-size:9px;color:var(--text3)">2 jul · Los Angeles · Espanha passou</span></div>
-      <div style="display:flex;align-items:center;gap:10px;padding:7px 10px;background:rgba(232,117,26,.08);border-radius:8px;font-size:11px;border:1px solid rgba(232,117,26,.2)"><span>🇵🇹 Portugal</span><b>2-1</b><span>Croácia 🇭🇷</span><span style="margin-left:auto;font-size:9px;color:var(--orange)">3 jul · Toronto · Gonçalo Ramos e Pepe</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:7px 10px;background:rgba(232,117,26,.08);border-radius:8px;font-size:11px;border:1px solid rgba(232,117,26,.2)"><span>🇵🇹 Portugal</span><b>2-1</b><span>Croácia 🇭🇷</span><span style="margin-left:auto;font-size:9px;color:var(--orange)">3 jul · Toronto · Perišić 53' (HRV); CR7 pén. 68', G. Ramos 90+4'</span></div>
       <div style="display:flex;align-items:center;gap:10px;padding:7px 10px;background:var(--bg);border-radius:8px;font-size:11px"><span>🇨🇭 Suíça</span><b>vs</b><span>Argélia</span><span style="margin-left:auto;font-size:9px;color:var(--text3)">3 jul · Vancouver · Suíça passou</span></div>
-      <div style="display:flex;align-items:center;gap:10px;padding:7px 10px;background:var(--bg);border-radius:8px;font-size:11px"><span>🇦🇷 Argentina</span><b>vs</b><span>Cabo Verde</span><span style="margin-left:auto;font-size:9px;color:var(--text3)">3 jul · Miami · Argentina passou</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:7px 10px;background:var(--bg);border-radius:8px;font-size:11px"><span>🇦🇷 Argentina</span><b>3-2 a.p.</b><span>Cabo Verde 🇨🇻</span><span style="margin-left:auto;font-size:9px;color:var(--text3)">3 jul · Miami · Messi 29'; Cabo Verde empatou 2×; Cuti Romero ag. decidiu</span></div>
       <div style="display:flex;align-items:center;gap:10px;padding:7px 10px;background:var(--bg);border-radius:8px;font-size:11px"><span>🇨🇴 Colômbia</span><b>vs</b><span>Gana</span><span style="margin-left:auto;font-size:9px;color:var(--text3)">4 jul · Kansas City · Colômbia passou</span></div>
     </div>
   </div>
@@ -862,7 +952,7 @@ const TEAMS=[
    moon_group:70,moon_ko:80,moon_semi:72,moon_final:75,
    zodiac:58,karma:68,cosmic:60,altitude:90,cohesion:78,stats_quality:80,stats_defense:75,forma_torneio:84,h2h_record:68,
    gdpRaw:'$55k PPP',hdiRaw:'0.940',healthRaw:'81.3a',
-   info:'✅ MEIAS-FINAIS (15 jul, Mercedes-Benz Stadium, Atlanta) vs Argentina. Caminho: Grupo L (4-2 Croácia, 0-0 Gana, 2-0 Panamá) → 16-avos: 2-1 RD Congo (Kane x2) → Oitavos: 3-2 México no Azteca (Bellingham x2, Kane pen; Quiñones e Jiménez pen) → Quartos: 3-2 Noruega prol. (Schjelderup 1-0; Bellingham 45+2\' e 93\'). Bellingham: 7 golos. Treinador: Thomas Tuchel. 58 anos sem título.'},
+   info:'✅ MEIAS-FINAIS (15 jul, Mercedes-Benz Stadium, Atlanta) vs Argentina. Caminho: Grupo L (4-2 Croácia, 0-0 Gana, 2-0 Panamá) → 16-avos: 2-1 RD Congo em Atlanta (Cipenga 7\' adiantou; Kane virou com doblete 74\' e 87\') — Kane: 13 golos em Mundiais, iguala Pelé e Fontaine → Oitavos: 3-2 México no Azteca (Bellingham 36\' e 38\', Kane pén. 68\'; Quiñones 42\', Jiménez pén. 76\') → Quartos: 3-2 Noruega prol. (Schjelderup 1-0; Bellingham 45+2\' e 93\'). Bellingham: 7 golos. Treinador: Thomas Tuchel. 58 anos sem título.'},
   {name:'Alemanha',flag:'🇩🇪',grp:'E',sign:'♎ Balança',founder:'3 out 1990',titles:4,finals:8,eliminated:true,
    // ❌ ELIMINADA nos 16-avos — 29 jun 2026: Alemanha 1-1 Paraguai (120min), Paraguai venceu 4-3 nos pénaltis, Gillette Stadium, Foxborough MA
    // Golos: Havertz 54' (Alemanha) · Enciso 42' (Paraguai) — Jonathan Tah falhou pénalti decisivo, Canale converteu para o Paraguai
@@ -897,7 +987,7 @@ const TEAMS=[
    moon_group:72,moon_ko:78,moon_semi:70,moon_final:68,
    zodiac:62,karma:22,cosmic:55,altitude:60,cohesion:60,stats_quality:90,stats_defense:75,forma_torneio:82,h2h_record:75,
    gdpRaw:'$24k PPP',hdiRaw:'0.849',healthRaw:'76.5a',
-   info:'✅ MEIAS-FINAIS (15 jul, Mercedes-Benz Stadium, Atlanta) vs Inglaterra. Caminho: Grupo J (9pts, 3V) → 16-avos: Cabo Verde → Oitavos → Quartos: 3-1 Suíça no prolongamento (Mac Allister, Álvarez 112\', Lautaro — com Suíça reduzida a 10 após expulsão de Embolo). Messi com 5+ golos no torneio. A rivalidade histórica com a Inglaterra reavivada: mão de Deus (1986), golo do século. Treinador: Lionel Scaloni. FIFA nº1.'},
+   info:'✅ MEIAS-FINAIS (15 jul, Mercedes-Benz Stadium, Atlanta) vs Inglaterra. Caminho: Grupo J (9pts: 3-0 Argélia, 2-0 Áustria, 3-0 Jordânia) → 16-avos: 3-2 a.p. Cabo Verde em Miami (Messi 29\', Deroy Duarte empatou; L.Martínez na prol. voltou a adiantar; Cabo Verde empatou 2× no total; Cuti Romero ag. 3-2 decidiu) → Oitavos: 3-2 Egipto em Atlanta — remontada épica! (Ibrahim 15\' e Ziko 67\' puseram 0-2; Messi falhou pén. 21\'; Cuti Romero 79\', Messi volea 83\' — 8.º golo no torneio, 21.º em Mundiais —, Enzo Fernández 90+2\') → Quartos: 3-1 Suíça prol. (Mac Allister, Ndoye E, Álvarez 112\', Lautaro — Embolo expulso). Messi: 8 golos no torneio (21 em Mundiais total, 2.º histórico). A rivalidade histórica com a Inglaterra: Mão de Deus e golo do século (1986). Treinador: Lionel Scaloni. FIFA nº1.'},
   {name:'Brasil',flag:'🇧🇷',grp:'C',sign:'♍ Virgem',founder:'7 set 1822',titles:5,finals:7,eliminated:true,
    // FIFA nº5/6 — Grupo C: Marrocos(nº12 Opta/nº8 outras fontes), Haiti(nº84), Escócia(nº34)
    // Jogos reais: 1-1 Marrocos (sem Neymar, lesionado) · 3-0 Haiti (Cunha x2, Vinicius x1) · 3-0 Escócia em Miami (Vinicius x2, Cunha x1, regresso de Neymar)
@@ -920,7 +1010,7 @@ const TEAMS=[
    moon_group:70,moon_ko:76,moon_semi:68,moon_final:70,
    zodiac:72,karma:65,cosmic:70,altitude:88,cohesion:68,stats_quality:84,stats_defense:72,forma_torneio:78,h2h_record:60,
    gdpRaw:'$61k PPP',hdiRaw:'0.934',healthRaw:'81.7a',
-   info:'❌ ELIMINADA NOS QUARTOS (10 jul): Espanha 2-1 Bélgica em Los Angeles — Fabián Ruiz abriu, De Ketelaere empatou, Merino decidiu ag. Percurso: 1.º Grupo G (1-1 Egipto, 1-1 Irão, 5-1 NZ) → 16-avos: 3-2 a.p. Senegal → Oitavos: 4-1 EUA (De Ketelaere x2, Lukaku, Doku) → Quartos: 2-1 Espanha. De Ketelaere e Doku foram as grandes revelações. A "geração doirada" fica mais uma vez sem o título.'},
+   info:'❌ ELIMINADA NOS QUARTOS (10 jul): Espanha 2-1 Bélgica em Los Angeles — Fabián Ruiz abriu, De Ketelaere empatou, Merino decidiu ag. Percurso: 1.º Grupo G (1-1 Egipto, 1-1 Irão, 5-1 NZ) → 16-avos: 3-2 a.p. Senegal (Diarra 25', Sarr 51' adiantaram; Lukaku 86', Tielemans 89', pén. a.p.) → Oitavos: 4-1 EUA (De Ketelaere x2, Lukaku, Doku) → Quartos: 2-1 Espanha. De Ketelaere e Doku foram as grandes revelações. A "geração doirada" fica mais uma vez sem o título.'},
   {name:'Noruega',flag:'🇳🇴',grp:'I',sign:'♓ Peixes',founder:'17 mai 1814',titles:0,finals:0,eliminated:true,
    // FIFA nº22 — Grupo I: França(nº3!), Senegal(nº14), Iraque(nº58) — grupo MUITO DIFÍCIL
    // Jogos: 15 jun França vs Senegal · 22 jun França vs Iraque · 26 jun Noruega vs França (Boston)

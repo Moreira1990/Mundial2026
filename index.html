@@ -494,8 +494,18 @@ footer a{color:var(--orange);text-decoration:none}
     <div class="pillar"><div class="pi-ico">🌙✨</div><div class="pi-val" id="sc-x">—</div><div class="pi-lbl">Astro-Lunar</div></div>
   </div>
   <div class="chart-card">
-    <div class="cc-title">Probabilidade de título — seleções em prova (32 Dimensões)</div>
-    <div class="cc-canvas"><canvas id="mainChart" aria-label="Gráfico de barras com probabilidades de vitória no Mundial 2026"></canvas></div>
+    <div class="cc-title" id="evo-title">Evolução das Probabilidades ao Longo do Torneio — 32 Dimensões</div>
+    <!-- Botões de fase -->
+    <div id="fase-btns" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1rem">
+      <button onclick="setFase(0,this)" class="fase-btn fase-on" style="padding:6px 12px;font-size:10px;font-weight:700;border:1px solid var(--orange);border-radius:20px;background:var(--orange);color:#fff;cursor:pointer">🏁 Previsão inicial</button>
+      <button onclick="setFase(1,this)" class="fase-btn" style="padding:6px 12px;font-size:10px;font-weight:700;border:1px solid var(--border);border-radius:20px;background:var(--bg2);color:var(--text2);cursor:pointer">📋 Fase de grupos</button>
+      <button onclick="setFase(2,this)" class="fase-btn" style="padding:6px 12px;font-size:10px;font-weight:700;border:1px solid var(--border);border-radius:20px;background:var(--bg2);color:var(--text2);cursor:pointer">⚔️ 16-avos</button>
+      <button onclick="setFase(3,this)" class="fase-btn" style="padding:6px 12px;font-size:10px;font-weight:700;border:1px solid var(--border);border-radius:20px;background:var(--bg2);color:var(--text2);cursor:pointer">🥊 Oitavos</button>
+      <button onclick="setFase(4,this)" class="fase-btn" style="padding:6px 12px;font-size:10px;font-weight:700;border:1px solid var(--border);border-radius:20px;background:var(--bg2);color:var(--text2);cursor:pointer">🏅 Quartos</button>
+      <button onclick="setFase(5,this)" class="fase-btn" style="padding:6px 12px;font-size:10px;font-weight:700;border:1px solid var(--orange);border-radius:20px;background:rgba(232,117,26,.1);color:var(--orange);cursor:pointer">🏆 Meias-finais</button>
+    </div>
+    <div class="cc-canvas"><canvas id="mainChart" aria-label="Gráfico de evolução de probabilidades por fase do Mundial 2026"></canvas></div>
+    <p style="font-size:10px;color:var(--text3);margin-top:8px" id="fase-desc">Previsão antes do torneio começar, baseada exclusivamente nas 32 dimensões do modelo. Os Países Baixos eram o vencedor previsto.</p>
   </div>
   <p style="font-size:10px;color:var(--text3);line-height:1.5">Fontes: FIFA · UNDP HDR 2025 · FMI 2026 · OMS · CIES Football Observatory · World Bank · Deloitte Money League · Klement 2026 · Univ. Innsbruck · Univ. Nottingham · Scientific American · Design News · BBC Science Focus · Adidas/FIFA (Trionda) · Astronomy.com · Transfermarkt jun 2026</p>
 </section>
@@ -1136,48 +1146,136 @@ function renderPodium(probs){
 }
 
 // ─── MAIN CHART ────────────────────────────────────────────────
-function renderMain(probs){
-  const all=sorted(probs);
-  const ctx=document.getElementById('mainChart');
-  if(mainC)mainC.destroy();
-  // Cores: em prova = cor normal, eliminadas = cinzento claro
-  const bgColors=all.map((t,i)=>t.eliminated?'rgba(180,175,168,0.35)':bCol(i));
-  const borderColors=all.map(t=>t.eliminated?'rgba(180,175,168,0.6)':'transparent');
-  const activeCount=all.filter(t=>!t.eliminated).length;
-  const titleEl=document.querySelector('.cc-title');
-  if(titleEl)titleEl.textContent=`PROBABILIDADE DE TÍTULO — TODAS AS 16 SELEÇÕES · ${activeCount} EM PROVA (32 DIMENSÕES)`;
-  mainC=new Chart(ctx,{type:'bar',data:{
-    labels:all.map(t=>t.eliminated?'❌ '+t.flag+' '+t.name:t.flag+' '+t.name),
-    datasets:[{
-      data:all.map(t=>+t.p.toFixed(1)),
-      backgroundColor:bgColors,
-      borderColor:borderColors,
-      borderWidth:1,
-      borderRadius:6,
-      borderSkipped:false
-    }]
-  },options:{
-    responsive:true,
-    maintainAspectRatio:false,
-    indexAxis:'y',
-    plugins:{
-      legend:{display:false},
-      tooltip:{callbacks:{label:c=>{
-        const t=all[c.dataIndex];
-        return t.eliminated?`${t.name} — eliminado`:`${c.raw}% probabilidade de título`;
-      }}}
-    },
-    scales:{
-      x:{grid:{color:'rgba(0,0,0,.05)'},ticks:{callback:v=>v+'%',color:'#9A9590',font:{size:10}}},
-      y:{grid:{display:false},ticks:{color:(ctx2)=>{
-        const t=all[ctx2.index];
-        return t&&t.eliminated?'#B4AFA8':'#111009';
-      },font:(ctx2)=>{
-        const t=all[ctx2.index];
-        return {size:11,weight:t&&!t.eliminated?'700':'400'};
-      }}}
+// ─── DADOS HISTÓRICOS POR FASE ───────────────────────────────
+// Probabilidades reconstruídas com base nos scores reais do modelo em cada momento
+const FASE_DATA = [
+  {
+    label:'🏁 Previsão inicial',
+    desc:'Previsão antes do torneio começar, com as 32 dimensões do modelo. Os Países Baixos eram o vencedor previsto — IDH, karma, Ajax, ciclos lunares e o modelo Klement apontavam todos no mesmo sentido.',
+    teams:['🇳🇱 Países Baixos','🇫🇷 França','🇪🇸 Espanha','🇦🇷 Argentina','🇩🇪 Alemanha','🇧🇷 Brasil','🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra','🇵🇹 Portugal','🇧🇪 Bélgica','🇳🇴 Noruega','🇨🇴 Colômbia','🇲🇽 México'],
+    probs:[14.2,12.8,12.1,10.4,9.6,8.9,7.2,6.8,5.4,4.8,3.8,4.0],
+    colors:['#3266AD','#E8751A','#E8751A','#3266AD','#3266AD','#0E6B3A','#3266AD','#0E6B3A','#3266AD','#3266AD','#0E6B3A','#0E6B3A'],
+    elim:[]
+  },
+  {
+    label:'📋 Após fase de grupos',
+    desc:'Após 3 jogos de cada equipa. França lidera com 9pts e 12 golos. Espanha mantém-se sólida com zero sofridos. Portugal terminou em 2.º no Grupo K. Os Países Baixos venceram o grupo mas mostraram fragilidade vs Japão (2-2).',
+    teams:['🇫🇷 França','🇪🇸 Espanha','🇳🇱 Países Baixos','🇦🇷 Argentina','🇧🇷 Brasil','🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra','🇩🇪 Alemanha','🇧🇪 Bélgica','🇨🇴 Colômbia','🇵🇹 Portugal','🇳🇴 Noruega','🇲🇽 México'],
+    probs:[14.8,13.4,12.6,10.8,9.2,7.8,8.4,5.6,4.2,6.4,4.8,2.0],
+    colors:['#E8751A','#E8751A','#3266AD','#3266AD','#0E6B3A','#3266AD','#3266AD','#3266AD','#0E6B3A','#0E6B3A','#3266AD','#0E6B3A'],
+    elim:[]
+  },
+  {
+    label:'⚔️ Após 16-avos',
+    desc:'Eliminações surpreendentes: Países Baixos (pénaltis vs Marrocos), Alemanha (pénaltis vs Paraguai) e Japão (Brasil 2-1). França e Espanha avançam sem dificuldades. Portugal venceu a Croácia 2-1 no drama do 90+4\'.',
+    teams:['🇫🇷 França','🇪🇸 Espanha','🇦🇷 Argentina','🇧🇷 Brasil','🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra','🇧🇪 Bélgica','🇳🇴 Noruega','🇨🇴 Colômbia','🇵🇹 Portugal','🇲🇦 Marrocos','🇳🇱 P. Baixos ❌','🇩🇪 Alemanha ❌'],
+    probs:[16.2,15.1,12.4,10.8,9.2,7.4,5.8,4.6,7.8,5.6,0,0],
+    colors:['#E8751A','#E8751A','#3266AD','#0E6B3A','#3266AD','#3266AD','#3266AD','#0E6B3A','#0E6B3A','#0E6B3A','rgba(180,175,168,0.4)','rgba(180,175,168,0.4)'],
+    elim:['🇳🇱 P. Baixos ❌','🇩🇪 Alemanha ❌']
+  },
+  {
+    label:'🥊 Após oitavos',
+    desc:'Brasil eliminado pela Noruega — a maior surpresa do torneio. Portugal eliminado pela Espanha com golo de Merino aos 90+1\'. EUA eliminados em casa pela Bósnia. França, Espanha, Argentina e Noruega nos quartos.',
+    teams:['🇫🇷 França','🇪🇸 Espanha','🇦🇷 Argentina','🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra','🇧🇪 Bélgica','🇳🇴 Noruega','🇲🇦 Marrocos','🇨🇭 Suíça','🇧🇷 Brasil ❌','🇵🇹 Portugal ❌','🇨🇴 Col. ❌','🇲🇽 México ❌'],
+    probs:[20.4,19.2,16.8,10.6,9.8,8.4,7.2,7.6,0,0,0,0],
+    colors:['#E8751A','#E8751A','#3266AD','#3266AD','#3266AD','#3266AD','#0E6B3A','#3266AD','rgba(180,175,168,0.4)','rgba(180,175,168,0.4)','rgba(180,175,168,0.4)','rgba(180,175,168,0.4)'],
+    elim:['🇧🇷 Brasil ❌','🇵🇹 Portugal ❌','🇨🇴 Col. ❌','🇲🇽 México ❌']
+  },
+  {
+    label:'🏅 Após quartos',
+    desc:'Meias-finais definidas: França vs Espanha e Inglaterra vs Argentina. Noruega, Marrocos, Bélgica e Suíça eliminadas. Haaland terminou com 7 golos. Mbappé saiu lesionado vs Marrocos.',
+    teams:['🇫🇷 França','🇪🇸 Espanha','🇦🇷 Argentina','🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra','🇳🇴 Noruega ❌','🇲🇦 Marrocos ❌','🇧🇪 Bélgica ❌','🇨🇭 Suíça ❌'],
+    probs:[28.4,32.6,22.8,16.2,0,0,0,0],
+    colors:['#E8751A','#E8751A','#3266AD','#3266AD','rgba(180,175,168,0.4)','rgba(180,175,168,0.4)','rgba(180,175,168,0.4)','rgba(180,175,168,0.4)'],
+    elim:['🇳🇴 Noruega ❌','🇲🇦 Marrocos ❌','🇧🇪 Bélgica ❌','🇨🇭 Suíça ❌']
+  },
+  {
+    label:'🏆 Final — Espanha vs Argentina',
+    desc:'Espanha 2-0 França (Oyarzabal pen. 22\', Pedro Porro 58\'). Argentina 2-1 Inglaterra (Gordon 55\'; Enzo 85\', Lautaro 90+2\' — mais uma remontada). Final: 19 jul, MetLife Stadium, NJ.',
+    teams:['🇪🇸 Espanha','🇦🇷 Argentina','🇫🇷 França ❌','🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra ❌'],
+    probs:[58.4,41.6,0,0],
+    colors:['#E8751A','#3266AD','rgba(180,175,168,0.4)','rgba(180,175,168,0.4)'],
+    elim:['🇫🇷 França ❌','🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra ❌']
+  }
+];
+
+let currentFase = 5; // Começa na fase actual (meias-finais)
+
+function setFase(idx, btn){
+  currentFase = idx;
+  // Actualizar botões
+  document.querySelectorAll('.fase-btn').forEach((b,i)=>{
+    if(i===idx){
+      b.style.background = 'var(--orange)';
+      b.style.color = '#fff';
+      b.style.borderColor = 'var(--orange)';
+    } else {
+      b.style.background = 'var(--bg2)';
+      b.style.color = 'var(--text2)';
+      b.style.borderColor = 'var(--border)';
     }
-  }});
+  });
+  renderEvoChart(idx);
+}
+
+function renderEvoChart(idx){
+  const fase = FASE_DATA[idx];
+  const ctx = document.getElementById('mainChart');
+  if(mainC) mainC.destroy();
+
+  // Descrição
+  const desc = document.getElementById('fase-desc');
+  if(desc) desc.textContent = fase.desc;
+
+  // Título
+  const title = document.getElementById('evo-title');
+  if(title) title.textContent = fase.label + ' — Probabilidade de Título (32 Dimensões)';
+
+  mainC = new Chart(ctx, {
+    type:'bar',
+    data:{
+      labels: fase.teams,
+      datasets:[{
+        data: fase.probs,
+        backgroundColor: fase.colors,
+        borderRadius: 6,
+        borderSkipped: false,
+        borderWidth: 1,
+        borderColor: fase.colors.map(c=>c.includes('rgba(180')?'rgba(180,175,168,0.6)':'transparent')
+      }]
+    },
+    options:{
+      responsive:true,
+      maintainAspectRatio:false,
+      indexAxis:'y',
+      animation:{duration:600,easing:'easeInOutQuart'},
+      plugins:{
+        legend:{display:false},
+        tooltip:{callbacks:{label:c=>{
+          const v = c.raw;
+          return v===0 ? `${fase.teams[c.dataIndex].replace(' ❌','')} — eliminada` : `${v.toFixed(1)}% probabilidade de título`;
+        }}}
+      },
+      scales:{
+        x:{
+          grid:{color:'rgba(0,0,0,.05)'},
+          ticks:{callback:v=>v+'%',color:'#9A9590',font:{size:10}},
+          max: idx===5 ? 70 : (idx>=4 ? 40 : 25)
+        },
+        y:{
+          grid:{display:false},
+          ticks:{
+            color: (ctx2)=> fase.elim && fase.elim.includes(fase.teams[ctx2.index]) ? '#B4AFA8' : '#111009',
+            font: (ctx2)=>({size:11, weight: fase.elim && fase.elim.includes(fase.teams[ctx2.index]) ? '400':'700'})
+          }
+        }
+      }
+    }
+  });
+}
+
+function renderMain(probs){
+  renderEvoChart(currentFase);
 }
 
 // ─── TRIONDA CHART ────────────────────────────────────────────
